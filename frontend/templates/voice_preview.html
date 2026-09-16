@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TTS 音色试听与选择</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif; background: #0d1117; color: #e6edf3; padding: 20px; }
+h1 { text-align: center; color: #58a6ff; margin-bottom: 16px; font-size: 22px; }
+h2 { color: #3fb950; margin: 18px 0 10px; font-size: 17px; border-bottom: 1px solid #21262d; padding-bottom: 5px; }
+.section { background: #161b22; border-radius: 10px; padding: 14px; margin-bottom: 16px; border: 1px solid #30363d; }
+.char-card { background: #1c2333; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; border-left: 3px solid #58a6ff; }
+.char-card .name { font-size: 16px; font-weight: bold; color: #f0c040; }
+.char-card .info { font-size: 12px; color: #8b949e; margin-top: 3px; }
+.char-card .personality { font-size: 13px; color: #bc8cff; margin-top: 3px; }
+.char-card .rec { font-size: 12px; color: #3fb950; margin-top: 5px; }
+.char-card .rec .chosen { color: #f0c040; font-weight: bold; }
+.sample-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+.sample-card { background: #1c2333; border: 1px solid #30363d; border-radius: 8px; padding: 10px; }
+.sample-card.chosen { border-color: #f0c040; background: #2a2520; }
+.sample-card .label { font-weight: bold; color: #f0c040; font-size: 14px; }
+.sample-card .desc { color: #8b949e; font-size: 12px; margin: 3px 0; }
+.sample-card .style { color: #58a6ff; font-size: 11px; }
+.sample-card audio { width: 100%; margin-top: 6px; height: 36px; }
+.group-title { color: #f78166; font-size: 15px; margin: 14px 0 8px; font-weight: bold; }
+.note { background: #1c2333; border: 1px solid #58a6ff; border-radius: 8px; padding: 10px; margin-bottom: 16px; font-size: 12px; color: #8b949e; }
+</style>
+</head>
+<body>
+<h1>TTS 音色试听与角色匹配</h1>
+<div class="note">
+  已确认：<strong style="color:#f0c040">林小鹿 → 晓怡·活泼</strong> | <strong style="color:#f0c040">叶知秋 → 晓晓·沉稳慢速</strong><br>
+  请为剩余4个角色（晓月、苏晴、沈念、顾云溪）从候选音色中选择。
+</div>
+
+<h2>角色属性与推荐</h2>
+<div class="section">
+
+  <div class="char-card">
+    <div class="name">苏晴（25岁 · 刑事律师）</div>
+    <div class="info">短发利落，戴金属细框眼镜，常穿职业套装，气场干练冷静</div>
+    <div class="personality">性格：高冷,知性,理性 / 冷静简洁，偶有锐利反问</div>
+    <div class="info">表达风格：理性</div>
+    <div class="rec">推荐：高冷专业A, 高冷专业B, 高冷专业C, 晓怡·冷静低沉</div>
+  </div>
+  <div class="char-card">
+    <div class="name">林小鹿（19岁 · 美术学院学生）</div>
+    <div class="info">齐肩短发，经常扎双马尾，脸上有小雀斑，爱穿彩色卫衣和背带裤</div>
+    <div class="personality">性格：元气满满,活泼可爱 / 活力四射，语调上扬，喜欢用感叹号和拟声词</div>
+    <div class="info">表达风格：随性</div>
+    <div class="rec">推荐：晓怡·活泼</div>
+    <div class="rec"><span class="chosen">已选：晓怡·活泼</span></div>
+  </div>
+  <div class="char-card">
+    <div class="name">晓月（20岁 · 女大学生）</div>
+    <div class="info">黑长直，鹅蛋脸，皮肤白皙，笑起来有酒窝，穿搭清新学院风</div>
+    <div class="personality">性格：温柔,聪明,偶尔俏皮 / 自然日常，偶尔带点小机灵</div>
+    <div class="info">表达风格：自然</div>
+    <div class="rec">推荐：温柔自然A, 温柔自然B, 温柔自然C, 晓晓·标准温柔, 小妮·温柔</div>
+  </div>
+  <div class="char-card">
+    <div class="name">叶知秋（28岁 · 医生）</div>
+    <div class="info">中长发，常扎低马尾，白大褂里面穿素色衬衫，眼神温和但专注</div>
+    <div class="personality">性格：沉稳,内敛,温和 / 温和沉稳，语速适中，偶尔冷幽默</div>
+    <div class="info">表达风格：理性</div>
+    <div class="rec">推荐：晓晓·沉稳慢速, 小妮·温柔</div>
+    <div class="rec"><span class="chosen">已选：晓晓·沉稳慢速</span></div>
+  </div>
+  <div class="char-card">
+    <div class="name">沈念（22岁 · 文学系研究生）</div>
+    <div class="info">长发及腰，常戴圆框眼镜，穿素色连衣裙或棉麻衬衫，气质书卷安静</div>
+    <div class="personality">性格：害羞,文艺,细腻 / 轻声细语，偶尔会结巴或停顿，句子偏短</div>
+    <div class="info">表达风格：文艺</div>
+    <div class="rec">推荐：轻柔文艺A, 轻柔文艺B, 轻柔文艺C, 晓晓·标准温柔</div>
+  </div>
+  <div class="char-card">
+    <div class="name">顾云溪（24岁 · 游戏制作人）</div>
+    <div class="info">染了亚麻色短发，常戴棒球帽，穿宽松卫衣和运动鞋，风格帅气随意</div>
+    <div class="personality">性格：毒舌,率真,犀利 / 直来直去，吐槽不留情，但对认可的人会收敛，偶尔冒一句暖心话</div>
+    <div class="info">表达风格：直率</div>
+    <div class="rec">推荐：干脆利落A, 干脆利落B, 干脆利落C, 晓怡·活泼</div>
+  </div>
+</div>
+<h2>已确认选择</h2>
+<div class="section"><div class="sample-grid">
+    <div class="sample-card chosen">
+      <div class="label">晓怡·活泼 → 林小鹿</div>
+      <div class="desc">活泼开朗，语调上扬</div>
+      <div class="style">标准普通话，元气感</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaoyi_活泼.wav"></audio>
+    </div>
+    <div class="sample-card chosen">
+      <div class="label">晓晓·沉稳慢速 → 叶知秋</div>
+      <div class="desc">语速偏慢，低沉成熟</div>
+      <div class="style">标准普通话，知性冷静</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaoxiao_沉稳慢速.wav"></audio>
+    </div>
+</div></div>
+<h2>晓月候选（温柔自然系）</h2>
+<div class="section"><div class="sample-grid">
+    <div class="sample-card">
+      <div class="label">温柔自然A</div>
+      <div class="desc">微调语速，自然温柔</div>
+      <div class="style">rate=-5%</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_温柔自然_晓月A.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">温柔自然B</div>
+      <div class="desc">音调略高，清甜感</div>
+      <div class="style">pitch=+2Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_温柔自然_晓月B.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">温柔自然C</div>
+      <div class="desc">稍慢稍低，温婉感</div>
+      <div class="style">rate=-8%, pitch=-1Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_温柔自然_晓月C.wav"></audio>
+    </div>
+</div></div>
+<h2>苏晴候选（高冷专业系）</h2>
+<div class="section"><div class="sample-grid">
+    <div class="sample-card">
+      <div class="label">高冷专业A</div>
+      <div class="desc">很慢很低，气场强</div>
+      <div class="style">rate=-20%, pitch=-5Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_高冷专业_苏晴A.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">高冷专业B</div>
+      <div class="desc">偏慢偏低，冷静感</div>
+      <div class="style">rate=-12%, pitch=-2Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_高冷专业_苏晴B.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">高冷专业C</div>
+      <div class="desc">慢速低沉，成熟感</div>
+      <div class="style">rate=-15%, pitch=-4Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_高冷专业_苏晴C.wav"></audio>
+    </div>
+</div></div>
+<h2>沈念候选（轻柔文艺系）</h2>
+<div class="section"><div class="sample-grid">
+    <div class="sample-card">
+      <div class="label">轻柔文艺A</div>
+      <div class="desc">偏慢偏高，文艺感</div>
+      <div class="style">rate=-12%, pitch=+1Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_轻柔文艺_沈念A.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">轻柔文艺B</div>
+      <div class="desc">很慢，安静内敛</div>
+      <div class="style">rate=-18%</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_轻柔文艺_沈念B.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">轻柔文艺C</div>
+      <div class="desc">最慢最轻，细腻感</div>
+      <div class="style">rate=-20%, pitch=-1Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_轻柔文艺_沈念C.wav"></audio>
+    </div>
+</div></div>
+<h2>顾云溪候选（干脆利落系）</h2>
+<div class="section"><div class="sample-grid">
+    <div class="sample-card">
+      <div class="label">干脆利落A</div>
+      <div class="desc">很快很高，干练感</div>
+      <div class="style">rate=+12%, pitch=+3Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_干脆利落_顾云溪A.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">干脆利落B</div>
+      <div class="desc">偏快，直爽感</div>
+      <div class="style">rate=+8%</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_干脆利落_顾云溪B.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">干脆利落C</div>
+      <div class="desc">快且音调高，锐利感</div>
+      <div class="style">rate=+10%, pitch=+2Hz</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_干脆利落_顾云溪C.wav"></audio>
+    </div>
+</div></div>
+<h2>其他候选</h2>
+<div class="section"><div class="sample-grid">
+    <div class="sample-card">
+      <div class="label">晓晓·标准温柔</div>
+      <div class="desc">温柔甜美，自然亲切</div>
+      <div class="style">标准普通话</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaoxiao_标准温柔.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">小北·东北</div>
+      <div class="desc">东北口音，爽朗大方</div>
+      <div class="style">东北方言</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaobei_东北.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">小妮·陕西</div>
+      <div class="desc">陕西口音，朴实自然</div>
+      <div class="style">陕西方言</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaoni_陕西.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">晓晓·活泼快速</div>
+      <div class="desc">语速快，音调高，少女感</div>
+      <div class="style">标准普通话</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaoxiao_活泼快速.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">晓怡·冷静低沉</div>
+      <div class="desc">语速慢，音调低，专业感</div>
+      <div class="style">标准普通话</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaoyi_冷静低沉.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">晓怡·甜美高亢</div>
+      <div class="desc">语速快，音调高，甜美</div>
+      <div class="style">标准普通话</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaoyi_甜美高亢.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">小北·舒缓</div>
+      <div class="desc">东北口音但语速慢，柔和</div>
+      <div class="style">东北方言</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaobei_舒缓.wav"></audio>
+    </div>
+    <div class="sample-card">
+      <div class="label">小妮·温柔</div>
+      <div class="desc">陕西口音但语速慢，安静细腻</div>
+      <div class="style">陕西方言</div>
+      <audio controls preload="metadata" src="static/voice_samples/edge_Xiaoni_温柔.wav"></audio>
+    </div>
+</div></div>
+</body></html>

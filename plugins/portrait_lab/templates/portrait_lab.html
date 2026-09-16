@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>人物肖像实验室 · UI 设计稿</title>
+<style>
+:root{
+  --bg:#f5f6f8; --panel:#ffffff; --line:#e3e6ec; --line2:#eef0f4;
+  --ink:#1a1d24; --ink2:#5b6472; --ink3:#8b95a5;
+  --acc:#3b6ef5; --acc-bg:#eef3ff;
+  --var:#f5871f; --var-bg:#fff5e9;
+  --ok:#12a05c; --ok-bg:#e8f7ef;
+  --warn:#d99000; --warn-bg:#fff8e4;
+  --err:#d8412f; --err-bg:#fdeceb;
+  --shared:#0e8fb0; --shared-bg:#e6f6fa;
+  --r:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font:13px/1.6 "PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1420px;margin:0 auto;padding:0 20px 60px}
+
+/* ============ 顶栏 ============ */
+.topbar{background:var(--panel);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50}
+.topbar-in{max-width:1420px;margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;gap:26px;height:54px}
+.logo{font-size:15px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--acc)}
+.logo small{font-weight:400;color:var(--ink3);font-size:11px;letter-spacing:0}
+.navs{display:flex;gap:4px;margin-left:8px}
+.nav{padding:6px 14px;border-radius:7px;cursor:pointer;color:var(--ink2);
+  font-size:13px;transition:.15s;border:1px solid transparent}
+.nav:hover{background:var(--bg)}
+.nav.on{background:var(--acc-bg);color:var(--acc);font-weight:600;border-color:#d5e2ff}
+.spacer{flex:1}
+.status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);
+  background:var(--ok-bg);padding:5px 11px;border-radius:20px}
+.status .pulse{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+
+/* ============ 通用 ============ */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-top:14px}
+.ph{padding:13px 16px;border-bottom:1px solid var(--line2);display:flex;align-items:center;gap:10px}
+.step{width:21px;height:21px;border-radius:50%;background:var(--acc);color:#fff;
+  font-size:11px;font-weight:700;display:grid;place-items:center;flex:0 0 auto}
+.ph h3{font-size:13.5px;font-weight:650}
+.ph .sub{font-size:11.5px;color:var(--ink3);font-weight:400}
+.pb{padding:15px 16px}
+.tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600;line-height:1.7}
+.t-green{background:var(--ok-bg);color:var(--ok)}
+.t-blue{background:var(--shared-bg);color:var(--shared)}
+.t-yellow{background:var(--warn-bg);color:var(--warn)}
+.t-orange{background:var(--var-bg);color:var(--var)}
+.t-gray{background:#f0f2f5;color:var(--ink2)}
+.t-red{background:var(--err-bg);color:var(--err)}
+.mono{font-family:"SF Mono",Consolas,Monaco,monospace}
+
+/* ============ Step1 女主 ============ */
+.chars{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:flex;align-items:center;gap:9px;padding:7px 13px 7px 8px;border:1.5px solid var(--line);
+  border-radius:30px;cursor:pointer;background:#fff;transition:.15s;user-select:none}
+.chip:hover{border-color:#c3ccdb}
+.chip.on{border-color:var(--acc);background:var(--acc-bg)}
+.av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  font-size:11px;color:#fff;font-weight:600;flex:0 0 auto}
+.chip .nm{font-size:13px;font-weight:600}
+.chip .sd{font-size:10.5px;color:var(--ink3)}
+.chip.on .sd{color:var(--acc)}
+.selall{margin-left:6px;padding:7px 14px;border:1.5px dashed #c3ccdb;border-radius:30px;
+  background:transparent;cursor:pointer;color:var(--ink2);font-size:12.5px;font-family:inherit}
+.selall:hover{border-color:var(--acc);color:var(--acc)}
+.seednote{margin-top:12px;padding:9px 12px;background:var(--acc-bg);border-radius:7px;
+  font-size:12px;color:#2c4fa8;display:flex;gap:8px;align-items:flex-start}
+
+/* ---- 扩展性：角色筛选工具条 ---- */
+.cbar{display:flex;align-items:center;gap:8px;margin-bottom:11px;flex-wrap:wrap}
+.cbar input[type=text]{padding:6px 11px;border:1.5px solid var(--line);border-radius:7px;
+  font:12.5px inherit;font-family:inherit;width:150px;outline:none}
+.cbar input[type=text]:focus{border-color:var(--acc)}
+.fchip{padding:5px 11px;border:1.5px solid var(--line);border-radius:30px;cursor:pointer;
+  font-size:12px;color:var(--ink2);background:#fff;user-select:none}
+.fchip.on{border-color:var(--acc);background:var(--acc-bg);color:var(--acc);font-weight:600}
+.cbar .cnt{margin-left:auto;font-size:12px;color:var(--ink3)}
+.chip.blk{opacity:.55;border-style:dashed;cursor:not-allowed}
+.chip.blk:hover{border-color:var(--err)}
+.chip .tagn{font-size:10px;padding:1px 6px;border-radius:20px;background:var(--err-bg);
+  color:var(--err);font-weight:600;margin-left:4px}
+.chip .tagd{font-size:10px;padding:1px 6px;border-radius:20px;background:var(--warn-bg);
+  color:var(--warn);font-weight:600;margin-left:4px}
+
+/* ---- 扩展性：新角色提醒 ---- */
+.newbar{display:flex;align-items:center;gap:9px;padding:7px 13px;border-radius:30px;
+  background:var(--err-bg);color:var(--err);font-size:12.5px;font-weight:600;
+  cursor:pointer;border:1.5px solid #f3bdb6}
+.newbar:hover{background:#fbdcd8}
+
+/* ---- 扩展性：接入向导 ---- */
+.mask{display:none;position:absolute;inset:0;background:rgba(20,24,32,.42);z-index:80;
+  padding:60px 20px;overflow:auto}
+.mask.on{display:block}
+.dlg{max-width:720px;margin:0 auto;background:var(--panel);border-radius:14px;overflow:hidden}
+.dlgh{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.dlgh h3{font-size:15px}
+.dlgh .x{margin-left:auto;cursor:pointer;color:var(--ink3);font-size:18px;line-height:1}
+.dlgb{padding:18px 20px}
+.gate{display:flex;gap:12px;padding:12px 14px;border-radius:9px;margin-bottom:9px;
+  border:1px solid var(--line);align-items:flex-start}
+.gate.bad{background:var(--err-bg);border-color:#f3bdb6}
+.gate.warn{background:var(--warn-bg);border-color:#f0dda2}
+.gate.ok{background:var(--ok-bg);border-color:#b7e5cd}
+.gate .gi{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  font-size:11px;font-weight:700;color:#fff;flex:0 0 auto;margin-top:1px}
+.gate.bad .gi{background:var(--err)} .gate.warn .gi{background:var(--warn)}
+.gate.ok .gi{background:var(--ok)}
+.gate .gt{font-size:13px;font-weight:600;margin-bottom:3px}
+.gate .gd{font-size:12px;color:var(--ink2);line-height:1.55}
+.gate .fix{margin-top:7px;padding:4px 11px;font-size:11.5px;border-radius:6px;cursor:pointer;
+  border:1px solid currentColor;background:#fff;font-family:inherit}
+.dlgf{padding:14px 20px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.dlgf .note{font-size:11.5px;color:var(--ink3)}
+.btnp{margin-left:auto;padding:8px 18px;border-radius:8px;border:none;background:var(--acc);
+  color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.btnp:disabled{background:#c3ccdb;cursor:not-allowed}
+
+/* ============ Step2 维度 ============ */
+.dims{display:grid;grid-template-columns:repeat(8,1fr);gap:9px}
+.dim{border:1.5px solid var(--line);border-radius:9px;padding:11px 10px;cursor:pointer;
+  background:#fff;transition:.15s;position:relative;text-align:center}
+.dim:hover{border-color:#c3ccdb;transform:translateY(-1px)}
+.dim.on{border-color:var(--var);background:var(--var-bg);box-shadow:0 2px 8px rgba(245,135,31,.12)}
+.dim .ic{font-size:19px;line-height:1;margin-bottom:6px}
+.dim .dn{font-size:13px;font-weight:650;margin-bottom:3px}
+.dim .dc{font-size:10.5px;color:var(--ink3)}
+.dim.on .dc{color:var(--var);font-weight:600}
+.dim .badge{position:absolute;top:-6px;right:-5px;background:var(--var);color:#fff;
+  font-size:10px;font-weight:700;padding:1px 6px;border-radius:9px;display:none}
+.dim.on .badge{display:block}
+.dim.lack::after{content:"";position:absolute;top:7px;left:8px;width:6px;height:6px;
+  border-radius:50%;background:var(--warn)}
+
+/* 预算条 */
+.budget{margin-top:13px;display:flex;gap:9px;align-items:stretch}
+.bcard{flex:1;border:1px solid var(--line);border-radius:8px;padding:10px 13px;background:#fbfcfd}
+.bcard .bl{font-size:11px;color:var(--ink3);margin-bottom:3px}
+.bcard .bv{font-size:19px;font-weight:700;font-family:"SF Mono",Consolas,monospace}
+.bcard.hl{background:var(--var-bg);border-color:#f7d3aa}
+.bcard.hl .bv{color:var(--var)}
+.bcard.danger{background:var(--err-bg);border-color:#f5c4bf}
+.bcard.danger .bv{color:var(--err)}
+
+/* ============ Step3 候选 ============ */
+.subtabs{display:flex;gap:2px;border-bottom:1px solid var(--line2);padding:0 16px;background:#fbfcfd}
+.subtab{padding:9px 15px;font-size:12.5px;cursor:pointer;color:var(--ink2);
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:.12s}
+.subtab:hover{color:var(--ink)}
+.subtab.on{color:var(--var);border-bottom-color:var(--var);font-weight:650}
+.subtab .cnt{font-size:10.5px;color:var(--ink3);margin-left:4px}
+.cands{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cand{display:flex;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;
+  cursor:pointer;background:#fff;transition:.12s;align-items:flex-start}
+.cand:hover{border-color:#c3ccdb;background:#fbfcfd}
+.cand.on{border-color:var(--var);background:var(--var-bg)}
+.cbx{width:15px;height:15px;border:1.5px solid #c3ccdb;border-radius:4px;flex:0 0 auto;
+  margin-top:2px;display:grid;place-items:center;font-size:10px;color:#fff;background:#fff}
+.cand.on .cbx{background:var(--var);border-color:var(--var)}
+.cand .cn{font-size:12.5px;font-weight:600;margin-bottom:2px}
+.cand .cd{font-size:11px;color:var(--ink3);line-height:1.45}
+.cand.base{position:relative}
+.cand.base .cn::after{content:"当前默认";font-size:9.5px;background:var(--shared-bg);color:var(--shared);
+  padding:1px 5px;border-radius:4px;margin-left:6px;font-weight:600}
+.candbar{display:flex;gap:8px;margin-bottom:11px;align-items:center}
+.mini{padding:4px 10px;font-size:11.5px;border:1px solid var(--line);border-radius:6px;
+  background:#fff;cursor:pointer;color:var(--ink2);font-family:inherit}
+.mini:hover{border-color:var(--acc);color:var(--acc)}
+
+/* ============ 体检表 ============ */
+.hx{width:100%;border-collapse:separate;border-spacing:0;font-size:12px}
+.hx th{font-weight:600;color:var(--ink2);padding:7px 6px;text-align:center;
+  border-bottom:1px solid var(--line);font-size:11.5px;white-space:nowrap}
+.hx th:first-child{text-align:left;padding-left:10px}
+.hx td{padding:5px 6px;text-align:center;border-bottom:1px solid var(--line2)}
+.hx td:first-child{text-align:left;padding-left:10px;font-weight:600;white-space:nowrap}
+.cellc{display:inline-block;width:100%;max-width:74px;padding:3px 0;border-radius:5px;
+  font-size:10.5px;font-weight:600}
+.c-g{background:var(--ok-bg);color:var(--ok)}
+.c-b{background:var(--shared-bg);color:var(--shared)}
+.c-y{background:var(--warn-bg);color:var(--warn)}
+.c-o{background:var(--var-bg);color:var(--var);outline:1.5px solid var(--var)}
+.c-r{background:var(--err-bg);color:var(--err)}
+.legend{display:flex;gap:16px;margin-top:11px;font-size:11.5px;color:var(--ink2);flex-wrap:wrap}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.blockwarn{margin-top:11px;padding:10px 13px;background:var(--warn-bg);border:1px solid #f0dca8;
+  border-radius:7px;font-size:12px;color:#8a6200;display:flex;gap:8px}
+.oknote{margin-top:11px;padding:9px 13px;background:#eefaf1;border:1px solid #bfe6cd;
+  border-radius:7px;font-size:12px;color:#1f7a3d;display:flex;gap:8px;align-items:flex-start}
+.oknote span{font-weight:700}
+.oknote code{background:#d8f0e0}
+.subk{display:inline-block;font-size:9.5px;color:var(--ink3);background:var(--line2);
+  border-radius:4px;padding:0 5px;margin-left:4px;font-family:"SF Mono",Consolas,monospace}
+.ctags{margin-top:4px;display:flex;flex-wrap:wrap;gap:4px}
+.ctags .tg{font-size:9.5px;color:#8a5a00;background:#fdf0d8;border:1px solid #f3dcae;
+  border-radius:4px;padding:1px 6px;font-weight:600}
+
+/* ============ 提示词 ============ */
+.pv{background:#fbfcfd;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.pvrow{display:flex;gap:11px;padding:6px 12px;border-bottom:1px solid var(--line2);
+  font-size:11.5px;align-items:flex-start}
+.pvrow:last-child{border-bottom:none}
+.pvrow.var{background:var(--var-bg)}
+.pvrow.seed{background:var(--acc-bg)}
+.pvn{width:20px;color:var(--ink3);font-family:"SF Mono",Consolas,monospace;flex:0 0 auto;text-align:right}
+.pvk{width:88px;flex:0 0 auto;color:var(--ink2);font-weight:600}
+.pvrow.var .pvk{color:var(--var)}
+.pvv{flex:1;color:var(--ink);line-height:1.5}
+.pvrow.var .pvv{color:#a35d00;font-weight:600}
+.pvl{flex:0 0 auto;font-size:10px}
+.lock{color:var(--ink3)}
+
+/* 多角色横向滚动预览 */
+.pv-grid{display:flex;flex-direction:row;gap:12px;overflow-x:auto;overflow-y:hidden;
+  padding:4px 4px 8px;scroll-snap-type:x proximity}
+.pv-grid::-webkit-scrollbar{height:8px}
+.pv-grid::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
+.pv-grid::-webkit-scrollbar-thumb:hover{background:var(--ink3)}
+.pv-card{flex:0 0 380px;min-width:380px;max-width:380px;background:#fbfcfd;
+  border:1.5px solid var(--line);border-radius:9px;overflow:hidden;scroll-snap-align:start;
+  display:flex;flex-direction:column}
+.pv-card-hd{display:flex;align-items:center;gap:9px;padding:9px 12px;
+  background:#fff;border-bottom:1px solid var(--line);font-size:12.5px}
+.pv-card-hd .av{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  font-size:11px;color:#fff;font-weight:700}
+.pv-card-name{font-weight:650;color:var(--ink)}
+.pv-card-seed{margin-left:auto;font-size:10.5px;color:var(--ink3);font-family:"SF Mono",Consolas,monospace}
+.pv-card-rows{flex:1;overflow-y:auto}
+.pv-card-rows .pvrow{padding:5px 10px}
+.pv-card-rows .pvv{font-size:11px}
+.pv-card-rows .pvl{font-size:9.5px}
+
+/* ============ 结果区 ============ */
+.rtabs{display:flex;gap:2px;padding:0 16px;background:#fbfcfd;border-bottom:1px solid var(--line2)}
+.vswitch{display:inline-flex;background:#f0f2f5;border-radius:7px;padding:2px}
+.vsw{padding:5px 13px;font-size:12px;border-radius:5px;cursor:pointer;color:var(--ink2);transition:.12s}
+.vsw.on{background:#fff;color:var(--ink);font-weight:650;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.prog{height:5px;background:#eef0f4;border-radius:3px;overflow:hidden;margin:0 0 3px}
+.progi{height:100%;background:linear-gradient(90deg,var(--acc),#6a92ff);border-radius:3px;transition:width .3s}
+.mx{overflow:auto;padding-bottom:4px;max-height:calc(100vh - 322px);
+  scrollbar-color:var(--acc) #e9edf3;scrollbar-width:thin}
+.mxt{border-collapse:separate;border-spacing:0}
+.mxt th{padding:9px 8px;font-size:12px;font-weight:650;color:var(--ink2);white-space:nowrap;
+  border-bottom:1px solid var(--line);text-align:center;position:sticky;top:0;background:var(--panel);z-index:3}
+.mxt th.rowh{text-align:left;position:sticky;left:0;top:0;background:var(--panel);z-index:4;min-width:108px}
+.mxt td{padding:6px;border-bottom:1px solid var(--line2)}
+.mxt td.rowh{position:sticky;left:0;top:auto;background:var(--panel);z-index:2;font-size:13px;font-weight:650;
+  padding-left:6px;white-space:nowrap}
+.rowh .sd{display:block;font-size:10px;color:var(--ink3);font-weight:400}
+.cell{width:178px;height:224px;border-radius:8px;position:relative;overflow:hidden;cursor:pointer;
+  border:1.5px solid var(--line);transition:.15s}
+.cell:hover{border-color:var(--acc);transform:scale(1.03);z-index:3}
+.cell.baseline{border-color:var(--shared);box-shadow:0 0 0 2px var(--shared-bg)}
+.cell.picked{border-color:var(--ok);box-shadow:0 0 0 2px var(--ok-bg)}
+.cell .ph2{position:absolute;inset:0;display:grid;place-items:center;font-size:48px}
+.cell .wm{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.92);
+  font-size:11px;padding:3px 5px;text-align:center;font-weight:600;color:#333;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell .flag{position:absolute;top:4px;left:4px;font-size:10px;padding:1px 6px;border-radius:4px;
+  font-weight:700;background:rgba(255,255,255,.94)}
+.cell.baseline .flag{color:var(--shared)}
+.cell.picked .flag{color:var(--ok)}
+.pickbtn{display:block;width:178px;margin-top:4px;padding:5px 0;font-size:11.5px;border:1px solid var(--line);
+  border-radius:6px;background:#fff;cursor:pointer;color:var(--ink2);font-family:inherit}
+.pickbtn:hover{border-color:var(--ok);color:var(--ok)}
+.pickbtn.on{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:650}
+.viewwarn{padding:9px 13px;background:var(--err-bg);border:1px solid #f5c4bf;border-radius:7px;
+  font-size:12px;color:#a32a1c;margin-bottom:12px;display:flex;gap:8px}
+
+/* 生成失败格子 + 重新生成按钮 */
+.cell.failed{border-color:var(--err);box-shadow:0 0 0 2px var(--err-bg)}
+.cell .errx{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:7px;background:rgba(255,240,238,.97);font-size:11px;color:#a32a1c;
+  text-align:center;padding:6px;line-height:1.35}
+.cell .regenbtn{margin-top:1px;padding:5px 13px;font-size:11.5px;border:1px solid var(--err);
+  border-radius:6px;background:#fff;color:#a32a1c;cursor:pointer;font-family:inherit;font-weight:650}
+.cell .regenbtn:hover{background:var(--err);color:#fff}
+.regenbar{display:none;align-items:center;gap:12px;margin-bottom:10px;padding:8px 13px;
+  border-radius:7px;background:var(--err-bg);border:1px solid #f5c4bf;font-size:12.5px}
+.regenbar .regenbtn{padding:6px 15px;font-size:12px;border:1px solid var(--err);border-radius:6px;
+  background:#fff;color:#a32a1c;cursor:pointer;font-family:inherit;font-weight:650}
+.regenbar .regenbtn:hover{background:var(--err);color:#fff}
+
+/* ① 成功图删除按钮（右上角，hover 显示，不遮挡网格） */
+.cell .delbtn{position:absolute;top:4px;right:4px;z-index:6;padding:3px 8px;font-size:11px;
+  border:1px solid rgba(120,120,120,.5);border-radius:6px;background:rgba(255,255,255,.9);
+  color:#444;cursor:pointer;font-family:inherit;font-weight:600;opacity:0;transition:.12s}
+.cell:hover .delbtn{opacity:1}
+.cell .delbtn:hover{background:#a32a1c;color:#fff;border-color:#a32a1c}
+/* ② 右下角穿搭详情角标：白色半透明底纹 */
+/* 定妆组合：失败格子 + 重新生成按钮 */
+.ccell{position:relative}
+.ccell.failed{border-color:var(--err);box-shadow:0 0 0 2px var(--err-bg)}
+.ccell .errx{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:7px;background:rgba(255,240,238,.97);font-size:11px;color:#a32a1c;
+  text-align:center;padding:6px;line-height:1.35}
+.ccell .regenbtn{margin-top:1px;padding:5px 13px;font-size:11.5px;border:1px solid var(--err);
+  border-radius:6px;background:#fff;color:#a32a1c;cursor:pointer;font-family:inherit;font-weight:650}
+.ccell .regenbtn:hover{background:var(--err);color:#fff}
+
+/* 底部操作 */
+.actbar{position:sticky;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);margin-top:16px;padding:12px 16px;border-radius:0 0 var(--r) var(--r);
+  display:flex;align-items:center;gap:12px}
+.btn{padding:9px 20px;border-radius:8px;border:none;font-size:13px;font-weight:650;
+  cursor:pointer;font-family:inherit;transition:.15s}
+.btn-p{background:var(--acc);color:#fff}
+.btn-p:hover{background:#2d5ce0}
+.btn-o{background:#fff;color:var(--ink2);border:1px solid var(--line)}
+.btn-o:hover{border-color:var(--acc);color:var(--acc)}
+.btn-g{background:var(--ok);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* ===== 铺满全屏对比 ===== */
+.fsbtn{margin-left:10px;padding:5px 13px;font-size:12px;border:1px solid var(--line);border-radius:7px;
+  background:#fff;color:var(--ink2);cursor:pointer;font-family:inherit;transition:.15s;flex:0 0 auto}
+.fsbtn:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-bg)}
+.panel.fs{position:fixed;inset:0;z-index:210;display:flex;flex-direction:column;margin:0;
+  border-radius:0;overflow:hidden;background:var(--panel)}
+.panel.fs>.ph{position:relative;z-index:5;background:var(--panel)}
+.panel.fs>.rtabs{flex:0 0 auto}
+.panel.fs>.pb{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.panel.fs .mx{flex:1 1 auto;min-height:0;max-height:none;overflow:auto}
+.panel.fs .actbar{flex:0 0 auto;z-index:5}
+.panel.fs .cgrid{flex:1 1 auto;min-height:0;overflow:auto;align-content:start}
+
+/* 定妆间 */
+.hide{display:none}
+.combo{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.guard{display:flex;gap:9px;margin-bottom:14px}
+.gcard{flex:1;border:1px solid #f0dca8;background:var(--warn-bg);border-radius:8px;padding:10px 13px}
+.gcard .gl{font-size:11px;color:#8a6200;margin-bottom:2px}
+.gcard .gv{font-size:14px;font-weight:700;color:#7a5600}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:13px}
+.ccell{border:1.5px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:#fff}
+.ccell:hover{border-color:var(--acc)}
+.ccell .cimg{height:184px;display:grid;place-items:center;font-size:48px}
+.ccell .cinfo{padding:5px 7px;border-top:1px solid var(--line2);font-size:10px;color:var(--ink2);line-height:1.5}
+.note{font-size:11.5px;color:var(--ink3);margin-top:9px;line-height:1.6}
+h4.sec{font-size:12.5px;font-weight:650;color:var(--ink2);margin:16px 0 9px}
+h4.sec:first-child{margin-top:0}
+.mini{margin-left:auto;font:inherit;font-size:11px;font-weight:600;color:var(--acc);background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:3px 9px;cursor:pointer}
+.mini:hover{border-color:var(--acc);background:var(--acc-bg)}
+/* 定妆间：维度块 + 候选药丸 */
+.dimblock{border:1px solid var(--line);border-radius:9px;margin-bottom:10px;overflow:hidden}
+.dimhead{display:flex;align-items:center;gap:9px;padding:9px 13px;background:var(--panel);font-weight:650;font-size:13px;
+  cursor:pointer;user-select:none}
+.dimhead:hover{background:var(--acc-bg)}
+.dimhead .dimchk{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--line);display:inline-grid;place-items:center;
+  font-size:11px;color:#fff;transition:.12s}
+.dimhead.on .dimchk{background:var(--acc);border-color:var(--acc)}
+.dimhead .dimcnt{margin-left:auto;font-size:11px;color:var(--ink3);font-weight:400}
+.candwrap{padding:10px 12px;display:flex;flex-wrap:wrap;gap:7px}
+.scand{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border:1.5px solid var(--line);border-radius:20px;
+  font-size:12.5px;cursor:pointer;background:#fff;transition:.12s}
+.scand:hover{border-color:var(--acc)}
+.scand .scbx{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);display:inline-grid;place-items:center;
+  font-size:9px;color:#fff}
+.scand.on{border-color:var(--ok);background:var(--ok-bg);color:#1f7a4d;font-weight:600}
+.scand.on .scbx{background:var(--ok);border-color:var(--ok)}
+.stwarn{margin:0 0 10px;padding:8px 12px;border-radius:7px;background:var(--warn-bg);border:1px solid #f0dca8;
+  color:#8a6200;font-size:12px;display:none}
+.stwarn.show{display:block}
+/* 提示词预览弹窗 */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal-box{background:#fff;border:1px solid var(--line);border-radius:12px;width:min(960px,100%);max-height:90vh;display:flex;flex-direction:column;box-shadow:0 18px 60px rgba(0,0,0,.2)}
+.modal-hd{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.modal-hd h3{margin:0;font-size:16px}
+.modal-bd{padding:14px 18px;overflow:auto;flex:1}
+.modal-ft{padding:12px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px}
+.pv-item{border:1px solid var(--line);border-radius:9px;margin-bottom:12px;overflow:hidden}
+.pv-item.base{border-color:var(--ok)}
+.pv-item-hd{padding:9px 12px;background:var(--panel);font-size:12.5px;display:flex;gap:10px;align-items:center}
+.pv-item-hd .tag{font-size:11px}
+.pv-item-bd{padding:10px 12px;font-size:13px;line-height:1.6;color:var(--ink);white-space:pre-wrap;word-break:break-word;background:#fff}
+.pv-empty{color:var(--ink3);text-align:center;padding:30px}
+/* ============ 结果矩阵灯箱（点击放大 + 左右翻页） ============ */
+.cell[data-img], .ccell[data-img]{ cursor: zoom-in; position:relative; }
+.lab-lightbox{ position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center;
+  background:rgba(15,17,22,.92); backdrop-filter:blur(2px); }
+.lab-lightbox.on{ display:flex; }
+.lab-lb-stage{ position:relative; width:min(94vw,1400px); height:min(90vh,900px); display:flex; align-items:center; justify-content:center; }
+.lab-lb-img{ max-width:100%; max-height:100%; object-fit:contain; border-radius:6px; box-shadow:0 10px 40px rgba(0,0,0,.5); user-select:none; }
+.lab-lb-nav{ position:absolute; top:0; bottom:0; width:46%; display:flex; align-items:center; justify-content:center;
+  border:none; background:transparent; color:rgba(255,255,255,.0); font-size:46px; cursor:pointer; transition:.15s; z-index:2; }
+.lab-lb-nav:hover{ color:rgba(255,255,255,.95); background:rgba(255,255,255,.06); }
+.lab-lb-prev{ left:0; } .lab-lb-next{ right:0; }
+.lab-lb-arrow{ position:absolute; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.08); color:#fff; font-size:28px; cursor:pointer; transition:.15s; z-index:3; }
+.lab-lb-arrow:hover{ background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.6); }
+.lab-lb-prev-arrow{ left:18px; } .lab-lb-next-arrow{ right:18px; }
+.lab-lb-close{ position:absolute; top:18px; right:22px; width:42px; height:42px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); color:#fff; font-size:24px; line-height:1;
+  cursor:pointer; z-index:4; transition:.15s; }
+.lab-lb-close:hover{ background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.6); }
+.lab-lb-counter{ position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:3;
+  color:rgba(255,255,255,.85); font-size:13px; background:rgba(0,0,0,.4); padding:4px 14px; border-radius:20px; }
+.lab-lb-nav:disabled{ cursor:default; }
+.lab-lb-nav:disabled:hover{ background:transparent; color:rgba(255,255,255,0); }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <div class="logo"><span class="dot"></span>人物肖像实验室 <small>portrait_lab · :5090</small></div>
+  <div class="navs">
+    <div class="nav on" data-page="lab">实验台</div>
+    <div class="nav" data-page="studio">定妆间</div>
+    <div class="nav" data-page="vocab">候选词库</div>
+  </div>
+  <div class="spacer"></div>
+  <div class="newbar" id="newbar" onclick="openWiz()"><span>●</span><span id="newbartx">发现 1 位新女主未接入</span></div>
+  <div class="status"><span class="pulse"></span>ComfyUI 在线 · 127.0.0.1:8188</div>
+</div></div>
+
+<div class="mask" id="mask">
+  <div class="dlg">
+    <div class="dlgh">
+      <h3>新女主接入向导 · <span id="wizname"></span></h3>
+      <span class="x" onclick="closeWiz()">✕</span>
+    </div>
+    <div class="dlgb" id="wizb"></div>
+    <div class="dlgf">
+      <span class="note">全部红色闸门处理完毕才允许加入实验名单 · 所有修复默认不写库</span>
+      <button class="btnp" id="wizok" onclick="wizDone()"></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+<!-- ==================== 实验台 ==================== -->
+<div id="page-lab">
+
+<!-- Step 1 -->
+<div class="panel">
+  <div class="ph"><span class="step">1</span><h3>试验对象</h3>
+    <span class="sub">每位女主使用自己的 portrait_seed，全程锁定不变</span></div>
+  <div class="pb">
+    <div class="cbar">
+      <input type="text" id="csearch" placeholder="搜索女主…" oninput="renderAll()">
+      <span class="fchip on" data-f="all">全部</span>
+      <span class="fchip" data-f="ok">就绪</span>
+      <span class="fchip" data-f="warn">部分可用</span>
+      <span class="fchip" data-f="new">待接入</span>
+      <span class="cnt" id="ccnt"></span>
+    </div>
+    <div class="chars" id="chars"></div>
+    <div class="seednote"><span>🔒</span><div><b>seed 锁定策略</b> —— 同一位女主在整轮实验中 seed 恒定，画面差异只可能来自你改动的那一个维度。跨女主的 seed 不同，因此<b>只允许横着读，不允许竖着比</b>。</div></div>
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div class="panel">
+  <div class="ph"><span class="step">2</span><h3>变量维度</h3>
+    <span class="sub">可多选 —— 多选 = 打包多个单变量实验串行跑，不是笛卡尔积</span></div>
+  <div class="pb">
+    <div class="dims" id="dims"></div>
+    <div class="budget" id="budget"></div>
+  </div>
+</div>
+
+<!-- Step 3 -->
+<div class="panel">
+  <div class="ph"><span class="step">3</span><h3>候选池</h3>
+    <span class="sub">勾选参与本轮的候选，描述词即写入提示词第 3 段的实际内容</span></div>
+  <div class="subtabs" id="candtabs"></div>
+  <div class="subtabs" id="chartabs" style="margin-top:6px;display:none"></div>
+  <div class="pb">
+    <div class="candbar">
+      <button class="mini" onclick="candAll(1)">全选</button>
+      <button class="mini" onclick="candAll(0)">全不选</button>
+      <button class="mini" onclick="candAll(2)">反选</button>
+      <span style="font-size:11.5px;color:var(--ink3)" id="candinfo"></span>
+    </div>
+    <div class="cands" id="cands"></div>
+  </div>
+</div>
+
+<!-- 基线体检 -->
+<div class="panel">
+  <div class="ph"><span class="step" style="background:var(--warn)">!</span><h3>基线体检表</h3>
+    <span class="sub">开跑前确认每格基线来源 —— 黄格必须先补齐，否则实验结论不可信</span></div>
+  <div class="pb">
+    <table class="hx" id="hxt"></table>
+    <div class="legend">
+      <span><i class="c-g" style="background:#12a05c"></i>角色专属数据</span>
+      <span><i class="c-b" style="background:#0e8fb0"></i>共享池 character_id=0</span>
+      <span><i class="c-y" style="background:#d99000"></i>无数据 · 将回落通用默认值</span>
+      <span><i class="c-o" style="background:#f5871f"></i>本轮变量维度</span>
+      <span><i class="c-r" style="background:#d8412f"></i>解析失败 · 仅该维降级，其余维度照常</span>
+    </div>
+    <div class="blockwarn" id="hxwarn"><span>⚠️</span><div id="hxwarntx"></div></div>
+  </div>
+</div>
+
+<!-- 提示词预览 -->
+<div class="panel">
+  <div class="ph"><span class="step" style="background:var(--var)">P</span><h3>提示词预览 · 每女主一卡</h3>
+    <span class="sub" id="pvsub"></span>
+  </div>
+  <div class="pb"><div class="pv-grid" id="pv"></div>
+    <div class="note">⭐ 变量段<b>永远固定在第 3 段</b>，不因候选词长短前后移动 —— 段位一动，后续 token 位置全变，等于引入第二个变量。候选描述词统一压在 6–12 词以对齐扰动。每张卡片直读 character.appearance 与 current_outfit 当前真实值，方便横向对比差异。</div>
+  </div>
+</div>
+
+<!-- 操作条 -->
+<div class="panel">
+  <div class="actbar">
+    <button class="btn btn-p" onclick="startRun()">▶ 开始生成</button>
+    <button class="btn btn-o" onclick="cancelLab()">⏹ 中断</button>
+    <button class="btn btn-o" onclick="previewPrompts()">仅预览提示词</button>
+    <select id="labSize" style="font:inherit;font-size:12px;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:#fff">
+      <option value="1024x1024">1024×1024 方形</option>
+      <option value="768x1344">768×1344 全身竖图</option>
+      <option value="512x1024">512×1024 半身竖图</option>
+      <option value="1344x768">1344×768 横图</option>
+    </select>
+    <button class="btn btn-o">保存为实验模板</button>
+    <div class="spacer"></div>
+    <span id="labstatus" style="font-size:12px;color:var(--ok);margin-right:10px"></span>
+    <span id="actinfo" style="font-size:12px;color:var(--ink2)"></span>
+  </div>
+</div>
+
+<!-- 结果区 -->
+<div class="panel" id="resultPanel">
+  <div class="ph"><span class="step" style="background:var(--ok)">R</span><h3>结果矩阵</h3>
+    <span class="sub" id="ressub">任务 #A17 · 眼睛扫描</span>
+    <div class="spacer"></div>
+    <div class="vswitch">
+      <div class="vsw on" data-view="exp">实验视图</div>
+      <div class="vsw" data-view="pat">巡检视图</div>
+    </div>
+    <button class="fsbtn" onclick="toggleFs('resultPanel')">⛶ 铺满对比</button>
+  </div>
+  <div class="rtabs" id="rtabs"></div>
+  <div class="pb">
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink2);margin-bottom:5px">
+        <span id="progtx">生成中 41 / 64 · 眼睛子实验</span>
+        <span class="mono" id="progpc">64%</span>
+      </div>
+      <div class="prog"><div class="progi" id="progi" style="width:64%"></div></div>
+    </div>
+    <div class="regenbar" id="regenbar"></div>
+    <div id="viewwarn"></div>
+    <div class="mx"><table class="mxt" id="mxt"></table></div>
+    <div class="note" id="mxnote"></div>
+  </div>
+  <div class="actbar">
+    <span style="font-size:12px;color:var(--ink2)">已标记 <b id="pickn" style="color:var(--ok)">0</b> 项最佳（仅页面标记，未写库）</span>
+    <div class="spacer"></div>
+    <button class="btn btn-o">导出对比图</button>
+    <button class="btn btn-g" onclick="alert('将先 VACUUM INTO 备份 game.db，再二次确认后写回 appearance / outfit_components')">✓ 应用选择并写库</button>
+  </div>
+</div>
+</div>
+<!-- ==================== 定妆间 ==================== -->
+<div id="page-studio" class="hide">
+<div class="panel">
+  <div class="ph"><span class="step" style="background:#8b5cf6">C</span><h3>定妆间 · 组合验证</h3>
+    <span class="sub">回答单变量实验答不了的问题：最优眼 + 最优鼻，未必协调</span></div>
+  <div class="pb">
+    <div class="guard">
+      <div class="gcard"><div class="gl">护栏 1 · 女主数</div><div class="gv">仅 1 位</div>
+        <div style="font-size:10.5px;color:#8a6200;margin-top:3px">定妆是给某人定，不做横向比较</div></div>
+      <div class="gcard"><div class="gl">护栏 2 · 维度数（智能选择）</div><div class="gv">最多 3 维</div>
+        <div style="font-size:10.5px;color:#8a6200;margin-top:3px">启用第 4 维时前端直接拒绝并提示</div></div>
+      <div class="gcard"><div class="gl">护栏 3 · 每维候选</div><div class="gv">最多 3 个</div>
+        <div style="font-size:10.5px;color:#8a6200;margin-top:3px">全部候选可见可点，但单维选取封顶 3</div></div>
+    </div>
+
+    <h4 class="sec">定妆对象（点击切换）</h4>
+    <div class="chars" id="studioChips"></div>
+    <div class="chars" style="margin-top:8px" id="studioInfo">
+      <span style="font-size:11.5px;color:var(--ink3);align-self:center">加载中…</span>
+    </div>
+
+    <h4 class="sec">维度与候选（全部候选均可点选 · 前端护栏：最多 3 维 / 每维最多 3 候选）
+      <button class="mini" onclick="studioReset()">清空选择</button></h4>
+    <div class="stwarn" id="studioWarn"></div>
+    <div id="studioDims"></div>
+
+    <div class="budget" id="studioBudget" style="margin-top:14px"></div>
+    <div class="actbar" style="margin-top:12px">
+      <button class="btn btn-p" id="comboRunBtn" onclick="comboRunClick()">▶ 生成定妆组合</button>
+      <button class="btn btn-o" id="comboCancelBtn" onclick="cancelCombo()" style="display:none">⏹ 中断</button>
+      <select id="comboSize" style="font:inherit;font-size:12px;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:#fff">
+        <option value="1024x1024">1024×1024 方形</option>
+        <option value="768x1344">768×1344 全身竖图</option>
+        <option value="512x1024">512×1024 半身竖图</option>
+        <option value="1344x768">1344×768 横图</option>
+      </select>
+      <div class="spacer"></div>
+      <span id="combostatus" style="font-size:12px;color:var(--ok)"></span>
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="comboPanel">
+  <div class="ph"><h3 id="comboTitle">组合结果 · 苏晴</h3><span class="sub" id="comboSub">seed 107922 恒定 · 仅三个五官维度变化</span>
+    <div class="spacer"></div>
+    <button class="fsbtn" onclick="toggleFs('comboPanel')">⛶ 铺满对比</button></div>
+  <div class="pb">
+    <div class="regenbar" id="comboregenbar" style="display:none"></div>
+    <div class="cgrid" id="cgrid"></div>
+    <div class="note">组合验证只看协调度，不做归因 —— 因为三个维度同时在变，你无法判断某张变好看是哪一维的功劳。这一步的唯一目的是<b>从已收敛的候选里挑出最协调的一套</b>。</div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 候选词库 ==================== -->
+<div id="page-vocab" class="hide">
+<div class="panel">
+  <div class="ph"><span class="step" style="background:var(--shared)">V</span><h3>候选词库 · outfit_components (character_id = 0)</h3>
+    <span class="sub">共享池现状盘点 —— 红色为待建数据</span></div>
+  <div class="pb">
+    <table class="hx">
+      <tr><th style="width:110px">维度</th><th>key</th><th>共享池 cid=0</th><th>角色专属</th><th>默认值真实来源</th><th>状态</th></tr>
+      <tr><td>🥚 脸型</td><td class="mono">face_shape</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👁 眼睛</td><td class="mono">eyes</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>✏️ 眉毛</td><td class="mono">eyebrows</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👃 鼻子</td><td class="mono">nose</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👄 嘴型</td><td class="mono">mouth</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>💇 发型</td><td class="mono">hairstyle</td><td><span class="tag t-blue">40 条</span></td><td><span class="tag t-green">4–11 条</span></td><td style="text-align:left">outfit_components</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👙 内衣</td><td class="mono">underwear</td><td><span class="tag t-gray">0 条</span></td><td><span class="tag t-green">10–20 条</span></td><td style="text-align:left">outfit_components</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👗 服饰</td><td class="mono">outfit</td><td><span class="tag t-gray">0 条</span></td><td><span class="tag t-green">56–60 套</span></td><td style="text-align:left">outfit_presets 展开</td><td><span class="tag t-green">就绪</span></td></tr>
+    </table>
+    <div class="oknote"><span>✓</span> 脸型 / 眼睛 / 眉毛 / 鼻子 / 嘴型 五个外观维度已写入 <code class="mono">outfit_components</code>（character_id=0，各 15 条），<code class="mono">style_tags</code> 存气质印象（逗号分隔）。这就是真实候选池，定妆间与候选词库均直接读它。</div>
+    <div class="blockwarn" style="margin-top:14px"><span>⚠️</span><div>
+      <b>数据状态更新（2026-08-08）</b><br>
+      1 · <b>晓月的「眉眼」段已可在运行时自动拆分</b> —— 三级降级解析：L1 分号切（7/8 人），L2 句级切（晓月，眉眼混写同一句），L3 不可分（仅新角色 <code class="mono">bad</code> 触发，需 LLM 规范化 + 人工 review）。晓月现落在 L2，无需回库。<br>
+      2 · <b>苏晴、顾云溪实际有「脸型与轮廓」段</b> —— 此前误报缺失是解析器 bug（脸型段被标题前缀「带金丝圆框眼镜／东亚女性」挤掉，已修）。脸型现已升为第 8 个变量维度；且发现<b>苏晴、晓月佩戴眼镜</b>，眼镜已提取为全程锁定段（永远保留、不参与变量）。
+    </div></div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="ph"><h3>appearance 原位替换机制</h3><span class="sub">摘除同义原句 → 在原位插入候选词，绝不追加</span></div>
+  <div class="pb">
+    <div class="pv">
+      <div class="pvrow"><span class="pvk" style="width:60px">原文</span><span class="pvv">眉眼：细长柳叶眉，眉峰柔和；<span style="background:#fdeceb;color:var(--err);text-decoration:line-through">标准杏眼，眼尾微微上扬，双眼皮宽度适中</span></span></div>
+      <div class="pvrow"><span class="pvk" style="width:60px">摘除后</span><span class="pvv">眉眼：细长柳叶眉，眉峰柔和；<span style="color:var(--ink3)">▁▁▁▁▁▁</span></span></div>
+      <div class="pvrow var"><span class="pvk" style="width:60px">替换结果</span><span class="pvv">眉眼：细长柳叶眉，眉峰柔和；<span style="background:var(--var-bg);color:var(--var);font-weight:700">上挑丹凤眼，眼尾锐利收窄</span></span></div>
+    </div>
+    <div class="note">
+      ⭐ <b>摘除是运行时临时行为，<code class="mono">character.appearance</code> 原文永不改动。</b>实验做废可随时回滚，库里始终是唯一真相。<br>
+      这条纪律来自你自己的实践 —— <code class="mono">data/_生成发型肖像.py</code> docstring 第 10 行：「appearance 字段已移除发型描述，避免与生成图前后不一致」。当时是手工删的，现在把它产品化成自动机制。
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+/* ===== 真实数据（来自 game.db 实测） ===== */
+/* face:1 = 有脸型段。苏晴/顾云溪原判「缺失」是解析器 bug（脸型段被标题前缀挤掉），
+   升级为行内嵌标题解析后 8/8 全部命中。glasses = 常驻眼镜，全程锁定不参与变量。 */
+/* 真实角色列表由 /api/lab/characters 异步拉取后填充；此处先置空，boot() 会覆盖 */
+let CHARS=[];
+
+const SEED_BASE=100003, SEED_STEP=7919;
+function seedOf(c){ return c.s || (SEED_BASE + c.id*SEED_STEP); }
+function isDerived(c){ return !c.s; }
+let CFILTER='all';
+
+/* 顺序 = 视觉影响力降序，也是建议的逐维收敛顺序（与后端 DIMENSION_ORDER 对齐） */
+const DIMS=[
+ {k:'hairstyle',ic:'💇',n:'发型',src:'b',cn:40},
+ {k:'face_shape',ic:'🥚',n:'脸型',src:'y',cn:7},
+ {k:'eyes',ic:'👁',n:'眼睛',src:'y',cn:8},
+ {k:'eyebrows',ic:'✏️',n:'眉毛',src:'y',cn:6},
+ {k:'nose',ic:'👃',n:'鼻子',src:'y',cn:6},
+ {k:'mouth',ic:'👄',n:'嘴型',src:'y',cn:5},
+ {k:'underwear',ic:'👙',n:'内衣',src:'g',cn:20},
+ {k:'outfit',ic:'👗',n:'服饰',src:'g',cn:56}];
+
+/* ===== 真实候选池：来自 outfit_components (character_id=0) =====
+   字段 s=subtype(英文) n=中文名 d=核心特征 t=style_tags(气质印象,逗号分隔)
+   style_tags 即原 design_tags（已合并迁移，2026-08-09） */
+/* 候选池由 /api/lab/dimensions 异步拉取后填充（结构保持 {s,n,d,t} 兼容渲染） */
+let DIMPOOL={};
+/* CAND：既有的选择器/列表/预算复用 [name,desc] 元组；
+   外观五维由 DIMPOOL 派生，发型/内衣/服饰保持 mock（接 character_id 专属池后替换） */
+/* CAND：选择器/列表/预算复用 [name,desc] 元组；拉取后由 DIMPOOL/服务端数据重建 */
+let CAND={};
+/* 候选信息统一入口：外观维返回真实 name/desc/tags，服装维降级无 tags */
+function candInfo(k,i){
+  const p = DIMPOOL[k];
+  if(p && p[i]) return {name:p[i].n, desc:p[i].d, tags:p[i].t, sub:p[i].s};
+  const t = (CAND[k] && CAND[k][i]) ? CAND[k][i] : ['—','—'];
+  return {name:t[0], desc:t[1], tags:'', sub:''};
+}
+
+let SEL_C=[], SEL_D=['eyes'], SEL_CAND={}, ACTIVE_TAB='eyes', VIEW='exp', RES_TAB='eyes';
+const PICKED={};
+let LABDIMS={};                 // {dim: {label, candidates:[{value,name,...}], default}}
+const API='/api/lab';
+// 按角色分别选候选的维度（内衣/服装/发型各自不同）；外观五维保持全局共享一份（对照实验语义）
+const COMP_DIMS = ['hairstyle','underwear','outfit'];
+// 跨「重生成」任务聚合的结果表：key = cid|dim|value_name，后到的成功结果覆盖失败结果
+let LAB_RES = new Map();
+// 定妆组合跨任务聚合结果表：key = value_name（sig），后到的成功结果覆盖失败结果
+let COMBO_RES = new Map();
+let DIMPOOL_BY_CHAR={}, CAND_BY_CHAR={}, LABDIMS_BY_CHAR={}, SEL_CAND_BY_CHAR={};
+let STUDIO_TAB_C = 1;          // 组件维度候选面板的角色 tab 当前选择（仅多选且选中组件维度时有意义）
+function initSelections(){
+  SEL_C = CHARS.filter(c=>c.st!=='new').map(c=>c.id);
+  SEL_CAND={}; DIMS.forEach(d=>SEL_CAND[d.k]=(CAND[d.k]||[]).map((_,i)=>i));
+  SEL_CAND_BY_CHAR={};
+  SEL_C.forEach(cid=>{
+    SEL_CAND_BY_CHAR[cid]={};
+    DIMS.forEach(d=>{
+      // 组件维度（发型/内衣/服饰）每个角色有独立候选池；外观五维共享全局 CAND
+      const pool = COMP_DIMS.includes(d.k) ? (CAND_BY_CHAR[cid]&&CAND_BY_CHAR[cid][d.k]) : CAND[d.k];
+      SEL_CAND_BY_CHAR[cid][d.k] = (pool||[]).map((_,i)=>i);
+    });
+  });
+  STUDIO_TAB_C = SEL_C[0]||1;
+}
+// 为当前所有选中角色各自拉取维度候选，供组件维度「按角色分别选」使用（外观五维仍由全局 CAND 共享）
+async function loadCharsDims(){
+  await Promise.all(SEL_C.map(async cid=>{
+    if(DIMPOOL_BY_CHAR[cid]) return;
+    try{
+      const payload = await (await fetch(API+'/dimensions?cid='+cid)).json();
+      DIMPOOL_BY_CHAR[cid]={}; CAND_BY_CHAR[cid]={}; LABDIMS_BY_CHAR[cid]={}; SEL_CAND_BY_CHAR[cid]={};
+      DIMS.forEach(d=>{
+        const blk = payload[d.k] || {label:d.n, candidates:[], default:{}};
+        const cands = blk.candidates || [];
+        DIMPOOL_BY_CHAR[cid][d.k] = cands.map(x=>({s:x.subtype||'', n:x.name, d:x.description, t:x.detail||''}));
+        CAND_BY_CHAR[cid][d.k] = cands.map(x=>[x.name, x.description]);
+        LABDIMS_BY_CHAR[cid][d.k] = {label:blk.label, candidates:cands, default:blk.default||{}};
+        SEL_CAND_BY_CHAR[cid][d.k] = cands.map((_,i)=>i);
+      });
+    }catch(e){ console.error('loadCharsDims failed',cid,e); }
+  }));
+}
+
+const SIZE_PRESETS=[
+  {label:'1024×1024 方形', w:1024, h:1024},
+  {label:'768×1344 全身竖图', w:768, h:1344},
+  {label:'512×1024 半身竖图', w:512, h:1024},
+  {label:'1344×768 横图', w:1344, h:768},
+];
+function sizeOptionsHTML(selId){
+  return SIZE_PRESETS.map((s,i)=>`<option value="${s.w}x${s.h}">${s.label}</option>`).join('');
+}
+function readSize(selId){
+  const el=document.getElementById(selId);
+  if(!el || !el.value) return {w:1024,h:1024};
+  const [w,h]=el.value.split('x').map(Number);
+  return {w,h};
+}
+
+/* ===== 启动：拉取真实角色与维度，接好生成本地 ===== */
+async function boot(){
+  try{
+    const cs = await (await fetch(API+'/characters')).json();
+    CHARS = cs.map(c=>({id:c.id,n:c.name,s:c.portrait_seed,c:c.color,st:c.status,
+       face:c.has_appearance?1:0, issues:c.issues||[],
+       hairstyle:c.hairstyle||'',
+       app:c.app_segments||{}, outfit:c.outfit||{}}));
+  }catch(e){
+    const el=document.getElementById('chars');
+    if(el) el.innerHTML='<div style="color:var(--err)">加载角色失败：'+e+'</div>';
+    return;
+  }
+  initSelections();
+  renderAll();                       // 数据未到位时各渲染函数需自行防御空数据
+  const first = CHARS.find(x=>x.st==='ok') || CHARS.find(x=>x.st!=='new') || CHARS[0];
+  if(first){
+    try{ await selectStudio(first.id, true); }
+    catch(e){ console.error('selectStudio failed:', e); }
+  }
+  try{ await loadCharsDims(); }      // 确保所有选中角色的候选已加载（供组件维度按角色分别选）
+  catch(e){ console.error('loadCharsDims failed:', e); }
+  initSelections();                  // 全局 CAND / 各角色 CAND_BY_CHAR 均已到位，重新填充 SEL_CAND / SEL_CAND_BY_CHAR
+  renderAll();
+}
+window.addEventListener('DOMContentLoaded', boot);
+
+/* ===== Step1 ===== */
+function visibleChars(){
+  const el=document.getElementById('csearch');
+  const q=(el&&el.value||'').trim();
+  return CHARS.filter(c=>{
+    if(CFILTER!=='all' && c.st!==CFILTER) return false;
+    if(q && c.n.indexOf(q)<0) return false;
+    return true;
+  });
+}
+function renderChars(){
+  const vis=visibleChars();
+  const selectable=vis.filter(c=>c.st!=='new');
+  const allOn = selectable.length>0 && selectable.every(c=>SEL_C.includes(c.id));
+  const h=vis.map(c=>{
+    const blk = c.st==='new';
+    const tag = blk?'<span class="tagn">待接入</span>':(c.st==='warn'?'<span class="tagd">部分</span>':'');
+    const sd = isDerived(c)? `seed ${seedOf(c)} · 派生` : `seed ${c.s}`;
+    return `<div class="chip ${SEL_C.includes(c.id)?'on':''} ${blk?'blk':''}" data-cid="${c.id}" data-blk="${blk?1:0}">
+    <span class="av" style="background:${c.c}">${c.n[0]}</span>
+    <span><span class="nm">${c.n}</span>${tag} <span class="sd mono">${sd}</span></span></div>`;
+  }).join('');
+  document.getElementById('chars').innerHTML = h +
+    `<button class="selall" onclick="toggleAll()">${allOn?'✕ 清空':'✓ 全选 '+selectable.length+' 位'}</button>`;
+  document.getElementById('ccnt').textContent =
+    `名单 ${CHARS.length} 位 · 当前显示 ${vis.length} · 已选 ${SEL_C.length}`;
+  document.querySelectorAll('.fchip').forEach(el=>{
+    el.classList.toggle('on', el.dataset.f===CFILTER);
+    el.onclick=()=>{ CFILTER=el.dataset.f; renderAll(); };
+  });
+  document.querySelectorAll('.chip[data-cid]').forEach(el=>el.onclick=()=>{
+    if(el.dataset.blk==='1'){ openWiz(); return; }
+    const id=+el.dataset.cid;
+    SEL_C = SEL_C.includes(id)? SEL_C.filter(x=>x!==id) : [...SEL_C,id];
+    loadCharsDims().then(renderAll);
+  });
+  const nb=document.getElementById('newbar'), nn=CHARS.filter(c=>c.st==='new').length;
+  if(nb){ nb.style.display = nn? 'flex':'none';
+    document.getElementById('newbartx').textContent = `发现 ${nn} 位新女主未接入`; }
+}
+function toggleAll(){
+  const sel=visibleChars().filter(c=>c.st!=='new');
+  const allOn = sel.length>0 && sel.every(c=>SEL_C.includes(c.id));
+  if(allOn) SEL_C = SEL_C.filter(id=>!sel.some(c=>c.id===id));
+  else sel.forEach(c=>{ if(!SEL_C.includes(c.id)) SEL_C.push(c.id); });
+  loadCharsDims().then(renderAll);
+}
+
+/* ===== 扩展性：新女主接入向导 ===== */
+const WIZ={g1:0,g2:0,g3:1,g4:0};
+function openWiz(){ document.getElementById('mask').classList.add('on'); window.scrollTo(0,0); renderWiz(); }
+function closeWiz(){ document.getElementById('mask').classList.remove('on'); }
+function fixG(k){ WIZ[k]=1; renderWiz(); }
+function renderWiz(){
+  const c=CHARS.find(x=>x.st==='new')||CHARS[CHARS.length-1];
+  const gates=[
+    ['g1','appearance 自带发型段',
+     `解析到 <code class="mono">发型：</code> 段 —— 由 <code class="mono">IDENTITY_PROMPT</code> 第 11 条强制生成。
+      与提示词第 9 段（<code class="mono">outfit_components</code>）重复，会造成双重发型描述。`,
+     '运行时自动摘除（不改库）'],
+    ['g2','眉眼段无法拆出眉与眼',
+     `原文用句号分隔且眉眼混写，三级降级解析全部失败。<b>仅眉、眼两维降级</b>，其余五维不受影响。`,
+     'LLM 规范化 → 返回 diff 待你 review'],
+    ['g3','分段完整性',
+     `appearance 直接供脸型/眼/眉/鼻/嘴五维基线；发型来自 <code class="mono">outfit_components</code>。
+      本角色眉眼段为 <code class="mono">bad</code> —— <b>仅眉、眼两维降级</b>，其余六维照常，不阻断实验。`,
+     null],
+    ['g4','portrait_seed 为 0',
+     `按老角色同一规律派生 <code class="mono">${SEED_BASE} + ${c.id} × ${SEED_STEP} = ${seedOf(c)}</code>，
+      运行时可直接使用；固化到库后 UI 不再标注「派生」。`,
+     '固化到库（先自动备份）']
+  ];
+  document.getElementById('wizname').textContent = c.n;
+  document.getElementById('wizb').innerHTML = gates.map(([k,t,d,btn])=>{
+    const done=WIZ[k]===1, cls=done?'ok':(k==='g3'?'warn':'bad');
+    return `<div class="gate ${cls}"><span class="gi">${done?'✓':'!'}</span><div>
+      <div class="gt">${t}</div><div class="gd">${d}</div>
+      ${btn&&!done?`<button class="fix" onclick="fixG('${k}')">${btn}</button>`:''}
+      ${done?'<div class="gd" style="margin-top:5px"><b>已处理</b></div>':''}
+    </div></div>`;
+  }).join('');
+  const pass = WIZ.g1&&WIZ.g2&&WIZ.g4;
+  const b=document.getElementById('wizok'); b.disabled=!pass;
+  b.textContent = pass? '完成接入 · 加入名单' : '请先处理红色闸门';
+}
+function wizDone(){
+  const c=CHARS.find(x=>x.st==='new'); if(!c) return;
+  c.st='warn'; c.s=seedOf(c); c.hairSeg=0;
+  if(!SEL_C.includes(c.id)) SEL_C.push(c.id);
+  closeWiz(); renderAll();
+}
+
+/* ===== Step2 ===== */
+function renderDims(){
+  document.getElementById('dims').innerHTML = DIMS.map(d=>{
+    const on=SEL_D.includes(d.k), idx=SEL_D.indexOf(d.k)+1;
+    return `<div class="dim ${on?'on':''} ${d.src==='y'?'lack':''}" data-dk="${d.k}">
+      <span class="badge">${idx}</span>
+      <div class="ic">${d.ic}</div><div class="dn">${d.n}</div>
+      <div class="dc">${on?dimCount(d.k)+' / '+globalCandLen(d.k)+' 候选':globalCandLen(d.k)+' 候选'}</div></div>`;
+  }).join('');
+  document.querySelectorAll('.dim').forEach(el=>el.onclick=()=>{
+    const k=el.dataset.dk;
+    SEL_D = SEL_D.includes(k)? SEL_D.filter(x=>x!==k) : [...SEL_D,k];
+    if(!SEL_D.includes(ACTIVE_TAB)) ACTIVE_TAB = SEL_D[0]||null;
+    renderAll();
+  });
+}
+function renderBudget(){
+  const nc=SEL_C.length;
+  let total=0;
+  SEL_D.forEach(k=>{
+    if(COMP_DIMS.includes(k)){
+      total += SEL_C.reduce((a,cid)=>a+((SEL_CAND_BY_CHAR[cid]&&SEL_CAND_BY_CHAR[cid][k])||[]).length,0);
+    } else {
+      total += nc*SEL_CAND[k].length;
+    }
+  });
+  const min=Math.round(total*12/60*10)/10;
+  const danger = total>200;
+  document.getElementById('budget').innerHTML=`
+    <div class="bcard"><div class="bl">试验对象</div><div class="bv">${nc} 位</div></div>
+    <div class="bcard"><div class="bl">拆成子实验</div><div class="bv">${SEL_D.length} 个</div></div>
+    <div class="bcard ${danger?'danger':'hl'}"><div class="bl">待生成图片</div><div class="bv">${total} 张</div></div>
+    <div class="bcard"><div class="bl">预估耗时</div><div class="bv">${min} min</div></div>
+    <div class="bcard" style="flex:1.4;background:${danger?'var(--err-bg)':'#fbfcfd'};border-color:${danger?'#f5c4bf':'var(--line)'}">
+      <div class="bl">对照：若做笛卡尔积</div>
+      <div class="bv" style="color:var(--err)">${SEL_D.length?SEL_D.reduce((a,k)=>a*dimCount(k),nc):0} 张</div>
+      <div style="font-size:10.5px;color:var(--ink3);margin-top:2px">归因失效 · 已默认禁用</div></div>`;
+  document.getElementById('actinfo').innerHTML = SEL_D.length===0 ? '<span style="color:var(--err)">请至少选择一个变量维度</span>'
+    : `将串行执行 <b>${SEL_D.length}</b> 个单变量子实验，共 <b>${total}</b> 张 · 引擎内部严格保持单变量`;
+}
+
+/* ===== Step3 ===== */
+function renderCands(){
+  if(!SEL_C.includes(STUDIO_TAB_C)) STUDIO_TAB_C = SEL_C[0]||1;   // 组件维度角色 tab 必在选中集合内
+  const tabs=document.getElementById('candtabs');
+  if(!SEL_D.length){ tabs.innerHTML=''; document.getElementById('cands').innerHTML=
+    '<div style="color:var(--ink3);padding:20px;text-align:center">请先在上方选择变量维度</div>'; return; }
+  tabs.innerHTML = SEL_D.map(k=>{const d=DIMS.find(x=>x.k===k);
+    return `<div class="subtab ${k===ACTIVE_TAB?'on':''}" data-tk="${k}">${d.ic} ${d.n}
+      <span class="cnt">${dimCount(k)}/${globalCandLen(k)}</span></div>`;}).join('');
+  tabs.querySelectorAll('.subtab').forEach(el=>el.onclick=()=>{ACTIVE_TAB=el.dataset.tk;renderAll();});
+  const dim=ACTIVE_TAB;
+  if(COMP_DIMS.includes(dim)) renderCompCandPanel(dim);
+  else renderGlobalCandPanel(dim);
+}
+function dimCount(k){
+  if(COMP_DIMS.includes(k)){
+    return SEL_C.reduce((a,cid)=>a+((SEL_CAND_BY_CHAR[cid]&&SEL_CAND_BY_CHAR[cid][k])||[]).length,0);
+  }
+  return (SEL_CAND[k]||[]).length;
+}
+function globalCandLen(k){
+  if(COMP_DIMS.includes(k)){
+    const cid=STUDIO_TAB_C; return (CAND_BY_CHAR[cid]&&CAND_BY_CHAR[cid][k]||CAND[k]||[]).length;
+  }
+  return (CAND[k]||[]).length;
+}
+function renderGlobalCandPanel(dim){
+  const list=(DIMPOOL[dim]||CAND[dim]||[]);
+  document.getElementById('cands').innerHTML = list.map((_,i)=>{
+    const ci=candInfo(dim,i);
+    return `<div class="cand ${SEL_CAND[dim].includes(i)?'on':''} ${i===0?'base':''}" data-ci="${i}">
+      <span class="cbx">${SEL_CAND[dim].includes(i)?'✓':''}</span>
+      <div><div class="cn">${ci.name}${ci.sub?' <span class="subk">'+ci.sub+'</span>':''}</div>
+      <div class="cd">${ci.desc}</div>${
+        ci.tags?'<div class="ctags">'+ci.tags.split(',').map(t=>'<span class="tg">'+t+'</span>').join('')+'</div>':''
+      }</div></div>`;
+  }).join('');
+  document.querySelectorAll('#cands .cand[data-ci]').forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.ci, arr=SEL_CAND[dim];
+    SEL_CAND[dim] = arr.includes(i)? arr.filter(x=>x!==i):[...arr,i].sort((a,b)=>a-b);
+    renderAll();
+  });
+  const d=DIMS.find(x=>x.k===dim);
+  document.getElementById('candinfo').innerHTML =
+    `当前维度 <b>${d.n}</b> · 本页勾选 ${SEL_CAND[dim].length} 项 → 将生成 ${SEL_C.length}×${SEL_CAND[dim].length}=<b>${SEL_C.length*SEL_CAND[dim].length}</b> 张`;
+  const ct=document.getElementById('chartabs'); if(ct) ct.style.display='none';
+}
+function compCandInfo(cid,dim,i){
+  const p=(DIMPOOL_BY_CHAR[cid]&&DIMPOOL_BY_CHAR[cid][dim])||{};
+  if(p[i]) return {name:p[i].n, desc:p[i].d, tags:p[i].t, sub:p[i].s};
+  const t=(CAND_BY_CHAR[cid]&&CAND_BY_CHAR[cid][dim]&&CAND_BY_CHAR[cid][dim][i])||['—','—'];
+  return {name:t[0], desc:t[1], tags:'', sub:''};
+}
+function renderCompCandPanel(dim){
+  const ct=document.getElementById('chartabs'); ct.style.display='';
+  ct.innerHTML = SEL_C.map(cid=>{ const c=CHARS.find(x=>x.id===cid);
+    return `<div class="subtab ${cid===STUDIO_TAB_C?'on':''}" data-ck="${cid}">${c?c.n:cid}</div>`;}).join('');
+  ct.querySelectorAll('.subtab').forEach(el=>el.onclick=()=>{STUDIO_TAB_C=+el.dataset.ck;renderAll();});
+  const cid=STUDIO_TAB_C;
+  const list=(DIMPOOL_BY_CHAR[cid]&&DIMPOOL_BY_CHAR[cid][dim])||CAND_BY_CHAR[cid][dim]||CAND[dim]||[];
+  const sel=(SEL_CAND_BY_CHAR[cid]&&SEL_CAND_BY_CHAR[cid][dim])||[];
+  document.getElementById('cands').innerHTML = list.map((_,i)=>{
+    const ci=compCandInfo(cid,dim,i);
+    return `<div class="cand ${sel.includes(i)?'on':''} ${i===0?'base':''}" data-ci="${i}">
+      <span class="cbx">${sel.includes(i)?'✓':''}</span>
+      <div><div class="cn">${ci.name}${ci.sub?' <span class="subk">'+ci.sub+'</span>':''}</div>
+      <div class="cd">${ci.desc}</div>${
+        ci.tags?'<div class="ctags">'+ci.tags.split(',').map(t=>'<span class="tg">'+t+'</span>').join('')+'</div>':''
+      }</div></div>`;
+  }).join('');
+  document.querySelectorAll('#cands .cand[data-ci]').forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.ci;
+    const arr=SEL_CAND_BY_CHAR[cid][dim];
+    SEL_CAND_BY_CHAR[cid][dim]=arr.includes(i)?arr.filter(x=>x!==i):[...arr,i].sort((a,b)=>a-b);
+    renderAll();
+  });
+  const d=DIMS.find(x=>x.k===dim);
+  const c=CHARS.find(x=>x.id===cid);
+  document.getElementById('candinfo').innerHTML =
+    `当前维度 <b>${d.n}</b> · 正在为 <b>${c?c.n:cid}</b> 选候选 · 本角色已选 ${sel.length} 项 · 全角色合计 ${dimCount(dim)} 项`;
+}
+function candAll(m){
+  const dim=ACTIVE_TAB;
+  if(COMP_DIMS.includes(dim)){
+    const cid=STUDIO_TAB_C;
+    const all=(CAND_BY_CHAR[cid]&&CAND_BY_CHAR[cid][dim]||CAND[dim]||[]).map((_,i)=>i);
+    const cur=SEL_CAND_BY_CHAR[cid][dim]||[];
+    SEL_CAND_BY_CHAR[cid][dim] = m===1?all : m===0?[] : all.filter(i=>!cur.includes(i));
+  }else{
+    const all=(CAND[dim]||[]).map((_,i)=>i), cur=SEL_CAND[dim];
+    SEL_CAND[dim] = m===1?all : m===0?[] : all.filter(i=>!cur.includes(i));
+  }
+  renderAll();
+}
+
+/* ===== 体检表 ===== */
+function renderHx(){
+  const src={face_shape:'y',eyes:'y',eyebrows:'y',nose:'y',mouth:'y',hairstyle:'b',underwear:'g',outfit:'g'};
+  const lbl={g:['c-g','专属'],b:['c-b','共享池'],y:['c-y','将回落']};
+  let h='<tr><th>女主 / 维度</th>'+DIMS.map(d=>`<th>${d.ic} ${d.n}</th>`).join('')+'</tr>';
+  CHARS.filter(c=>SEL_C.includes(c.id)).forEach(c=>{
+    const lock = c.glasses? ' <span class="tag t-gray" style="margin-left:4px">🔒眼镜</span>' : '';
+    h+=`<tr><td>${c.n}${lock}</td>`+DIMS.map(d=>{
+      const isVar=SEL_D.includes(d.k);
+      if(c.brow==='bad' && (d.k==='eyes'||d.k==='eyebrows'))
+        return `<td><span class="cellc c-r" title="眉眼段无法拆分，仅该维降级，其余维度不受影响">待拆分</span></td>`;
+      const s=src[d.k], L=lbl[s];
+      return `<td><span class="cellc ${isVar?'c-o':L[0]}">${isVar?'变量':L[1]}</span></td>`;
+    }).join('')+'</tr>';
+  });
+  document.getElementById('hxt').innerHTML=h;
+  const ny = SEL_C.length * DIMS.filter(d=>src[d.k]==='y' && !SEL_D.includes(d.k)).length;
+  const w=document.getElementById('hxwarn');
+  if(ny>0){ w.style.display='flex';
+    document.getElementById('hxwarntx').innerHTML=
+      `检测到 <b>${ny}</b> 个黄格 —— 脸型/眼/眉/鼻/嘴五维在 <code class="mono">outfit_components</code> 里<b>共享池与角色专属均为 0 条</b>，
+       非变量时只能从 <code class="mono">appearance</code> 分段抽取；若抽取失败会回落到通用默认值。
+       <b>禁止留空段</b> —— 空段会让同 seed 的固有扰动放大到不可控。建议先跑 <code class="mono">seed_face_components.py</code> 补齐共享池。
+       <br>注：眼镜（苏晴/晓月）与身份前缀为<b>全程锁定段</b>，永远保留、不进变量、不进黄格。`;
+  } else w.style.display='none';
+}
+
+/* ===== 提示词预览 ===== */
+function renderPreview(){ renderPvGrid(); }
+
+function buildOutfitDesc(o){
+  if(!o) return '';
+  const parts=[];
+  if(o.outer) parts.push(o.outer);
+  if(o.top) parts.push(o.top);
+  if(o.bottom) parts.push(o.bottom);
+  if(o.underwear) parts.push(o.underwear);
+  return parts.join(' + ');
+}
+
+function renderPvGrid(){
+  const list = CHARS.filter(c=>SEL_C.includes(c.id) && c.st!=='new');
+  if(!list.length){ document.getElementById('pv').innerHTML = '<div class="note">未选择任何试验对象。</div>'; return; }
+
+  const dk=ACTIVE_TAB||SEL_D[0];
+  const dim=DIMS.find(x=>x.k===dk);
+  const ci=SEL_CAND[dk]?SEL_CAND[dk][0]:0;
+  const cd=CAND[dk]&&CAND[dk][ci]?CAND[dk][ci]:['—','—'];
+  const stripKey = {face_shape:'face',eyes:'eye',eyebrows:'brow',nose:'nose',mouth:'mouth'}[dk];
+
+  document.getElementById('pv').innerHTML = list.map(c=>{
+    const app = c.app || {};
+    const o = c.outfit || {};
+    const segOrEmpty = (k)=> app[k] || '';
+
+    // 眉眼：brow 变量摘除 brow 句，eye 变量摘除 eye 句，否则完整
+    let browEyeSeg = segOrEmpty('eyebrows_eyes');
+    if(stripKey==='brow' || stripKey==='eye'){
+      const brow = (c.app.brow||'');
+      const eye  = (c.app.eye||'');
+      if(stripKey==='brow' && eye) browEyeSeg = eye;
+      else if(stripKey==='eye' && brow) browEyeSeg = brow;
+      else if(stripKey==='brow') browEyeSeg = '<span style="color:var(--err)">〔眉句已摘除〕</span>';
+      else browEyeSeg = '<span style="color:var(--err)">〔眼句已摘除〕</span>';
+    }
+
+    const face = stripKey==='face'?'<span style="color:var(--err)">〔整段已摘除，由第 3 段替代〕</span>':(segOrEmpty('face')||(c.face? '（该角色无此段 · 静默跳过）':'（该角色无外观字段）'));
+    const nose = stripKey==='nose'?'<span style="color:var(--err)">〔整段已摘除，由第 3 段替代〕</span>':(segOrEmpty('nose')||'（无）');
+    const mouth = stripKey==='mouth'?'<span style="color:var(--err)">〔整段已摘除，由第 3 段替代〕</span>':(segOrEmpty('mouth')||'（无）');
+    const skin  = segOrEmpty('skin_makeup') || '（无）';
+    const hair  = stripKey==='hairstyle'?'<span style="color:var(--err)">〔由第 3 段替代〕</span>':(c.hairstyle||'（未读取到发型）');
+    const outfitDesc = stripKey==='outfit'?'<span style="color:var(--err)">〔由第 3 段替代〕</span>':(buildOutfitDesc(o)||'（无当前穿搭）');
+
+    const rows=[
+      [1,'画风前缀','杰作，最高画质，超精细写实人像，8K','photo_presets',false],
+      [2,'身份基底',`22 岁东亚女性，${c.n}，气质清冷知性`,'character',false],
+      [3,dim?dim.n+'（变量）':'(未选变量)',`${cd[0]} —— ${cd[1]}`,'本轮候选',true],
+      [4,'脸型与轮廓', face,'appearance',false],
+      [5,'眉眼', browEyeSeg,'appearance',false],
+      [6,'鼻子', nose,'appearance',false],
+      [7,'嘴唇', mouth,'appearance',false],
+      [8,'肤色与妆容', skin,'appearance',false],
+      [9,'发型', hair,'components',false],
+      [10,'服饰', outfitDesc,'presets',false],
+      [11,'姿态','端坐于窗边，微微侧首，目光平视','activity_pose',false],
+      [12,'情绪基调','平静自持，眼神温和不外露','photo_presets',false]];
+
+    const statusTag = c.st==='ok'
+      ? '<span class="tag t-green">基线 ok</span>'
+      : (c.st==='warn' ? '<span class="tag t-orange">基线告警</span>'
+      : '<span class="tag t-red">基线阻断</span>');
+
+    return `<div class="pv-card" data-cid="${c.id}">
+      <div class="pv-card-hd">
+        <span class="av" style="background:${c.c}">${c.n[0]}</span>
+        <span class="pv-card-name">${c.n}</span>
+        ${statusTag}
+        <span class="pv-card-seed mono">seed ${c.s}</span>
+      </div>
+      <div class="pv-card-rows">${rows.map(r=>`
+        <div class="pvrow ${r[4]?'var':''}">
+          <span class="pvn">${r[0]}</span>
+          <span class="pvk">${r[1]}</span>
+          <span class="pvv">${r[2]}</span>
+          <span class="pvl">${r[4]?'<span class="tag t-orange">← 变量</span>':'<span class="lock">🔒 '+r[3]+'</span>'}</span>
+        </div>`).join('')}
+        <div class="pvrow seed">
+          <span class="pvn">—</span><span class="pvk">seed</span>
+          <span class="pvv mono" style="font-weight:700;color:var(--acc)">${c.s}</span>
+          <span class="pvl"><span class="tag" style="background:#dbe6ff;color:#2c4fa8">🔒 恒定不变</span></span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('pvsub').textContent =
+    `共 ${list.length} 位女主 · 12 段固定顺序 · 变量段锁定在第 3 位${stripKey?' · 已自动摘除同义原句':''}`;
+}
+
+/* ===== 真实提示词预览（传给 ComfyUI 的 positive prompt） ===== */
+async function previewPrompts(){
+  if(!SEL_D.length) return alert('请至少选择一个变量维度');
+  if(!SEL_C.length) return alert('请至少选择一个试验对象');
+  const empty = SEL_D.filter(k=> dimCount(k)===0 );
+  if(empty.length) return alert(`维度「${empty.map(k=>DIMS.find(d=>d.k===k).n).join('、')}」尚未勾选任何候选，无法预览提示词`);
+
+  const plan={};
+  const plan_by_char={};
+  for(const k of SEL_D){
+    if(COMP_DIMS.includes(k)){
+      SEL_C.forEach(cid=>{
+        const idxs=(SEL_CAND_BY_CHAR[cid]&&SEL_CAND_BY_CHAR[cid][k])||[];
+        const vals=idxs.map(i=> (LABDIMS_BY_CHAR[cid]&&LABDIMS_BY_CHAR[cid][k]&&LABDIMS_BY_CHAR[cid][k].candidates[i])?LABDIMS_BY_CHAR[cid][k].candidates[i].value:null).filter(Boolean);
+        if(vals.length){ plan_by_char[cid]=plan_by_char[cid]||{}; plan_by_char[cid][k]=vals; }
+      });
+    } else {
+      plan[k] = (SEL_CAND[k]||[]).map(i=>
+        (LABDIMS[k]&&LABDIMS[k].candidates[i])? LABDIMS[k].candidates[i].value : null
+      ).filter(Boolean);
+    }
+  }
+  openPvModal('加载中…');
+  try{
+    const resp = await fetch(API+'/preview',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({character_ids:SEL_C, plan, plan_by_char})});
+    const data = await resp.json();
+    if(!resp.ok){ openPvModal('', '请求失败：'+(data.error||resp.status)); return; }
+    renderPvList(data);
+  }catch(e){ openPvModal('', '网络错误：'+e); }
+}
+function openPvModal(listHtml, err){
+  const modal=document.getElementById('pvModal');
+  const list=document.getElementById('pvList');
+  const cnt=document.getElementById('pvCount');
+  if(err){ list.innerHTML='<div class="pv-empty" style="color:var(--err)">'+err+'</div>'; cnt.textContent=''; }
+  else if(listHtml){ list.innerHTML=listHtml; }
+  modal.classList.add('show');
+}
+function closePvModal(){ document.getElementById('pvModal').classList.remove('show'); }
+function renderPvList(items){
+  _pvItemsCache = items || [];
+  const list=document.getElementById('pvList');
+  const cnt=document.getElementById('pvCount');
+  cnt.textContent = `共 ${items.length} 条`;
+  if(!items.length){ list.innerHTML='<div class="pv-empty">当前选择下没有可预览的提示词</div>'; return; }
+  list.innerHTML = items.map(it=>`
+    <div class="pv-item ${it.is_baseline?'base':''}">
+      <div class="pv-item-hd">
+        <span class="tag ${it.is_baseline?'t-green':'t-orange'}">${it.is_baseline?'基准':'变量'}</span>
+        <b>${it.character_name}</b>
+        <span style="color:var(--ink3)">· ${it.dim_label} · ${it.value_name}</span>
+        ${it.value&&it.value!=='native'&&it.value!=='base'?'<span class="tag t-gray mono">'+it.value+'</span>':''}
+      </div>
+      <div class="pv-item-bd">${escapeHtml(it.prompt)}</div>
+    </div>`).join('');
+}
+function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+let _pvItemsCache=[];
+function copyAllPrompts(){
+  const items=_pvItemsCache; if(!items.length) return;
+  const text = items.map(it=>`# ${it.character_name} · ${it.dim_label} · ${it.value_name}${it.is_baseline?' [基准]':''}\n${it.prompt}`).join('\n\n---\n\n');
+  navigator.clipboard.writeText(text).then(()=>alert('已复制 '+items.length+' 条提示词到剪贴板')).catch(()=>alert('复制失败，请手动全选复制'));
+}
+
+/* ===== 结果矩阵 ===== */
+function renderResult(){
+  const tabs=document.getElementById('rtabs');
+  const dlist = SEL_D.length?SEL_D:['eyes'];
+  if(!dlist.includes(RES_TAB)) RES_TAB=dlist[0];
+  tabs.innerHTML = dlist.map(k=>{const d=DIMS.find(x=>x.k===k);
+    return `<div class="subtab ${k===RES_TAB?'on':''}" data-rt="${k}">${d.ic} ${d.n}子实验
+      <span class="cnt">${dimCount(k)} 张</span></div>`;}).join('');
+  tabs.querySelectorAll('.subtab').forEach(el=>el.onclick=()=>{RES_TAB=el.dataset.rt;renderResult();});
+
+  const cs=CHARS.filter(c=>SEL_C.includes(c.id));
+  const d=DIMS.find(x=>x.k===RES_TAB);
+  const wv=document.getElementById('viewwarn');
+
+  // 组件维度 + 多选：各女主候选不同，用按角色分组展示（矩阵不适用）
+  if(COMP_DIMS.includes(RES_TAB) && cs.length>1){
+    renderCompResult(cs, d, wv);
+    return;
+  }
+
+  // 组件维度 + 单角色：候选池取该女主专属，避免被定妆间全局 CAND 污染导致列标题错位
+  let _POOL_CAND, _POOL_SEL;
+  if(COMP_DIMS.includes(RES_TAB) && cs.length===1){
+    const _cid = cs[0].id;
+    _POOL_CAND = (CAND_BY_CHAR[_cid] && CAND_BY_CHAR[_cid][RES_TAB]) || [];
+    _POOL_SEL  = (SEL_CAND_BY_CHAR[_cid] && SEL_CAND_BY_CHAR[_cid][RES_TAB]) || [];
+  } else {
+    _POOL_CAND = CAND[RES_TAB] || [];
+    _POOL_SEL  = SEL_CAND[RES_TAB] || [];
+  }
+  const cands=_POOL_SEL.map(i=>_POOL_CAND[i]||['—','—']);
+  let h='';
+  if(VIEW==='exp'){
+    wv.innerHTML='';
+    h='<tr><th class="rowh">女主 ＼ 候选</th>'+cands.map(c=>`<th>${c[0]}</th>`).join('')+'</tr>';
+    cs.forEach(c=>{
+      h+=`<tr><td class="rowh">${c.n}<span class="sd mono">seed ${c.s} 锁定</span></td>`;
+      cands.forEach((cd,j)=>{
+        const key=c.id+'-'+RES_TAB+'-'+j, pk=PICKED[key];
+        h+=`<td><div class="cell ${j===0?'baseline':''} ${pk?'picked':''}" style="background:${shade(c.c,j)}" data-cid="${c.id}" data-dim="${RES_TAB}" data-ci="${j}" data-gi="${_POOL_SEL[j]}">
+          <div class="ph2">🖼</div>
+          ${j===0?'<span class="flag">基准</span>':''}${pk?'<span class="flag" style="left:auto;right:3px">★</span>':''}
+          <div class="wm">${cd[0]}</div></div>
+          <button class="pickbtn ${pk?'on':''}" onclick="pick('${key}')">${pk?'★ 已选':'设为最佳'}</button></td>`;
+      });
+      h+='</tr>';
+    });
+    document.getElementById('mxnote').innerHTML =
+      `<b>行内可读</b> —— ${cs[0]?cs[0].n:'苏晴'}这一行里，她的脸型、鼻子、嘴唇、肤色、发型、服饰、seed 全部纹丝不动，唯一变量是<b>${d.n}</b>，差异 100% 归因于它。蓝框格是她当前的默认值，作为基准。<br><b>列内不可读</b> —— 请切到巡检视图查看限制说明。`;
+  }else{
+    wv.innerHTML=`<div class="viewwarn"><span>🚫</span><div><b>巡检视图不可用于挑人。</b>
+      每一格的底板（脸型/鼻子/嘴唇/肤色）与 seed <b>全都不同</b>，等于四个变量在同时变化。
+      它只回答一个问题：<b>「${d.n}」的候选词在你的模型上稳不稳定、画不画得出来</b>。</div></div>`;
+    h='<tr><th class="rowh">候选 ＼ 女主</th>'+cs.map(c=>`<th>${c.n}<br><span class="mono" style="font-weight:400;color:var(--ink3);font-size:10px">${c.s}</span></th>`).join('')+'</tr>';
+    cands.forEach((cd,j)=>{
+      h+=`<tr><td class="rowh">${cd[0]}<span class="sd">${cd[1].slice(0,10)}…</span></td>`;
+      cs.forEach(c=>{ h+=`<td><div class="cell" style="background:${shade(c.c,j)}" data-cid="${c.id}" data-dim="${RES_TAB}" data-ci="${j}" data-gi="${_POOL_SEL[j]}">
+        <div class="ph2">🖼</div><div class="wm">${c.n} · ${cd[0]}</div></div></td>`; });
+      h+='</tr>';
+    });
+    document.getElementById('mxnote').innerHTML =
+      `用途示例：如果「${cands[0]?cands[0][0]:'某候选'}」这一行 8 张图长得五花八门，说明这个词在模型里语义不稳定，应从候选池剔除；如果整行风格一致，说明它是可靠词条。<br><b>两个视图共用同一份生成结果，切换只是重排 DOM，不额外消耗算力。</b>`;
+  }
+  document.getElementById('mxt').innerHTML=h;
+  document.getElementById('ressub').textContent=`任务 #A17 · ${d.n}子实验 · ${cs.length}×${cands.length}=${cs.length*cands.length} 张`;
+  const done=Math.min(cs.length*cands.length, 41);
+  const pc=Math.round(done/(cs.length*cands.length||1)*100);
+  document.getElementById('progtx').textContent=`生成中 ${done} / ${cs.length*cands.length} · ${d.n}子实验`;
+  document.getElementById('progpc').textContent=pc+'%';
+  document.getElementById('progi').style.width=pc+'%';
+  document.getElementById('pickn').textContent=Object.keys(PICKED).length;
+  if(LAB_RES && LAB_RES.size) fillLabImages(Array.from(LAB_RES.values()));
+}
+// 组件维度 + 多选：按角色分组展示（每人候选不同）
+function renderCompResult(cs, d, wv){
+  wv.innerHTML=`<div class="viewwarn"><span>👗</span><div><b>各女主分别选各自的${d.n}。</b>
+    每行的候选是<b>该女主专属</b>的、互不相同；共 ${cs.reduce((a,c)=>a+((SEL_CAND_BY_CHAR[c.id]&&SEL_CAND_BY_CHAR[c.id][RES_TAB])||[]).length,0)} 张，每人独立生成、互不干扰。</div></div>`;
+  let h='';
+  cs.forEach(c=>{
+    const idxs=(SEL_CAND_BY_CHAR[c.id]&&SEL_CAND_BY_CHAR[c.id][RES_TAB])||[];
+    const cands=idxs.map(i=>(CAND_BY_CHAR[c.id]&&CAND_BY_CHAR[c.id][RES_TAB]&&CAND_BY_CHAR[c.id][RES_TAB][i])||['—','—']);
+    h+=`<div class="chargroup" style="margin:14px 0"><div class="cghead" style="font-weight:600;margin-bottom:6px">${c.n} <span class="mono" style="color:var(--ink3);font-weight:400">seed ${c.s}</span> · ${cands.length} 套</div><div class="cgrow" style="display:flex;flex-wrap:wrap;gap:8px">`;
+    cands.forEach((cd,j)=>{
+      const gi=idxs[j];
+      h+=`<div class="cell" style="background:${shade(c.c,j)}" data-cid="${c.id}" data-dim="${RES_TAB}" data-ci="${j}" data-gi="${gi}">
+        <div class="ph2">🖼</div><div class="wm">${cd[0]}</div></div>`;
+    });
+    h+='</div></div>';
+  });
+  document.getElementById('mxt').innerHTML=h;
+  const total=cs.reduce((a,c)=>a+((SEL_CAND_BY_CHAR[c.id]&&SEL_CAND_BY_CHAR[c.id][RES_TAB])||[]).length,0);
+  document.getElementById('ressub').textContent=`${d.n} · 各女主分别选 · 共 ${total} 张`;
+  document.getElementById('mxnote').innerHTML=`每个女主独立生成各自选中的${d.n}，互不干扰；切换视图只是重排。`;
+  if(LAB_RES && LAB_RES.size) fillLabImages(Array.from(LAB_RES.values()));
+}
+function shade(hex,i){
+  const n=parseInt(hex.slice(1),16);
+  let r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  const f=0.80+ (i%5)*0.045;
+  r=Math.round(255-(255-r)*(0.24*f)); g=Math.round(255-(255-g)*(0.24*f)); b=Math.round(255-(255-b)*(0.24*f));
+  return `rgb(${r},${g},${b})`;
+}
+function pick(k){ if(PICKED[k]) delete PICKED[k]; else PICKED[k]=1; renderResult(); }
+function startRun(){
+  if(!SEL_D.length) return alert('请至少选择一个变量维度');
+  if(!SEL_C.length) return alert('请至少选择一个试验对象');
+  // 组件维度按角色分别计数；外观维度用全局 SEL_CAND
+  const empty = SEL_D.filter(k=> dimCount(k)===0 );
+  if(empty.length) return alert(`请为维度「${empty.map(k=>DIMS.find(d=>d.k===k).n).join('、')}」至少勾选 1 个候选，再点击生成。`);
+  let t=0; SEL_D.forEach(k=>{ t+=dimCount(k); });
+  if(!confirm(`确认提交？\n\n共 ${SEL_D.length} 个维度，串行执行\n共 ${t} 张\n\n引擎内部严格保持单变量：每次只替换一个子句，seed 恒定。${COMP_DIMS.some(k=>SEL_D.includes(k)&&SEL_C.length>1)?'\n（内衣/服装/发型按各女主分别生成）':''}`)) return;
+  submitLab();
+}
+
+async function submitLab(){
+  const plan={};
+  const plan_by_char={};
+  for(const k of SEL_D){
+    if(COMP_DIMS.includes(k)){
+      // 组件维度：每个角色用各自勾选的候选
+      SEL_C.forEach(cid=>{
+        const idxs=(SEL_CAND_BY_CHAR[cid]&&SEL_CAND_BY_CHAR[cid][k])||[];
+        const vals=idxs.map(i=> (LABDIMS_BY_CHAR[cid]&&LABDIMS_BY_CHAR[cid][k]&&LABDIMS_BY_CHAR[cid][k].candidates[i])?LABDIMS_BY_CHAR[cid][k].candidates[i].value:null).filter(Boolean);
+        if(vals.length){ plan_by_char[cid]=plan_by_char[cid]||{}; plan_by_char[cid][k]=vals; }
+      });
+    } else {
+      plan[k] = (SEL_CAND[k]||[]).map(i=> (LABDIMS[k]&&LABDIMS[k].candidates[i])? LABDIMS[k].candidates[i].value : null).filter(Boolean);
+    }
+  }
+  const size=readSize('labSize');
+  setLabStatus('提交中…');
+  let data;
+  try{
+    const resp = await fetch(API+'/generate',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({character_ids:SEL_C, plan, plan_by_char, width:size.w, height:size.h})});
+    data = await resp.json();
+    if(!resp.ok){ setLabStatus('拒绝：'+(data.error||resp.status), true); return; }
+  }catch(e){ setLabStatus('提交失败：'+e, true); return; }
+  window.__lab = {job_id:data.job_id, job:null};
+  LAB_RES = new Map();
+  pollLab(data.job_id, false);
+}
+
+async function pollLab(job_id, isRegen){
+  if(!isRegen) LAB_RES = new Map();          // 全新生成：清空上一轮聚合结果
+  while(true){
+    let job;
+    try{ job = await (await fetch(API+'/job/'+job_id)).json(); }
+    catch(e){ setLabStatus('轮询失败：'+e, true); return; }
+    window.__lab.job = job;
+    aggJob(job);
+    const results = Array.from(LAB_RES.values());
+    const pc = job.total? Math.round(job.done/job.total*100):0;
+    setLabProg(job.done, job.total, pc, job.status);
+    fillLabImages(results);                  // 渐进上屏：每生成一张立即显示
+    updateRegenBar(results);                 // 失败/缺失计数 + 一键重生成
+    if(job.status==='done' || job.status==='cancelled' || job.status==='error'){
+      if(job.status==='error') setLabStatus('出错：'+job.error, true);
+      else if(job.status==='cancelled') setLabStatus('已中断（完成 '+job.done+'/'+job.total+'）');
+      else setLabStatus(isRegen? '重新生成完成（已补 '+job.total+' 张）' : '完成 '+job.done+'/'+job.total+' 张');
+      return;
+    }
+    await new Promise(r=>setTimeout(r,1500));
+  }
+}
+
+function labKey(cid,dim,name){ return cid+'|'+dim+'|'+name; }
+function aggJob(job){
+  (job.results||[]).forEach(r=>{ LAB_RES.set(labKey(r.character_id, r.dim, r.value_name), r); });
+}
+
+function fillLabImages(results){
+  const mp = new Map();
+  results.forEach(r=> mp.set(labKey(r.character_id, r.dim, r.value_name), r));
+  document.querySelectorAll('#mxt .cell[data-cid]').forEach(el=>{
+    const cid=+el.dataset.cid, dim=el.dataset.dim, gi=+el.dataset.gi;
+    const name = COMP_DIMS.includes(dim)
+      ? ((CAND_BY_CHAR[cid]&&CAND_BY_CHAR[cid][dim]&&CAND_BY_CHAR[cid][dim][gi])?CAND_BY_CHAR[cid][dim][gi][0]:'')
+      : ((CAND[dim] && CAND[dim][gi]!=null) ? CAND[dim][gi][0] : '');
+    const r = mp.get(labKey(cid, dim, name));
+    if(!r) return;
+    const k = labKey(cid, dim, name);
+    // 清理上一轮附加元素（删除按钮/失败框/穿搭角标），避免重复叠加
+    el.querySelectorAll('.regenbtn,.errx,.delbtn,.outfitbadge').forEach(n=>n.remove());
+    const ph = el.querySelector('.ph2');
+    if(r.image_url){
+      el.style.backgroundImage = `url(${r.image_url}?t=${Date.now()})`;
+      el.style.backgroundSize = 'contain';
+      el.style.backgroundRepeat = 'no-repeat';
+      el.style.backgroundPosition = 'center';
+      el.classList.remove('failed');
+      el.dataset.img = r.image_url;
+      if(ph) ph.style.display='none';
+      // ① 成功图上叠加删除按钮（hover 显示）
+      const del=document.createElement('button'); del.className='delbtn'; del.textContent='✕ 删除';
+      del.onclick=(ev)=>{ ev.stopPropagation(); deleteLabImage(k, el); };
+      el.appendChild(del);
+    } else {
+      // 失败 或 已被用户删除（缺失）均进入「重新生成」清单
+      el.style.backgroundImage = 'none';
+      delete el.dataset.img;
+      if(ph) ph.style.display='none';
+      el.classList.add('failed');
+      const box=document.createElement('div'); box.className='errx';
+      box.innerHTML = (r.error? ('✕ '+(r.error||'').slice(0,34)+'<br>') : '已删除<br>');
+      const btn=document.createElement('button'); btn.className='regenbtn'; btn.textContent='重新生成';
+      btn.onclick=(ev)=>{ ev.stopPropagation(); regenItems([k]); };
+      box.appendChild(btn);
+      el.appendChild(box);
+    }
+  });
+}
+
+// ① 删除单张实验室产物图：调后端 DELETE，再把该格标记缺失进重生成清单
+async function deleteLabImage(k, el){
+  const r = LAB_RES.get(k);
+  if(!r || !r.image_url) return;
+  const fname = r.image_url.replace(/^\/api\/lab\/image\//, '');
+  if(!confirm('确定删除这张图？删除后可在下方「重新生成」中补画。')) return;
+  try{
+    const resp = await fetch(API+'/image/'+fname.split('/').map(encodeURIComponent).join('/'), {method:'DELETE'});
+    const d = await resp.json().catch(()=>({}));
+    if(!resp.ok){ setLabStatus('删除失败：'+(d.error||resp.status), true); return; }
+    r.image_url='';                 // 标记缺失，自动进重生成清单
+    fillLabImages(Array.from(LAB_RES.values()));   // 立即重绘该格为「已删除」
+    setLabStatus('已删除 1 张，可在下方「重新生成」补画');
+  }catch(e){ setLabStatus('删除失败：'+e, true); }
+}
+
+function updateRegenBar(results){
+  const bar=document.getElementById('regenbar'); if(!bar) return;
+  // 失败 + 已删除缺失（只要没图就算待补）
+  const missing=results.filter(r=> !r.image_url);
+  if(!missing.length){ bar.style.display='none'; return; }
+  bar.style.display='flex';
+  bar.innerHTML = `<span style="color:#a32a1c;font-weight:650">⚠ ${missing.length} 张缺失/失败</span>`
+    + `<button class="regenbtn" onclick="regenAllFailed()">一键重新生成（${missing.length}）</button>`;
+}
+
+// 仅把缺失/失败（含已删除）的格子重新提交，已成功的自动跳过
+function regenItems(keys){
+  const items = keys.map(k=> LAB_RES.get(k)).filter(Boolean).map(r=>({
+    character_id:r.character_id, character_name:r.character_name,
+    dim:r.dim, dim_label:r.dim_label||'', value_name:r.value_name, prompt:r.prompt, desc:r.desc
+  }));
+  if(!items.length) return;
+  const size=readSize('labSize');
+  setLabStatus('重新生成 '+items.length+' 张…');
+  fetch(API+'/regenerate',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({items, width:size.w, height:size.h})})
+    .then(r=>r.json().then(d=>({ok:r.ok,d})))
+    .then(({ok,d})=>{
+      if(!ok){ setLabStatus('重新生成被拒：'+(d.error||''), true); return; }
+      window.__lab.job_id = d.job_id;
+      pollLab(d.job_id, true);   // 合并进现有结果，不重置矩阵
+    }).catch(e=>setLabStatus('重新生成失败：'+e, true));
+}
+function regenAllFailed(){
+  const missing=Array.from(LAB_RES.values()).filter(r=> !r.image_url);
+  regenItems(missing.map(r=> labKey(r.character_id, r.dim, r.value_name)));
+}
+
+function setLabProg(done,total,pc,status){
+  const t=document.getElementById('progtx'); if(t) t.textContent=`生成中 ${done} / ${total} · ${status}`;
+  const p=document.getElementById('progpc'); if(p) p.textContent=pc+'%';
+  const i=document.getElementById('progi'); if(i) i.style.width=pc+'%';
+}
+function setLabStatus(msg, isErr){
+  const el=document.getElementById('labstatus');
+  if(el){ el.textContent=msg; el.style.color = isErr? 'var(--err)' : 'var(--ok)'; }
+}
+
+/* ===== 定妆间组合生成 ===== */
+let COMBO_PAUSED = false;    // 本地暂停状态（用于按钮显示）
+function startCombo(){
+  if(!STUDIO_ACTIVE.size) return alert('请先在定妆间启用至少 1 个维度并挑选候选');
+  const act = DIMS.filter(d=>STUDIO_ACTIVE.has(d.k));
+  const parts = act.map(d=>(STUDIO_PICK[d.k]||[]).length);
+  const combos = parts.reduce((a,b)=>a*b,1);
+  const mins = (combos*12/60).toFixed(1);
+  if(!confirm(`即将生成 ${combos} 张定妆组合图，预估耗时约 ${mins} 分钟。\n（ComfyUI 串行出图，生成过程中可随时暂停/中断）\n\n确认开始？`)) return;
+
+  const selections={};
+  DIMS.forEach(d=>{ if(STUDIO_ACTIVE.has(d.k)) selections[d.k]=(STUDIO_PICK[d.k]||[]).map(i=>
+      (LABDIMS[d.k]&&LABDIMS[d.k].candidates[i])?LABDIMS[d.k].candidates[i].value:null).filter(Boolean); });
+  const size=readSize('comboSize');
+  COMBO_RES.clear();
+  updateComboRegenBar();
+  setComboRunState('running');
+  setComboStatus('提交中…');
+  fetch(API+'/combo',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({character_id:STUDIO_C, selections, width:size.w, height:size.h})})
+    .then(r=>r.json().then(d=>({ok:r.ok,d})))
+    .then(({ok,d})=>{
+      if(!ok){ setComboStatus('拒绝：'+(d.error||''), true); setComboRunState('idle'); return; }
+      window.__combo={job_id:d.job_id, job:null};
+      pollCombo(d.job_id);
+    }).catch(e=>{ setComboStatus('提交失败：'+e, true); setComboRunState('idle'); });
+}
+function comboRunClick(){
+  if(!window.__combo || !window.__combo.job_id || window.__combo.done){
+    // 空闲/已完成 -> 开始新任务
+    startCombo();
+  } else if(COMBO_PAUSED){
+    resumeCombo();
+  } else {
+    pauseCombo();
+  }
+}
+function setComboRunState(state){
+  const runBtn=document.getElementById('comboRunBtn');
+  const cancelBtn=document.getElementById('comboCancelBtn');
+  if(!runBtn) return;
+  if(state==='running'){
+    runBtn.textContent='⏸ 暂停'; runBtn.className='btn btn-p';
+    cancelBtn.style.display='';
+    COMBO_PAUSED=false;
+  } else if(state==='paused'){
+    runBtn.textContent='▶ 继续'; runBtn.className='btn btn-p';
+    cancelBtn.style.display='';
+    COMBO_PAUSED=true;
+  } else {
+    runBtn.textContent='▶ 生成定妆组合'; runBtn.className='btn btn-p';
+    cancelBtn.style.display='none';
+    COMBO_PAUSED=false;
+  }
+}
+function pauseCombo(){
+  if(!window.__combo || !window.__combo.job_id) return;
+  fetch(API+'/job/'+window.__combo.job_id+'/pause',{method:'POST'})
+    .then(r=>r.json().then(d=>({ok:r.ok,d})))
+    .then(({ok,d})=>{
+      if(!ok){ setComboStatus('暂停失败：'+(d.error||''), true); return; }
+      setComboRunState('paused');
+      setComboStatus('已暂停');
+    }).catch(e=>setComboStatus('暂停失败：'+e, true));
+}
+function resumeCombo(){
+  if(!window.__combo || !window.__combo.job_id) return;
+  fetch(API+'/job/'+window.__combo.job_id+'/resume',{method:'POST'})
+    .then(r=>r.json().then(d=>({ok:r.ok,d})))
+    .then(({ok,d})=>{
+      if(!ok){ setComboStatus('继续失败：'+(d.error||''), true); return; }
+      setComboRunState('running');
+      setComboStatus('继续生成…');
+    }).catch(e=>setComboStatus('继续失败：'+e, true));
+}
+async function pollCombo(job_id){
+  while(true){
+    let job;
+    try{ job = await (await fetch(API+'/job/'+job_id)).json(); }
+    catch(e){ setComboStatus('轮询失败：'+e, true); setComboRunState('idle'); return; }
+    window.__combo.job = job;
+    aggComboJob(job);
+    const results = Array.from(COMBO_RES.values());
+    const pc = job.total? Math.round(job.done/job.total*100):0;
+    setComboStatus((job.paused?'已暂停 · ':'')+`生成中 ${job.done} / ${job.total} · ${pc}%`);
+    fillComboImages(results);
+    updateComboRegenBar(results);
+    if(job.status==='done'||job.status==='cancelled'||job.status==='error'){
+      if(job.status==='error') setComboStatus('出错：'+job.error, true);
+      else if(job.status==='cancelled') setComboStatus('已中断（完成 '+job.done+'/'+job.total+'）');
+      else setComboStatus('完成 '+job.done+'/'+job.total);
+      setComboRunState('idle');
+      window.__combo.done = true;
+      return;
+    }
+    await new Promise(r=>setTimeout(r,1500));
+  }
+}
+function aggComboJob(job){
+  (job.results||[]).forEach(r=>{ COMBO_RES.set(r.value_name, r); });
+}
+function fillComboImages(results){
+  const mp=new Map();
+  (results||[]).forEach(r=> mp.set(r.value_name, r));
+  document.querySelectorAll('#cgrid .ccell').forEach(el=>{
+    const sig=el.dataset.sig; if(!sig) return;
+    const r=mp.get(sig); if(!r) return;
+    const img=el.querySelector('.cimg'); if(!img) return;
+    const oldErr=el.querySelector('.errx'); if(oldErr) oldErr.remove();
+    el.classList.remove('failed');
+    if(r.image_url){
+      img.style.backgroundImage=`url(${r.image_url}?t=${Date.now()})`; img.style.backgroundSize='contain';
+      img.style.backgroundRepeat='no-repeat'; img.style.backgroundPosition='center'; img.textContent='';
+      el.dataset.img = r.image_url;
+    } else if(r.error){
+      img.style.backgroundImage='none'; img.textContent='';
+      delete el.dataset.img;
+      el.classList.add('failed');
+      const box=document.createElement('div'); box.className='errx';
+      box.innerHTML = '✕ '+(r.error||'').slice(0,34)+'<br>';
+      const btn=document.createElement('button'); btn.className='regenbtn'; btn.textContent='重新生成';
+      btn.onclick=(ev)=>{ ev.stopPropagation(); regenComboItems([sig]); };
+      box.appendChild(btn);
+      el.appendChild(box);
+    }
+  });
+}
+function updateComboRegenBar(results){
+  const bar=document.getElementById('comboregenbar'); if(!bar) return;
+  const failed=(results||[]).filter(r=> !r.image_url && r.error);
+  if(!failed.length){ bar.style.display='none'; bar.innerHTML=''; return; }
+  bar.style.display='flex';
+  bar.innerHTML = `<span style="color:#a32a1c;font-weight:650">⚠ ${failed.length} 张生成失败</span>`
+    + `<button class="regenbtn" onclick="regenAllFailedCombo()">一键重新生成全部失败（${failed.length}）</button>`;
+}
+function regenComboItems(sigs){
+  const items = sigs.map(sig=> COMBO_RES.get(sig)).filter(Boolean).map(r=>({
+    character_id:r.character_id, character_name:r.character_name,
+    dim:r.dim, dim_label:r.dim_label||'', value_name:r.value_name, prompt:r.prompt
+  }));
+  if(!items.length) return;
+  const size=readSize('comboSize');
+  setComboStatus('重新生成 '+items.length+' 张…');
+  fetch(API+'/regenerate',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({items, width:size.w, height:size.h})})
+    .then(r=>r.json().then(d=>({ok:r.ok,d})))
+    .then(({ok,d})=>{
+      if(!ok){ setComboStatus('重新生成被拒：'+(d.error||''), true); return; }
+      window.__combo.job_id = d.job_id;
+      window.__combo.done = false;
+      setComboRunState('running');
+      pollCombo(d.job_id);
+    }).catch(e=>setComboStatus('重新生成失败：'+e, true));
+}
+function regenAllFailedCombo(){
+  const failed=Array.from(COMBO_RES.values()).filter(r=> !r.image_url && r.error);
+  regenComboItems(failed.map(r=> r.value_name));
+}
+function setComboStatus(msg, isErr){
+  const el=document.getElementById('combostatus');
+  if(el){ el.textContent=msg; el.style.color=isErr?'var(--err)':'var(--ok)'; }
+}
+function cancelLab(){
+  if(window.__lab && window.__lab.job_id)
+    fetch(API+'/job/'+window.__lab.job_id+'/cancel',{method:'POST'});
+}
+function cancelCombo(){
+  if(window.__combo && window.__combo.job_id)
+    fetch(API+'/job/'+window.__combo.job_id+'/cancel',{method:'POST'});
+}
+
+/* ===== 定妆间：可切换定妆对象 + 全维度候选 + 前端护栏 ===== */
+let STUDIO_C = 1;                       // 默认苏晴
+const MAX_DIMS = 3, MAX_PER_DIM = 3;    // 前端护栏
+let STUDIO_ACTIVE = new Set(['eyes','nose','mouth']);
+let STUDIO_PICK  = {eyes:[0,1], nose:[0,1], mouth:[0,1]};
+function dimEntries(k){
+  if(DIMPOOL[k]) return DIMPOOL[k];               // {s,n,d,t}
+  return (CAND[k]||[]).map(a=>({s:'',n:a[0],d:a[1],t:''}));
+}
+function renderStudioChips(){
+  const el = document.getElementById('studioChips');
+  if(!el) return;
+  const list = CHARS.filter(c=>c.st!=='new');
+  if(!list.length){
+    el.innerHTML = '<span style="font-size:12px;color:var(--ink3);padding:8px 0">暂无可用角色</span>';
+    return;
+  }
+  el.innerHTML = list.map(c=>{
+    const warn = c.issues && c.issues.length ? '<span class="tagd">'+c.issues.length+'</span>' : '';
+    return `<div class="chip ${c.id===STUDIO_C?'on':''}" onclick="selectStudio(${c.id})" title="切换到 ${c.n}">
+       <span class="av" style="background:${c.c}">${c.n[0]}</span>
+       <span><span class="nm">${c.n}</span>${warn}</span></div>`;
+  }).join('');
+  renderStudioInfo();
+}
+function renderStudioInfo(){
+  const el = document.getElementById('studioInfo');
+  const c = CHARS.find(x=>x.id===STUDIO_C);
+  if(!el) return;
+  if(!c){
+    el.innerHTML = '<span style="font-size:12px;color:var(--ink3);align-self:center">未选择角色</span>';
+    return;
+  }
+  const issues = c.issues || [];
+  const dimCount = DIMS.filter(d=>LABDIMS[d.k] && (LABDIMS[d.k].candidates||[]).length).length;
+  const statusText = issues.length
+    ? `⚠ 基线有 ${issues.length} 项提醒，仍可定妆但建议先修复`
+    : `✓ 候选池已就绪（${dimCount || DIMS.length} 维），可进入定妆`;
+  el.innerHTML = `<div class="chip on" style="cursor:default"><span class="av" style="background:${c.c}">${c.n[0]}</span>
+    <span><span class="nm">${c.n}</span> <span class="sd mono">seed ${c.s||seedOf(c)}</span></span></div>
+    <span style="font-size:11.5px;color:var(--ink3);align-self:center;margin-left:8px">${statusText}</span>`;
+}
+async function selectStudio(id){
+  STUDIO_C = id;
+  const c = CHARS.find(x=>x.id===id) || CHARS[0];
+  renderStudioChips();       // 先刷新高亮，避免网络抖动时用户以为没反应
+  try{
+    const payload = await (await fetch(API+'/dimensions?cid='+id)).json();
+    DIMS.forEach(d=>{
+      const blk = payload[d.k] || {label:d.n, candidates:[], default:{}};
+      const cands = blk.candidates || [];
+      DIMPOOL[d.k] = cands.map(x=>({s:x.subtype||'', n:x.name, d:x.description, t:x.detail||''}));
+      CAND[d.k]   = cands.map(x=>[x.name, x.description]);
+      LABDIMS[d.k]= {label:blk.label, candidates:cands, default:blk.default||{}};
+    });
+  }catch(e){
+    studioWarn('维度加载失败：'+e);
+  }
+  renderStudioDims();
+  renderStudioBudget();
+  renderCombo();
+  renderAll();              // Step2/3 实验区共用同一份 CAND/DIMPOOL
+}
+function studioWarn(msg){
+  const el=document.getElementById('studioWarn');
+  el.textContent='⚠ '+msg; el.classList.add('show');
+  clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'),2200);
+}
+function renderStudioDims(){
+  const html = DIMS.map(d=>{
+    const active = STUDIO_ACTIVE.has(d.k);
+    const ents = dimEntries(d.k);
+    const picks = STUDIO_PICK[d.k]||[];
+    const pills = ents.map((o,i)=>{
+      const on = picks.includes(i);
+      const tip = (o.d||'') + (o.t? ' ｜ 气质：'+o.t : '');
+      return `<div class="scand ${on?'on':''}" title="${tip.replace(/"/g,'&quot;')}" onclick="toggleCand('${d.k}',${i})">
+        <span class="scbx">${on?'✓':''}</span>${o.n}</div>`;
+    }).join('');
+    return `<div class="dimblock">
+      <div class="dimhead ${active?'on':''}" onclick="toggleDim('${d.k}')">
+        <span class="dimchk">${active?'✓':''}</span> ${d.ic} ${d.n}
+        <span class="dimcnt">${active? picks.length+' / '+MAX_PER_DIM+' 已选':'点击启用'}</span>
+      </div>
+      <div class="candwrap" style="${active?'':'display:none'}">${pills}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('studioDims').innerHTML = html;
+}
+function toggleDim(k){
+  if(STUDIO_ACTIVE.has(k)){
+    STUDIO_ACTIVE.delete(k); delete STUDIO_PICK[k];
+  } else {
+    if(STUDIO_ACTIVE.size >= MAX_DIMS){
+      studioWarn(`最多只能启用 ${MAX_DIMS} 个维度（前端护栏已锁）`);
+      return;
+    }
+    STUDIO_ACTIVE.add(k);
+    STUDIO_PICK[k] = [0];                 // 启用即默认选中首个候选，保证组合有效
+  }
+  renderStudioDims(); renderStudioBudget(); renderCombo();
+}
+function toggleCand(k, idx){
+  if(!STUDIO_ACTIVE.has(k)) return;       // 维度未启用不能选候选
+  const arr = STUDIO_PICK[k]||[];
+  const pos = arr.indexOf(idx);
+  if(pos>=0){
+    const next = arr.filter(x=>x!==idx);
+    if(next.length===0){ STUDIO_ACTIVE.delete(k); delete STUDIO_PICK[k]; }   // 取消最后一个 → 维度自动停用
+    else STUDIO_PICK[k]=next;
+  } else {
+    if(arr.length >= MAX_PER_DIM){
+      studioWarn(`每维最多选 ${MAX_PER_DIM} 个候选（前端护栏已锁）`);
+      return;
+    }
+    STUDIO_PICK[k] = arr.concat(idx);
+  }
+  renderStudioDims(); renderStudioBudget(); renderCombo();
+}
+function studioReset(){
+  STUDIO_ACTIVE = new Set(); STUDIO_PICK = {};
+  renderStudioDims(); renderStudioBudget(); renderCombo();
+}
+function renderStudioBudget(){
+  const act = DIMS.filter(d=>STUDIO_ACTIVE.has(d.k));
+  const el = document.getElementById('studioBudget');
+  if(act.length===0){
+    el.innerHTML = `<div class="bcard"><div class="bl">组合数</div><div class="bv">—</div></div>
+      <div class="bcard hl"><div class="bl">待生成</div><div class="bv">0 张</div></div>
+      <div class="bcard"><div class="bl">上限（${MAX_DIMS}维×${MAX_PER_DIM}候选）</div><div class="bv" style="color:var(--ink3)">${Math.pow(MAX_PER_DIM,MAX_DIMS)} 张</div></div>`;
+    return;
+  }
+  const parts = act.map(d=>(STUDIO_PICK[d.k]||[1]).length);
+  const combos = parts.reduce((a,b)=>a*b,1);
+  const mins = (combos*12/60).toFixed(1);
+  el.innerHTML = `<div class="bcard"><div class="bl">组合数</div><div class="bv">${parts.join(' × ')}</div></div>
+    <div class="bcard hl"><div class="bl">待生成</div><div class="bv">${combos} 张</div></div>
+    <div class="bcard"><div class="bl">预估耗时</div><div class="bv">${mins} min</div></div>
+    <div class="bcard"><div class="bl">上限（${MAX_DIMS}维×${MAX_PER_DIM}候选）</div><div class="bv" style="color:var(--ink3)">${Math.pow(MAX_PER_DIM,MAX_DIMS)} 张</div></div>`;
+}
+
+/* ===== 定妆间网格（按已启用维度 × 已选候选 笛卡尔积） ===== */
+function renderCombo(){
+  const c = CHARS.find(x=>x.id===STUDIO_C) || CHARS[0];
+  const act = DIMS.filter(d=>STUDIO_ACTIVE.has(d.k));
+  const title = document.getElementById('comboTitle');
+  const sub = document.getElementById('comboSub');
+  const grid = document.getElementById('cgrid');
+  title.textContent = '组合结果 · '+c.n;
+  if(act.length===0){
+    sub.textContent = 'seed '+seedOf(c)+' 恒定 · 请先启用至少 1 个维度';
+    grid.innerHTML = '<div class="note">尚未启用任何维度。在上方点选维度并挑选候选，组合结果会实时生成（最多 3 维、每维最多 3 候选）。</div>';
+    return;
+  }
+  const picked = act.map(d=>{
+    const list = (STUDIO_PICK[d.k]||[]).map(i=>{ const e=dimEntries(d.k)[i]; return {ic:d.ic, n:e.n}; });
+    return list;
+  });
+  sub.textContent = 'seed '+seedOf(c)+' 恒定 · '+act.length+' 维变化（'+act.map(d=>d.n).join(' · ')+'）';
+  let accs=[[]];
+  picked.forEach(list=>{ const next=[]; accs.forEach(acc=>list.forEach(item=>next.push(acc.concat(item)))); accs=next; });
+  let h='';
+  accs.forEach(combo=>{
+    const sig = act.map((d,idx)=> d.n+':'+combo[idx].n).join(' / ');
+    const info = combo.map(x=>`${x.ic} ${x.n}`).join('<br>');
+    h+=`<div class="ccell" data-sig="${sig.replace(/"/g,'&quot;')}"><div class="cimg" style="background:${shade(c.c,sig.length%5)}">🖼</div>
+      <div class="cinfo">${info}</div></div>`;
+  });
+  grid.innerHTML=h;
+}
+
+/* ===== 铺满全屏对比 ===== */
+function toggleFs(id){
+  const el=document.getElementById(id); if(!el) return;
+  const on=el.classList.toggle('fs');
+  const b=el.querySelector('.fsbtn'); if(b) b.textContent = on?'✕ 退出铺满':'⛶ 铺满对比';
+  document.body.style.overflow = on? 'hidden':'';
+  if(on) el.scrollTop=0;
+}
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  document.querySelectorAll('.panel.fs').forEach(p=>{
+    p.classList.remove('fs'); const b=p.querySelector('.fsbtn'); if(b) b.textContent='⛶ 铺满对比';
+  });
+  document.body.style.overflow='';
+});
+
+/* ===== 导航 ===== */
+document.querySelectorAll('.nav').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.nav').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  ['lab','studio','vocab'].forEach(p=>
+    document.getElementById('page-'+p).classList.toggle('hide', p!==el.dataset.page));
+});
+document.querySelectorAll('.vsw').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.vsw').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on'); VIEW=el.dataset.view; renderResult();
+});
+
+function renderAll(){ renderChars();renderDims();renderBudget();renderCands();renderHx();renderPreview();renderResult(); }
+/* 数据由 boot() 在 DOMContentLoaded 后异步拉取并渲染，这里不再提前渲染空数据 */
+
+/* ===== 结果矩阵 / 组合结果 灯箱：点击放大 + 左右翻页 ===== */
+let LAB_LB = { list: [], idx: -1 };
+function labCollect(container){
+  const sel = container === 'cgrid' ? '#cgrid .ccell[data-img]' : '#mxt .cell[data-img]';
+  const cells = Array.from(document.querySelectorAll(sel));
+  return { cells, list: cells.map(c => c.dataset.img).filter(Boolean) };
+}
+function labOpenLightbox(container, el){
+  const { cells, list } = labCollect(container);
+  const idx = cells.indexOf(el);
+  if(idx < 0 || !list.length) return;
+  LAB_LB.list = list; LAB_LB.idx = idx;
+  document.getElementById('labLightbox').classList.add('on');
+  labShowLightbox();
+}
+function labShowLightbox(){
+  const box = document.getElementById('labLightbox');
+  const img = box.querySelector('.lab-lb-img');
+  img.src = LAB_LB.list[LAB_LB.idx] || '';
+  img.alt = (LAB_LB.idx + 1) + ' / ' + LAB_LB.list.length;
+  box.querySelector('.lab-lb-counter').textContent = (LAB_LB.idx + 1) + ' / ' + LAB_LB.list.length;
+  box.querySelector('.lab-lb-prev-arrow').style.visibility = LAB_LB.idx <= 0 ? 'hidden' : 'visible';
+  box.querySelector('.lab-lb-next-arrow').style.visibility = LAB_LB.idx >= LAB_LB.list.length - 1 ? 'hidden' : 'visible';
+}
+function labNavLightbox(d){
+  const ni = LAB_LB.idx + d;
+  if(ni < 0 || ni >= LAB_LB.list.length) return;
+  LAB_LB.idx = ni; labShowLightbox();
+}
+function labCloseLightbox(){ document.getElementById('labLightbox').classList.remove('on'); }
+
+// 事件委托：点有图的格子打开灯箱；点按钮（设为最佳/重生成）不触发
+document.addEventListener('click', (e) => {
+  const t = e.target;
+  if(t.closest('button')) return;                 // 让 pick / regen 按钮自行处理
+  const cell = t.closest('.cell[data-img], .ccell[data-img]');
+  if(!cell) return;
+  const container = cell.classList.contains('ccell') ? 'cgrid' : 'mxt';
+  labOpenLightbox(container, cell);
+});
+</script>
+
+<!-- 提示词预览弹窗 -->
+<div class="modal" id="pvModal" onclick="if(event.target===this)closePvModal()">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <span style="font-size:20px">📝</span>
+      <h3>将要传给 ComfyUI 的提示词</h3>
+      <div class="spacer"></div>
+      <span style="font-size:12px;color:var(--ink3)" id="pvCount"></span>
+    </div>
+    <div class="modal-bd" id="pvList">
+      <div class="pv-empty">加载中…</div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-o" onclick="copyAllPrompts()">📋 复制全部</button>
+      <button class="btn btn-p" onclick="closePvModal()">关闭</button>
+    </div>
+  </div>
+</div>
+<!-- 结果矩阵灯箱（点击放大 + 左右翻页） -->
+<div class="lab-lightbox" id="labLightbox" onclick="if(event.target===this)labCloseLightbox()">
+  <div class="lab-lb-stage">
+    <button class="lab-lb-close" title="关闭" onclick="labCloseLightbox()">&times;</button>
+    <button class="lab-lb-arrow lab-lb-prev-arrow" title="上一张" aria-label="上一张" onclick="labNavLightbox(-1)">‹</button>
+    <img class="lab-lb-img" src="" alt="">
+    <button class="lab-lb-arrow lab-lb-next-arrow" title="下一张" aria-label="下一张" onclick="labNavLightbox(1)">›</button>
+    <div class="lab-lb-counter"></div>
+  </div>
+</div>
+
+<script>
+// 灯箱键盘左右翻页 + Esc 关闭（仅灯箱打开时生效）
+document.addEventListener('keydown', (e) => {
+  const box = document.getElementById('labLightbox');
+  if(!box || !box.classList.contains('on')) return;
+  if(e.key === 'ArrowLeft') labNavLightbox(-1);
+  else if(e.key === 'ArrowRight') labNavLightbox(1);
+  else if(e.key === 'Escape') labCloseLightbox();
+});
+</script>
+</body>
+</html>

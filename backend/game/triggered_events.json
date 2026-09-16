@@ -1,0 +1,1603 @@
+[
+  {
+    "trigger_id": "morning_jog",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "morning_jog",
+        "hours": 24
+      },
+      {
+        "attr": "energy",
+        "op": ">=",
+        "value": 30
+      },
+      {
+        "attr": "hunger",
+        "op": "<=",
+        "value": 70
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "energy",
+        "delta": -10
+      },
+      {
+        "attribute": "health",
+        "delta": 5
+      },
+      {
+        "attribute": "mood",
+        "delta": 3
+      }
+    ],
+    "narrative": {
+      "title": "晨跑",
+      "description": "{name} 早起去公园慢跑，感觉身体逐渐活跃起来。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "操场"
+  },
+  {
+    "trigger_id": "skipped_meal",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "skipped_meal",
+        "hours": 48
+      },
+      {
+        "attr": "hunger",
+        "op": ">=",
+        "value": 80
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "hunger",
+        "delta": -20
+      },
+      {
+        "attribute": "health",
+        "delta": -5
+      },
+      {
+        "attribute": "stress",
+        "delta": 2
+      }
+    ],
+    "narrative": {
+      "title": "错过午餐",
+      "description": "{name} 忙于工作忘了吃饭，肚子咕咕叫。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "食堂"
+  },
+  {
+    "trigger_id": "healthy_snack",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "healthy_snack",
+        "hours": 24
+      },
+      {
+        "attr": "hygiene",
+        "op": ">=",
+        "value": 50
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "hunger",
+        "delta": -15
+      },
+      {
+        "attribute": "health",
+        "delta": 3
+      },
+      {
+        "attribute": "happiness",
+        "delta": 2
+      }
+    ],
+    "narrative": {
+      "title": "健康零食",
+      "description": "{name} 吃了一些水果和坚果，补充能量。"
+    },
+    "auto_message_probability": 0.4,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "catch_cold",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "catch_cold",
+        "hours": 72
+      },
+      {
+        "attr": "health",
+        "op": "<=",
+        "value": 40
+      },
+      {
+        "attr": "energy",
+        "op": "<=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "health",
+        "delta": -15
+      },
+      {
+        "attribute": "energy",
+        "delta": -20
+      },
+      {
+        "attribute": "mood",
+        "delta": -5
+      }
+    ],
+    "narrative": {
+      "title": "感冒了",
+      "description": "{name} 感觉身体发冷，鼻涕直流，可能感冒了。"
+    },
+    "auto_message_probability": 0.7,
+    "progress_increment": 0,
+    "location": "校医院"
+  },
+  {
+    "trigger_id": "took_shower",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "took_shower",
+        "hours": 24
+      },
+      {
+        "attr": "hygiene",
+        "op": "<=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "hygiene",
+        "delta": 20
+      },
+      {
+        "attribute": "mood",
+        "delta": 5
+      },
+      {
+        "attribute": "energy",
+        "delta": 3
+      }
+    ],
+    "narrative": {
+      "title": "淋浴",
+      "description": "{name} 冲了个热水澡，感觉清爽多了。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "sleep_disorder",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "sleep_disorder",
+        "hours": 48
+      },
+      {
+        "attr": "stress",
+        "op": ">=",
+        "value": 60
+      },
+      {
+        "attr": "energy",
+        "op": "<=",
+        "value": 20
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "energy",
+        "delta": -10
+      },
+      {
+        "attribute": "stress",
+        "delta": 5
+      },
+      {
+        "attribute": "mood",
+        "delta": -5
+      }
+    ],
+    "narrative": {
+      "title": "失眠",
+      "description": "{name} 在床上翻来覆去，怎么也睡不着。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "gym_workout",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "gym_workout",
+        "hours": 48
+      },
+      {
+        "attr": "energy",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "energy",
+        "delta": -15
+      },
+      {
+        "attribute": "skills.fitness",
+        "delta": 3
+      },
+      {
+        "attribute": "health",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "健身房训练",
+      "description": "{name} 在健身房完成了力量训练，肌肉酸痛但充实。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "健身房"
+  },
+  {
+    "trigger_id": "stomach_ache",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "stomach_ache",
+        "hours": 72
+      },
+      {
+        "attr": "hunger",
+        "op": ">=",
+        "value": 90
+      },
+      {
+        "attr": "health",
+        "op": ">=",
+        "value": 60
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "health",
+        "delta": -8
+      },
+      {
+        "attribute": "hunger",
+        "delta": -10
+      },
+      {
+        "attribute": "mood",
+        "delta": -5
+      }
+    ],
+    "narrative": {
+      "title": "吃撑了",
+      "description": "{name} 吃得太急太多，胃开始抗议。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "食堂"
+  },
+  {
+    "trigger_id": "sun_bath",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "sun_bath",
+        "hours": 48
+      },
+      {
+        "attr": "mood",
+        "op": "<=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "mood",
+        "delta": 8
+      },
+      {
+        "attribute": "health",
+        "delta": 5
+      },
+      {
+        "attribute": "energy",
+        "delta": 3
+      }
+    ],
+    "narrative": {
+      "title": "晒太阳",
+      "description": "{name} 在阳台晒了会儿太阳，心情好了不少。"
+    },
+    "auto_message_probability": 0.4,
+    "progress_increment": 0,
+    "location": "阳台"
+  },
+  {
+    "trigger_id": "sports_injury",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "sports_injury",
+        "hours": 96
+      },
+      {
+        "attr": "skills.fitness",
+        "op": ">=",
+        "value": 20
+      },
+      {
+        "attr": "energy",
+        "op": "<=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "health",
+        "delta": -20
+      },
+      {
+        "attribute": "energy",
+        "delta": -15
+      },
+      {
+        "attribute": "happiness",
+        "delta": -10
+      }
+    ],
+    "narrative": {
+      "title": "运动扭伤",
+      "description": "{name} 运动时用力过猛，脚踝扭伤了。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "操场"
+  },
+  {
+    "trigger_id": "study_session",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "study_session",
+        "hours": 24
+      },
+      {
+        "attr": "skills.learning",
+        "op": ">=",
+        "value": 10
+      },
+      {
+        "attr": "energy",
+        "op": ">=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.learning",
+        "delta": 5
+      },
+      {
+        "attribute": "stress",
+        "delta": 3
+      },
+      {
+        "attribute": "energy",
+        "delta": -8
+      }
+    ],
+    "narrative": {
+      "title": "自习时间",
+      "description": "{name} 静下心来学习了几小时，收获颇丰。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "图书馆"
+  },
+  {
+    "trigger_id": "exam_stress",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "exam_stress",
+        "hours": 72
+      },
+      {
+        "attr": "stress",
+        "op": ">=",
+        "value": 50
+      },
+      {
+        "attr": "goals.writer_progress",
+        "op": "<=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "stress",
+        "delta": -10
+      },
+      {
+        "attribute": "skills.writing",
+        "delta": 4
+      },
+      {
+        "attribute": "goals.writer_progress",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "赶论文",
+      "description": "{name} 为了完成论文熬了夜，终于有了进展。"
+    },
+    "auto_message_probability": 0.7,
+    "progress_increment": 0,
+    "location": "图书馆"
+  },
+  {
+    "trigger_id": "code_review",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "code_review",
+        "hours": 48
+      },
+      {
+        "attr": "skills.coding",
+        "op": ">=",
+        "value": 15
+      },
+      {
+        "attr": "motivation",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.coding",
+        "delta": 6
+      },
+      {
+        "attribute": "skills.teamwork",
+        "delta": 2
+      },
+      {
+        "attribute": "happiness",
+        "delta": 3
+      }
+    ],
+    "narrative": {
+      "title": "代码审查",
+      "description": "{name} 和队友互相审查代码，发现并修复了一个隐藏bug。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "实验室"
+  },
+  {
+    "trigger_id": "internship_offer",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "internship_offer",
+        "hours": 96
+      },
+      {
+        "attr": "skills.learning",
+        "op": ">=",
+        "value": 20
+      },
+      {
+        "attr": "confidence",
+        "op": ">=",
+        "value": 50
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "goals.coder_progress",
+        "delta": 8
+      },
+      {
+        "attribute": "happiness",
+        "delta": 10
+      },
+      {
+        "attribute": "stress",
+        "delta": -5
+      }
+    ],
+    "narrative": {
+      "title": "实习机会",
+      "description": "{name} 收到一份不错的实习offer，职业道路更进一步。"
+    },
+    "auto_message_probability": 0.8,
+    "progress_increment": 0,
+    "location": "教室"
+  },
+  {
+    "trigger_id": "project_failure",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "project_failure",
+        "hours": 72
+      },
+      {
+        "attr": "skills.teamwork",
+        "op": "<=",
+        "value": 10
+      },
+      {
+        "attr": "stress",
+        "op": ">=",
+        "value": 60
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "happiness",
+        "delta": -10
+      },
+      {
+        "attribute": "confidence",
+        "delta": -5
+      },
+      {
+        "attribute": "stress",
+        "delta": 8
+      }
+    ],
+    "narrative": {
+      "title": "项目受挫",
+      "description": "{name} 负责的项目因沟通不畅出了问题，感到沮丧。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "实验室"
+  },
+  {
+    "trigger_id": "creative_burst",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "creative_burst",
+        "hours": 48
+      },
+      {
+        "attr": "creativity",
+        "op": ">=",
+        "value": 30
+      },
+      {
+        "attr": "happiness",
+        "op": ">=",
+        "value": 50
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.painting",
+        "delta": 5
+      },
+      {
+        "attribute": "creativity",
+        "delta": 5
+      },
+      {
+        "attribute": "joy",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "灵光一现",
+      "description": "{name} 突然有了一个绝妙的想法，开始疯狂创作。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "教室"
+  },
+  {
+    "trigger_id": "study_group",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "study_group",
+        "hours": 48
+      },
+      {
+        "attr": "skills.learning",
+        "op": ">=",
+        "value": 5
+      },
+      {
+        "attr": "loneliness",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.learning",
+        "delta": 4
+      },
+      {
+        "attribute": "loneliness",
+        "delta": -10
+      },
+      {
+        "attribute": "happiness",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "学习小组",
+      "description": "{name} 加入了一个学习小组，大家一起讨论效率更高。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "图书馆"
+  },
+  {
+    "trigger_id": "deadline_night",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "deadline_night",
+        "hours": 72
+      },
+      {
+        "attr": "motivation",
+        "op": ">=",
+        "value": 60
+      },
+      {
+        "attr": "energy",
+        "op": ">=",
+        "value": 25
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "goals.writer_progress",
+        "delta": 10
+      },
+      {
+        "attribute": "energy",
+        "delta": -20
+      },
+      {
+        "attribute": "stress",
+        "delta": 10
+      }
+    ],
+    "narrative": {
+      "title": "熬夜赶工",
+      "description": "{name} 为了赶上截止日期，通宵完成了任务。"
+    },
+    "auto_message_probability": 0.7,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "skill_workshop",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "skill_workshop",
+        "hours": 96
+      },
+      {
+        "attr": "skills.game_design",
+        "op": ">=",
+        "value": 10
+      },
+      {
+        "attr": "creativity",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.game_design",
+        "delta": 7
+      },
+      {
+        "attribute": "skills.teamwork",
+        "delta": 3
+      },
+      {
+        "attribute": "happiness",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "参加工坊",
+      "description": "{name} 参加了一场游戏设计工作坊，学到了很多新技巧。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "教室"
+  },
+  {
+    "trigger_id": "cheating_temptation",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "cheating_temptation",
+        "hours": 96
+      },
+      {
+        "attr": "stress",
+        "op": ">=",
+        "value": 70
+      },
+      {
+        "attr": "confidence",
+        "op": "<=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "happiness",
+        "delta": -10
+      },
+      {
+        "attribute": "stress",
+        "delta": -5
+      },
+      {
+        "attribute": "disappointment",
+        "delta": 8
+      }
+    ],
+    "narrative": {
+      "title": "作弊诱惑",
+      "description": "{name} 面临考试作弊的诱惑，但最终选择了诚实。"
+    },
+    "auto_message_probability": 0.4,
+    "progress_increment": 0,
+    "location": "教室"
+  },
+  {
+    "trigger_id": "friend_support",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "friend_support",
+        "hours": 48
+      },
+      {
+        "attr": "loneliness",
+        "op": ">=",
+        "value": 50
+      },
+      {
+        "attr": "happiness",
+        "op": "<=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "loneliness",
+        "delta": -15
+      },
+      {
+        "attribute": "happiness",
+        "delta": 8
+      },
+      {
+        "attribute": "mood",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "朋友谈心",
+      "description": "{name} 的朋友发现他情绪低落，主动过来聊天安慰。"
+    },
+    "auto_message_probability": 0.7,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "social_party",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "social_party",
+        "hours": 72
+      },
+      {
+        "attr": "energy",
+        "op": ">=",
+        "value": 40
+      },
+      {
+        "attr": "skills.social",
+        "op": ">=",
+        "value": 10
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.social",
+        "delta": 5
+      },
+      {
+        "attribute": "happiness",
+        "delta": 10
+      },
+      {
+        "attribute": "energy",
+        "delta": -10
+      }
+    ],
+    "narrative": {
+      "title": "参加派对",
+      "description": "{name} 参加了一场热闹的派对，认识了很多新朋友。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "商业街"
+  },
+  {
+    "trigger_id": "argument",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "argument",
+        "hours": 72
+      },
+      {
+        "attr": "stress",
+        "op": ">=",
+        "value": 50
+      },
+      {
+        "attr": "anger",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "anger",
+        "delta": -10
+      },
+      {
+        "attribute": "loneliness",
+        "delta": 5
+      },
+      {
+        "attribute": "happiness",
+        "delta": -5
+      }
+    ],
+    "narrative": {
+      "title": "与友人争执",
+      "description": "{name} 和好朋友因为小事吵了一架，事后很后悔。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "校园"
+  },
+  {
+    "trigger_id": "surprise_gift",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "surprise_gift",
+        "hours": 96
+      },
+      {
+        "attr": "happiness",
+        "op": "<=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "happiness",
+        "delta": 15
+      },
+      {
+        "attribute": "joy",
+        "delta": 10
+      },
+      {
+        "attribute": "joy",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "惊喜礼物",
+      "description": "{name} 收到了一份匿名礼物，感到非常温暖。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "neighbor_visit",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "neighbor_visit",
+        "hours": 48
+      },
+      {
+        "attr": "loneliness",
+        "op": ">=",
+        "value": 30
+      },
+      {
+        "attr": "confidence",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "loneliness",
+        "delta": -10
+      },
+      {
+        "attribute": "skills.social",
+        "delta": 2
+      },
+      {
+        "attribute": "happiness",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "邻居串门",
+      "description": "{name} 的邻居过来借东西，顺便聊了一会儿。"
+    },
+    "auto_message_probability": 0.4,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "group_project",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "group_project",
+        "hours": 72
+      },
+      {
+        "attr": "skills.teamwork",
+        "op": ">=",
+        "value": 15
+      },
+      {
+        "attr": "happiness",
+        "op": ">=",
+        "value": 50
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.teamwork",
+        "delta": 5
+      },
+      {
+        "attribute": "happiness",
+        "delta": 5
+      },
+      {
+        "attribute": "confidence",
+        "delta": 3
+      }
+    ],
+    "narrative": {
+      "title": "团队协作",
+      "description": "{name} 和同学们一起完成了一个小组项目，配合默契。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "实验室"
+  },
+  {
+    "trigger_id": "betrayal",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "betrayal",
+        "hours": 96
+      },
+      {
+        "attr": "happiness",
+        "op": ">=",
+        "value": 50
+      },
+      {
+        "attr": "happiness",
+        "op": ">=",
+        "value": 60
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "happiness",
+        "delta": -20
+      },
+      {
+        "attribute": "happiness",
+        "delta": -15
+      },
+      {
+        "attribute": "anger",
+        "delta": 10
+      }
+    ],
+    "narrative": {
+      "title": "遭到背叛",
+      "description": "{name} 被信任的朋友在背后说了坏话，心灰意冷。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "校园"
+  },
+  {
+    "trigger_id": "invitation_dinner",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "invitation_dinner",
+        "hours": 48
+      },
+      {
+        "attr": "hunger",
+        "op": ">=",
+        "value": 60
+      },
+      {
+        "attr": "loneliness",
+        "op": ">=",
+        "value": 20
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "hunger",
+        "delta": -20
+      },
+      {
+        "attribute": "loneliness",
+        "delta": -10
+      },
+      {
+        "attribute": "happiness",
+        "delta": 8
+      }
+    ],
+    "narrative": {
+      "title": "受邀晚餐",
+      "description": "{name} 被朋友邀请去家里吃晚餐，度过了一个愉快的晚上。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "校外"
+  },
+  {
+    "trigger_id": "public_speech",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "public_speech",
+        "hours": 96
+      },
+      {
+        "attr": "skills.debate",
+        "op": ">=",
+        "value": 10
+      },
+      {
+        "attr": "confidence",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.debate",
+        "delta": 5
+      },
+      {
+        "attribute": "confidence",
+        "delta": 8
+      },
+      {
+        "attribute": "stress",
+        "delta": -5
+      }
+    ],
+    "narrative": {
+      "title": "公开演讲",
+      "description": "{name} 在公众面前发表了一次演讲，获得了热烈掌声。"
+    },
+    "auto_message_probability": 0.7,
+    "progress_increment": 0,
+    "location": "教室"
+  },
+  {
+    "trigger_id": "mentorship",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "mentorship",
+        "hours": 72
+      },
+      {
+        "attr": "skills.learning",
+        "op": ">=",
+        "value": 20
+      },
+      {
+        "attr": "happiness",
+        "op": "<=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.learning",
+        "delta": 4
+      },
+      {
+        "attribute": "happiness",
+        "delta": 6
+      },
+      {
+        "attribute": "confidence",
+        "delta": 3
+      }
+    ],
+    "narrative": {
+      "title": "导师指导",
+      "description": "{name} 得到了一位经验丰富的导师的指导，受益匪浅。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "教室"
+  },
+  {
+    "trigger_id": "rainy_day",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "rainy_day",
+        "hours": 48
+      },
+      {
+        "attr": "mood",
+        "op": ">=",
+        "value": 50
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "mood",
+        "delta": 5
+      },
+      {
+        "attribute": "creativity",
+        "delta": 3
+      },
+      {
+        "attribute": "loneliness",
+        "delta": -2
+      }
+    ],
+    "narrative": {
+      "title": "雨天独处",
+      "description": "{name} 靠在窗边听雨，内心感到平静。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "wind_storm",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "wind_storm",
+        "hours": 96
+      },
+      {
+        "attr": "energy",
+        "op": ">=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "stress",
+        "delta": 5
+      },
+      {
+        "attribute": "hygiene",
+        "delta": -5
+      },
+      {
+        "attribute": "happiness",
+        "delta": -3
+      }
+    ],
+    "narrative": {
+      "title": "狂风大作",
+      "description": "{name} 出门被风吹得乱七八糟，心情也变得烦躁。"
+    },
+    "auto_message_probability": 0.4,
+    "progress_increment": 0,
+    "location": "校园"
+  },
+  {
+    "trigger_id": "power_outage",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "power_outage",
+        "hours": 72
+      },
+      {
+        "attr": "boredom",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "boredom",
+        "delta": -10
+      },
+      {
+        "attribute": "creativity",
+        "delta": 5
+      },
+      {
+        "attribute": "happiness",
+        "delta": -5
+      }
+    ],
+    "narrative": {
+      "title": "停电",
+      "description": "{name} 家里突然停电，只好点蜡烛看书。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "lost_item",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "lost_item",
+        "hours": 48
+      },
+      {
+        "attr": "stress",
+        "op": "<=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "stress",
+        "delta": 10
+      },
+      {
+        "attribute": "anger",
+        "delta": 5
+      },
+      {
+        "attribute": "disappointment",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "丢失物品",
+      "description": "{name} 找不到钥匙了，翻箱倒柜之后才找到。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "校园"
+  },
+  {
+    "trigger_id": "good_weather",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "good_weather",
+        "hours": 48
+      },
+      {
+        "attr": "happiness",
+        "op": "<=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "happiness",
+        "delta": 8
+      },
+      {
+        "attribute": "energy",
+        "delta": 5
+      },
+      {
+        "attribute": "mood",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "好天气",
+      "description": "{name} 推开窗户，阳光明媚，微风习习，心情大好。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "校园"
+  },
+  {
+    "trigger_id": "self_reflection",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "self_reflection",
+        "hours": 72
+      },
+      {
+        "attr": "fulfillment",
+        "op": "<=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "fulfillment",
+        "delta": 10
+      },
+      {
+        "attribute": "happiness",
+        "delta": 5
+      },
+      {
+        "attribute": "motivation",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "自我反思",
+      "description": "{name} 静下心回顾了最近的生活，找到了新的方向。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "宿舍"
+  },
+  {
+    "trigger_id": "achievement_unlock",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "achievement_unlock",
+        "hours": 96
+      },
+      {
+        "attr": "skills.coding",
+        "op": ">=",
+        "value": 30
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "confidence",
+        "delta": 10
+      },
+      {
+        "attribute": "happiness",
+        "delta": 8
+      },
+      {
+        "attribute": "fulfillment",
+        "delta": 7
+      }
+    ],
+    "narrative": {
+      "title": "获得成就",
+      "description": "{name} 成功完成了一个复杂代码项目，获得成就感。"
+    },
+    "auto_message_probability": 0.8,
+    "progress_increment": 0,
+    "location": "实验室"
+  },
+  {
+    "trigger_id": "coincidence",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "coincidence",
+        "hours": 48
+      },
+      {
+        "attr": "boredom",
+        "op": ">=",
+        "value": 50
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "boredom",
+        "delta": -15
+      },
+      {
+        "attribute": "happiness",
+        "delta": 5
+      },
+      {
+        "attribute": "creativity",
+        "delta": 3
+      }
+    ],
+    "narrative": {
+      "title": "意外巧遇",
+      "description": "{name} 在街上偶遇了多年未见的老同学，聊了很久。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "商业街"
+  },
+  {
+    "trigger_id": "life_lesson",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "life_lesson",
+        "hours": 72
+      },
+      {
+        "attr": "disappointment",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "disappointment",
+        "delta": -10
+      },
+      {
+        "attribute": "confidence",
+        "delta": 5
+      },
+      {
+        "attribute": "fulfillment",
+        "delta": 8
+      }
+    ],
+    "narrative": {
+      "title": "人生感悟",
+      "description": "{name} 经历了挫折后，领悟到一些重要的人生道理。"
+    },
+    "auto_message_probability": 0.6,
+    "progress_increment": 0,
+    "location": "公园"
+  },
+  {
+    "trigger_id": "nature_walk",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "nature_walk",
+        "hours": 48
+      },
+      {
+        "attr": "stress",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "stress",
+        "delta": -10
+      },
+      {
+        "attribute": "happiness",
+        "delta": 5
+      },
+      {
+        "attribute": "energy",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "林间散步",
+      "description": "{name} 在附近的森林里散步，呼吸新鲜空气，压力消散。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "公园"
+  },
+  {
+    "trigger_id": "learn_new_hobby",
+    "category": "daily",
+    "conditions": [
+      {
+        "not_cooldown": "learn_new_hobby",
+        "hours": 72
+      },
+      {
+        "attr": "boredom",
+        "op": ">=",
+        "value": 30
+      },
+      {
+        "attr": "energy",
+        "op": ">=",
+        "value": 40
+      }
+    ],
+    "state_changes": [
+      {
+        "attribute": "skills.painting",
+        "delta": 3
+      },
+      {
+        "attribute": "happiness",
+        "delta": 8
+      },
+      {
+        "attribute": "creativity",
+        "delta": 5
+      }
+    ],
+    "narrative": {
+      "title": "学习新爱好",
+      "description": "{name} 开始尝试绘画，发现自己还挺有天赋。"
+    },
+    "auto_message_probability": 0.5,
+    "progress_increment": 0,
+    "location": "宿舍"
+  }
+]

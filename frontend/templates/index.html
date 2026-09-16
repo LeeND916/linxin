@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="hDAw7kVG2TRDFUTPJB4XHZ">
+<head data-page-node-id="1IuqIJe5zfEl6Nd6fVydfL">
+    <meta charset="UTF-8" data-page-node-id="0Cmx6kNgkQixBtxQbcYbFn">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" data-page-node-id="rEoGXn5hQEenyEx0h10Ogj">
+    <title>邻信 - 加载中...</title>
+    <link rel="stylesheet" href="/static/css/style.css?v=20260915a" data-page-node-id="FrTOVIftbRAnbissrrT8tP">
+    <link href="https://fonts.googleapis.cn/css2?family=Material+Symbols+Outlined" rel="stylesheet" data-page-node-id="YTbH4bTcH0Q5ydzpXsLWIH">
+</head>
+<body data-page-node-id="iB7m7QWk25WCvm5gSYQftL">
+    <div class="app-container" data-page-node-id="0eJRSQiEAwyUxo7rFT0ckT">
+        <!-- 顶部导航栏：PC 单行（世界名 / 天气 / 地点 / 时间 / 汉堡并列）；移动端由 CSS order 重排为 2 行 -->
+        <header class="top-bar" data-page-node-id="HGUcrU3FPoCsd6Ks0K1CxU">
+            <div class="logo" data-page-node-id="01ts7g81q9Bl05qKtSYfmN">
+                <span class="material-symbols-outlined" data-page-node-id="eY2wwKfyj3luQIM7ttWelD">psychology</span>
+                <span id="logo-name" data-page-node-id="DyDngJjqwWLmOKCGM2CB2K">加载中...</span>
+            </div>
+            <!-- 天气 + 游戏时间：移动端合并为单行跑马灯；PC 上拍平为顶栏直接子元素 -->
+            <div class="time-weather" id="time-weather-group" data-page-node-id="sLhMQDmjq60e42GQO8ropG">
+                <div class="time-weather-track" data-page-node-id="0EhCWkvhElbaXjrKE00bGz">
+                    <div class="weather-widget" id="weather-widget" title="点击打开日历" data-page-node-id="2IE2q0XFwtd3WdtQyQF9z3">
+                        <span class="weather-icon" id="weather-icon" data-page-node-id="RkNo7IZpFOCtFWttAqomRF">☀️</span>
+                        <span class="weather-text" id="weather-text" data-page-node-id="3pBHHZVSxr8g5Bqbvk9syO">加载中...</span>
+                    </div>
+                    <div class="game-time-widget" id="game-time-widget" title="游戏时间" data-page-node-id="cVVzYRIWah1iV0Rfh5MOhG">
+                        <span class="material-symbols-outlined" data-page-node-id="2YyMN6mtH8VkWragtaYOkL">schedule</span>
+                        <span class="game-time-text" id="game-time-text" data-page-node-id="2b6OUGHzyQJBQODTL66prL">第1天 08:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="location-widget" id="location-widget" title="女主所在地点" data-page-node-id="S5z9vAYtD5yiVebHxYnjwJ">
+                <span class="material-symbols-outlined" data-page-node-id="UUbXWM6DWqTEyDh1ofHOSP">location_on</span>
+                <span class="location-text" id="location-text" data-page-node-id="lqJbntp9NMMWRRpdGC7IsE">加载中...</span>
+            </div>
+            <button class="mobile-menu-btn btn-icon" id="mobile-menu-btn" title="菜单" data-page-node-id="FoDNKZ47Zf2F7W2Tw3CCyy">
+                <span class="material-symbols-outlined" data-page-node-id="nzCx8k6FhDtRQYBvxxwSpL">menu</span>
+            </button>
+            <div class="top-bar-break" aria-hidden="true" data-page-node-id="K0LXM3rtmoTMfDylYdhEGS"></div>
+            <!-- 系统功能按钮：隐藏，仅通过汉堡菜单触发（保留 DOM 以便下拉菜单 click 调用） -->
+            <div class="top-actions" aria-hidden="true" data-page-node-id="udrkuhyNTNu1GgmAdyJrMU">
+                <div class="mobile-info-capsule" id="mobile-info-capsule" title="点击打开日历" data-page-node-id="CiaDanv8FdnhEQqhTX0us0">
+                    <span id="mobile-info-text" data-page-node-id="2RYDgNZGIy6b5Prkmpgv0K">加载中...</span>
+                </div>
+                <button class="btn-char-switch" id="btn-char-switch" title="切换角色" data-page-node-id="xDxKJY2dseqtmgHKttrxSk">
+                    <span class="material-symbols-outlined" data-page-node-id="CwtX8eBzAhmjm127hCFZQN">swap_horiz</span>
+                    <span id="current-char-name" data-page-node-id="dgnJo1FeD3DFcCHRPvOvQa">角色</span>
+                </button>
+                <button class="btn-save" id="btn-save" title="保存游戏" data-page-node-id="0AK4mVSs47bc7FepfqTZf1">
+                    <span class="material-symbols-outlined" data-page-node-id="nBxDZ1FgwlpZvxxPXa96ty">save</span>
+                    保存
+                </button>
+                <div class="auto-save-status" id="auto-save-status" data-page-node-id="aDGavP2vIiEcEHmqQerbEc">
+                    <span class="material-symbols-outlined" data-page-node-id="ebB0TocJf5227Ds46goGDK">schedule</span>
+                    <span id="auto-save-time" data-page-node-id="McDjHKz9AFRCV5AHlv6oY8">未保存</span>
+                </div>
+                <button class="btn-icon" id="btn-llm-config" title="系统设置" data-page-node-id="E0R9STlyY27Q3yHwET0yik">
+                    <span class="material-symbols-outlined" data-page-node-id="6tqcJgfpyEEGhLeSbYq9Qr">settings</span>
+                </button>
+                <button class="btn-icon" id="btn-character-create" title="创建角色" data-page-node-id="ccGloAxHsSlQf8307r91Ut">
+                    <span class="material-symbols-outlined" data-page-node-id="MX3mEbol2aeIhYUxCpRZ8x">person_add</span>
+                </button>
+                <button class="btn-icon" id="btn-gm-panel" title="GM设置" data-page-node-id="3pUEpGZRIJXX66FcopHtj0">
+                    <span class="material-symbols-outlined" data-page-node-id="UxFpzIYeIZesRGZOK9Ciju">tune</span>
+                </button>
+                <button class="btn-icon" id="btn-voice-panel" title="音色设置" data-page-node-id="fpUO4fGLsIfB1XLCtGFliv">
+                    <span class="material-symbols-outlined" data-page-node-id="y963pvQqVax9bUuCPjKVC1">record_voice_over</span>
+                </button>
+                <button class="btn-icon" id="btn-memory-panel" title="她的回忆" data-page-node-id="5cV1ubi29afTl9JBEUsxPk">
+                    <span class="material-symbols-outlined" data-page-node-id="Ufsk5QK889EK4x00J2H0Qw">auto_awesome_memory</span>
+                </button>
+                <button class="btn-icon" id="btn-character-profile" title="角色属性" data-page-node-id="6MR73FDJI3Oj1VVqAc9kIm">
+                    <span class="material-symbols-outlined" data-page-node-id="qAxzF7AJpoGqfkGP2bHkv5">person_edit</span>
+                </button>
+                <button class="btn-icon" id="btn-changelog" title="更新说明" data-page-node-id="oaOLk4nQ36Xcxa0ayqscCd">
+                    <span class="material-symbols-outlined" data-page-node-id="FGnFOTuCGQoEIofU70xHu7">history</span>
+                </button>
+                <span id="auto-tick-status" class="auto-status" data-page-node-id="OosaFnmpeP3htWKRlKpKrB"></span>
+            </div>
+        </header>
+
+        <!-- 玩家档案条 + 小喇叭：PC 同排（身份信息左对齐，小喇叭右对齐单行压缩），移动端各自隐藏 -->
+        <div class="identity-announce-row" data-page-node-id="wfVt3FFdDoDWqbiAVECBe1">
+            <div class="player-identity-strip" id="player-identity-strip" data-page-node-id="AGWf6iH5xZJTOhrwp07lWI"></div>
+            <div class="announce-bar" id="announce-bar" data-page-node-id="fafACtG1OMzV7oP9Ne9wB2">
+            <span class="announce-icon material-symbols-outlined" data-page-node-id="cxvwo8qR8C8WPkZ2EMMnxq">campaign</span>
+            <div class="announce-viewport" id="announce-viewport" data-page-node-id="eXFCmG4tpBj8ZZHhFFtEND">
+                <div class="announce-track" id="announce-track" data-page-node-id="zW2EKxTLQmxH4i39eBVc2K">
+                    <div class="announce-empty" data-page-node-id="28CXEB3MX6w41OrrwEIvdO">暂无动态通知</div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- 移动端汉堡菜单下拉面板 -->
+        <div class="mobile-menu-dropdown" id="mobile-menu-dropdown" data-page-node-id="mp7ViE7UZuGOgQX4u2yyFO">
+            <button onclick="document.getElementById('btn-save').click(); this.parentElement.classList.remove('open')" data-page-node-id="cwCsPEJk6KDiCKvEv9u44T">
+                <span class="material-symbols-outlined" data-page-node-id="957r6kw945xM6METi3ssy0">save</span> 保存
+            </button>
+            <button onclick="document.getElementById('btn-char-switch').click(); this.parentElement.classList.remove('open')" data-page-node-id="2kShgP3HB7FBYs0YuBhGqF">
+                <span class="material-symbols-outlined" data-page-node-id="7ObszqDRvHH0kDSa3QS5fx">swap_horiz</span> 切换角色
+            </button>
+            <button onclick="document.getElementById('btn-llm-config').click(); this.parentElement.classList.remove('open')" data-page-node-id="WNRLZXbonZ7XCF28UGg96B">
+                <span class="material-symbols-outlined" data-page-node-id="MDpwUM2v7DmmnibIAJn3eU">settings</span> 系统设置
+            </button>
+            <button onclick="document.getElementById('btn-character-create').click(); this.parentElement.classList.remove('open')" data-page-node-id="p5tJrV3fdBFMwNZp5DlNWL">
+                <span class="material-symbols-outlined" data-page-node-id="GImxS9buHE4nSmFoaBzZCj">person_add</span> 创建角色
+            </button>
+            <button onclick="document.getElementById('btn-gm-panel').click(); this.parentElement.classList.remove('open')" data-page-node-id="8b6UU2uXj35Deo4irLGxm6">
+                <span class="material-symbols-outlined" data-page-node-id="CO1UD2jAekcmWnrCDJcTfO">tune</span> GM设置
+            </button>
+            <button onclick="document.getElementById('btn-voice-panel').click(); this.parentElement.classList.remove('open')" data-page-node-id="oGrTssDQYbXx6oTzvNJC2O">
+                <span class="material-symbols-outlined" data-page-node-id="Bf4AwxOMaAHbkjrBqvW8ke">record_voice_over</span> 音色设置
+            </button>
+            <button onclick="document.getElementById('btn-memory-panel').click(); this.parentElement.classList.remove('open')" data-page-node-id="9V7ENwxR5Vlay404nMdGE8">
+                <span class="material-symbols-outlined" data-page-node-id="bF9utaVQs3HqppL43UcGuS">auto_awesome_memory</span> 她的回忆
+            </button>
+            <button onclick="document.getElementById('btn-character-profile').click(); this.parentElement.classList.remove('open')" data-page-node-id="JMVnrt2UfFS0qeWNfXMOHq">
+                <span class="material-symbols-outlined" data-page-node-id="xwpDmrBt93BQWKZ137Z7TO">person_edit</span> 角色属性
+            </button>
+            <button onclick="document.getElementById('btn-changelog').click(); this.parentElement.classList.remove('open')" data-page-node-id="5ctc3KLH1PEoJstmmGzI4e">
+                <span class="material-symbols-outlined" data-page-node-id="IkqVCjxLzykDwT1CouvJWk">history</span> 更新说明
+            </button>
+        </div>
+
+        <!-- 主仪表盘：三栏 flex 布局 -->
+        <main class="main-container" data-page-node-id="45T1p1eFWQILMKzyHxLk1L">
+            <!-- 左栏：角色画像 + 状态 + 朋友 -->
+            <div class="left-panel" id="left-panel" data-page-node-id="BV87MLGfAel3xc95nU7kP9">
+                <!-- 角色画像 -->
+                <section class="panel panel-avatar" id="panel-avatar" data-page-node-id="Bv3ompKv3am7ZZqJ2NRY3l">
+                    <h3 data-page-node-id="A6kX3ZjlhnkEhuTsaIZ7D3">角色画像</h3>
+                    <div class="avatar-container" id="avatar-container" data-page-node-id="oclkdDthVmBHxMq3jfqRSo">
+                        <!-- 肖像生成区域 -->
+                        <div class="portrait-generator" id="portrait-generator" data-page-node-id="AMOHyHeNQi0EcIkS9w4Fv7">
+                            <div class="portrait-display-wrap" id="portrait-display-wrap" data-page-node-id="aTa79h0GHaCbG5MzsD1Gxv">
+                                <div class="portrait-display photo-hidden" id="portrait-display" data-page-node-id="1ss4haZacEXiSwSmus0CEF">
+                                    <div class="portrait-placeholder" data-page-node-id="9E2xsJjfhkoOTOO0XfT5GA">点击生成角色肖像</div>
+                                </div>
+                                <button type="button" class="portrait-import-avatar" id="btn-import-avatar" title="导入为聊天头像" hidden data-page-node-id="Kki37OM99wEdjLXtpP0LRF">
+                                    <span class="material-symbols-outlined" data-page-node-id="AiM8qXTQCnY4qZBA81HjmV">swap_horiz</span>
+                                </button>
+                                <button type="button" class="portrait-history-btn" id="btn-avatar-history" title="历史头像" hidden data-page-node-id="Z29SSGA0j6n3kc3wdVxuTk">
+                                    <span class="material-symbols-outlined" data-page-node-id="4CPBEPoBE8XGQJT7VPAAb2">more_horiz</span>
+                                </button>
+                                <div class="portrait-history-menu" id="avatar-history-menu" hidden data-page-node-id="CYIOMd7nDHjqaGUMbsxKdK"></div>
+                            </div>
+                            <div class="portrait-controls" data-page-node-id="laSPsBid2Rm0BF4IHRl5ZU">
+                                <button class="btn-generate" id="btn-generate-portrait" data-page-node-id="z2AJlTrVw1IUMA2z0JOIOj">
+                                    <span class="material-symbols-outlined" data-page-node-id="y0goUFSSRPacMsZHU5SzB6">auto_fix</span>
+                                    生成肖像
+                                </button>
+                                <button class="btn-generate btn-generate-secondary" id="btn-custom-portrait" data-page-node-id="jGtfiX7hcGloGzimpDGwSV">
+                                    <span class="material-symbols-outlined" data-page-node-id="JkYgfpV0o2sGuAgBWMC2Cy">tune</span>
+                                    自定义
+                                </button>
+                            </div>
+                            <div class="portrait-status" data-page-node-id="Ye0IGVjE3ghK2WVVE9LPHy">
+                                <span class="status-dot offline" id="portrait-status-indicator" data-page-node-id="KXL16NNSVjFYQK1Oc8pFB7"></span>
+                                <span class="status-text" id="portrait-status-text" data-page-node-id="HV5iT6QVbXuvDsVdOavF9X">检查中...</span>
+                            </div>
+                        </div>
+                        <!-- 自定义肖像提示词弹窗 -->
+                        <div class="portrait-builder-overlay" id="portrait-builder-overlay" style="display:none" data-page-node-id="GYFYXnDOLPEDF9uSUYNVyA">
+                            <div class="portrait-builder-modal" data-page-node-id="0P2cK685sUx0HEnk0DggNG">
+                                <div class="portrait-builder-header" data-page-node-id="GcxlYFOGABdcLjjy8QibsR">
+                                    <span data-page-node-id="A0buJpgVVJFldcHQEQM4IL">自定义肖像提示词</span>
+                                    <button class="portrait-builder-close" id="btn-portrait-builder-close" title="关闭" data-page-node-id="4AwdXMBL31SpLSYsQrViNS">×</button>
+                                </div>
+                                <div class="pb-toolbar" data-page-node-id="ic3yp9949g8XNbyzRlOCux">
+                                    <label class="pb-pixel-toggle" data-page-node-id="XheY2kqrzVZV7mGFk4EGLd"><input type="checkbox" id="pb-pixel" data-page-node-id="cS9Ap0FNwThHH3m8IVn7od" /> 像素风格（LoRA）</label>
+                                </div>
+                                <div class="portrait-builder-body" id="portrait-builder-body" data-page-node-id="8SDjbqLb4vI2zqpWKH1Rir"></div>
+                                <div class="portrait-builder-preview" data-page-node-id="CjtATrshUCpqo5WJ4s9lZt">
+                                    <div class="preview-label" data-page-node-id="qVc3A07YI8ilAAz9GNqTg3">实时预览（将发送给 ComfyUI 的中文提示词 · 只读）
+                                        <button type="button" class="pb-preview-reset" id="btn-portrait-preview-reset" data-page-node-id="2yADKip9hEmtXyaDPKSgG0">↺ 重新组装</button>
+                                    </div>
+                                    <textarea class="preview-text" id="portrait-prompt-preview" spellcheck="false" readonly placeholder="点击下方选项将自动组装提示词（只读预览，不可编辑）"></textarea>
+                                </div>
+                                <div class="portrait-builder-footer" data-page-node-id="VwBAmo0pE4r5WQuN3b3vOy">
+                                    <button class="btn-cancel" id="btn-portrait-builder-cancel" data-page-node-id="KtQIrNMC1CCCJ2U4WatLbx">取消</button>
+                                    <button class="btn-generate" id="btn-portrait-builder-generate" data-page-node-id="hg18grLMVfy5MZ6BZa4sOr">生成肖像</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="avatar-label" data-page-node-id="F6OEn4LsHgTC3NdRANX0DX">
+                            <span class="name" id="avatar-name" data-page-node-id="JCYL7q8D4CQRzHbcoedkAo">加载中...</span>
+                            <span class="age" id="avatar-age" data-page-node-id="aN6FIvoHATZ0sQwLjPYDhy">加载中...</span>
+                            <span class="role-tag" id="avatar-dreams" data-page-node-id="Kn7N7JMCK4rSjOc7W6wuVc">加载中...</span>
+                        </div>
+                        <div class="outfit-display" id="outfit-display" data-page-node-id="mDUcFAVpY0J6Uqk3ZiTwAJ">
+                            <span class="outfit-label" data-page-node-id="rFhGFJVP8WrHGdeUrpkaZl">今日穿搭</span>
+                            <span class="outfit-name" id="outfit-name" data-page-node-id="2rB7ZFWlejMlqxsN02AjRA">加载中...</span>
+                            <p class="outfit-desc" id="outfit-desc" data-page-node-id="rVUZaD3HEVlIohqs4GHKHw"></p>
+                            <span class="outfit-details" id="outfit-details" data-page-node-id="DTXy2Aw5Au0myNWHjyLKan"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 活动地图 -->
+                <section class="panel panel-map" id="panel-map" data-page-node-id="3A8S4bCsM69kFlvwJsNozX">
+                    <h3 data-page-node-id="sJuNB67TzornHLDS5HPTWg"><span class="material-symbols-outlined" data-page-node-id="IKFMk96zVh0tBQhJN0TBxg">map</span> 活动地图</h3>
+                    <div class="map-current-location" data-page-node-id="OhRIl9Zq1Oj7OOYkcBoJ8x">
+                        当前位置：<strong id="current-location" data-page-node-id="zbr1e3qgoZyqGZ2SHv8A6Y">宿舍</strong>
+                    </div>
+                    <div class="map-container" data-page-node-id="JcMRKhAXIHkiKa1iTvvZBx">
+                        <svg viewBox="0 0 100 100" class="map-svg" id="map-svg" data-page-node-id="KbxGvL98KJSAF34CCZ3IxV">
+                            <!-- 地点由 JS 动态渲染 -->
+                        </svg>
+                    </div>
+                    <div class="activity-map-summary" id="activity-map-summary" data-page-node-id="AFVV10G3Q7GUD5uenOGuxJ">
+                        <!-- 活动地图解锁/访问数据由 JS 动态渲染 -->
+                    </div>
+                    <div class="map-actions" id="map-actions" data-page-node-id="oNaydJYLPqOH3F0JQ8Nvc1">
+                        <div class="activities-list" id="activities-list" data-page-node-id="49fHAzn6BA6hw9bg5CJ9r2">
+                            <span class="hint-label" data-page-node-id="DG1Xl1j8343rbbaCBse9nA">可用活动：</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 目标追踪 -->
+                <section class="panel panel-goals" id="panel-goals" data-page-node-id="d1UyuBnQ9xuGaawaHGfZbv">
+                    <h3 data-page-node-id="yjd7U3zebmeJm1PWhYxar9"><span class="material-symbols-outlined" data-page-node-id="qrWKeW24n0W5ENx4xF0oFN">flag</span> 目标追踪</h3>
+                    <div class="goals-container" id="goals-container" data-page-node-id="hoISAOZidfRC9AtsMrTBgc">
+                        <!-- 由 JS 动态渲染 -->
+                    </div>
+                </section>
+
+                <!-- 成就 -->
+                <section class="panel panel-achievements" id="panel-achievements" data-page-node-id="H5nmGGIB4ZxqgJb6p2rGoL">
+                    <h3 data-page-node-id="xkYk19dNGHAYXc8vS4x6E3"><span class="material-symbols-outlined" data-page-node-id="WmTY2QFRuhLCPJLYm2ohrP">emoji_events</span> 成就</h3>
+                    <div class="achievement-list" id="achievement-list" data-page-node-id="TDNf0VFYdgpyX6IOo7v53T"></div>
+                </section>
+
+                <!-- 朋友关系 -->
+                <section class="panel panel-friends" id="panel-friends" data-page-node-id="YdUhzT9PWRjQnVa83fXmqC">
+                    <h3 data-page-node-id="NVzulHOYXBGCqoSIxKZCch"><span class="material-symbols-outlined" data-page-node-id="xWWrcaygfehb37tb3PGp62">group</span> 朋友关系</h3>
+                    <div class="friends-list" id="friends-list" data-page-node-id="Kz055oGAsG3IGbOMizNjrb"></div>
+                </section>
+            </div>
+
+            <!-- 中栏：事件日志 + 加速控制 + 活动地图 -->
+            <div class="center-panel" id="center-panel" data-page-node-id="pgtggskt9oReqgmUsBU2dF">
+                <!-- 加速控制器面板 -->
+                <div class="speed-panel" id="speed-panel" data-page-node-id="0bBRHlGR8lbsWwQiSfPSKK">
+                    <select class="speed-select" id="speed-select" data-page-node-id="puz9k6ypOjLE37zohUAfgu">
+                        <option value="5" data-page-node-id="DKbdzMcdY4H3UZLxzXEx0H">5X</option>
+                        <option value="10" data-page-node-id="YkvYBUCxzKGnBWXpgDPMTu">10X</option>
+                        <option value="30" data-page-node-id="vuZKwR9iriiSDViLvhMdZn">30X</option>
+                        <option value="60" data-page-node-id="DOESo7UnINPgw5bKoOeG4k">60X</option>
+                        <option value="120" data-page-node-id="WoGQopq0pa4o3dqZcXA5Bd">120X</option>
+                        <option value="240" data-page-node-id="dXPBVeWx2Xb5Gy3FRlEuIF">240X</option>
+                    </select>
+                    <!-- 移动端：跳过选项 toggle（桌面端隐藏） -->
+                    <button class="speed-skip-mobile-toggle" id="speed-skip-mobile-toggle" title="跳过选项" data-page-node-id="rlPsP44y9crzTXZpeQGGTt">
+                        <span class="material-symbols-outlined" data-page-node-id="UjJEJTr6yiiBnHwqhgWJ3U">tune</span>
+                        <span class="toggle-text" data-page-node-id="epvBnPxI1ye5C5fUcVmYgC">跳过</span>
+                        <span class="material-symbols-outlined toggle-arrow" data-page-node-id="JopFtaBDbCzs0BTHQ5XSeg">expand_more</span>
+                    </button>
+                    <!-- 跳过选项：桌面端内联显示，移动端作为下拉弹层 -->
+                    <span class="speed-skip-options" id="speed-skip-options" data-page-node-id="MSSr3VSoumFmOObmCcBJxi">
+                        <button class="speed-skip-toggle-all" id="speed-skip-toggle-all" title="全选 / 取消全选" data-page-node-id="2TCew39kpyCuwawOHAjcxi">全选</button>
+                        <label class="speed-skip-label" data-page-node-id="YOWuRNk2Hk5GGqDza8j3iB"><input type="checkbox" id="skip-random-event" data-page-node-id="7P7sbayPNcv6MU3WqXDOqe"><span data-page-node-id="mgiKaCWzzWF1ebr95PxqUF">跳过随机事件</span></label>
+                        <label class="speed-skip-label" data-page-node-id="EAsjews1frw0HFKwzsbGyj"><input type="checkbox" id="skip-tick-llm" data-page-node-id="2aio7DEOG0YJNTDrHmMAtq"><span data-page-node-id="W3LWC1iCQHshNb4seV6YHN">跳过状态更新</span></label>
+                        <label class="speed-skip-label" data-page-node-id="Wb8DhzFXxbXadNtLVXcssi"><input type="checkbox" id="skip-auto-msg" data-page-node-id="Wpi5IX0zJmKb93BHEhd2pj"><span data-page-node-id="AavaYKSf7IuF3c09GxDZRk">跳过主动消息</span></label>
+                        <label class="speed-skip-label" data-page-node-id="wVxCcnuH6KoHsjpJjB4QlD"><input type="checkbox" id="skip-friend-update" data-page-node-id="6T8QifRtwtBXGAuA1pxgDS"><span data-page-node-id="BSs63XjXtudM0i51W09R83">跳过关系变化</span></label>
+                    </span>
+                    <button class="speed-go-btn" id="speed-go-btn" data-page-node-id="JscJREXHhaDEvvpbDXkhvS">开始加速</button>
+                    <button class="speed-stop-btn" id="speed-stop-btn" style="display:none" data-page-node-id="xPI3wA1OaUTJVuiwQuHta9">停止</button>
+                </div>
+
+                <!-- 角色状态面板 -->
+                <section class="panel panel-status" id="panel-status" data-page-node-id="abf72VSWFb6dTG4hz93CJJ">
+                    <h3 data-page-node-id="1qfSFCiqzu9oMAwzBaO79e"><span class="material-symbols-outlined" data-page-node-id="puRmjFyLk6K8Urclqxb2lV">monitor_heart</span> 角色状态</h3>
+                    <!-- 上半部分：物理状态 + 玩家关系 + 技能属性，三个并列 -->
+                    <div class="status-row-top" data-page-node-id="ADQGwuK1353EshDHOPXP2R">
+                        <div class="status-group physical" data-page-node-id="fAEhloYQyhDOvnbsXm5Xts">
+                            <h4 data-page-node-id="byAN63nA49UEZGRXluC76M"><span class="material-symbols-outlined" data-page-node-id="AIsUG5Qj1pHAvSAnwGZ8hj">fitness_center</span> 物理状态</h4>
+                            <div class="status-grid" id="physical-status" data-page-node-id="G4DlQYhC3f04m79QhyZCPd"></div>
+                        </div>
+                        <div class="status-group player" data-page-node-id="QAyNTYvvS0LWeAGj1HLOoP">
+                            <h4 data-page-node-id="KfaDgGpSkVTGcFrM2FTjJu"><span class="material-symbols-outlined" data-page-node-id="WaIeISdDW0n8DD9nCTPLMy">favorite</span> 与玩家（你）的关系</h4>
+                            <div class="status-grid" id="player-status" data-page-node-id="DfJ0QnaXuWAkaagdVDPcNG"></div>
+                        </div>
+                        <div class="status-group skills" data-page-node-id="xJOGsRPoGhEN7IIqg3EVOm">
+                            <h4 data-page-node-id="Q2h6zFseE6qcDsEQnwh6aC"><span class="material-symbols-outlined" data-page-node-id="8BpTJ1RGmrybxbV0LIsfQa">school</span> 技能属性</h4>
+                            <div class="status-grid" id="skill-status" data-page-node-id="0pU5cg5XPkxksg5rpoRaWn"></div>
+                        </div>
+                    </div>
+                    <!-- 下半部分：心理状态，正负面分两列 -->
+                    <div class="status-row-bottom" data-page-node-id="bnVrqICTSqjQpKxwsD4scS">
+                        <div class="status-group psychological" data-page-node-id="PTglEoInQ23eku1pXvxkUl">
+                            <h4 data-page-node-id="zjsEhv8gLuI986ChtmrIJF"><span class="material-symbols-outlined" data-page-node-id="9nG1nw1kXZS0vB019NFPZX">psychology</span> 心理状态</h4>
+                            <div class="mental-status-split" data-page-node-id="tDYFbDHFihpOTFZiejPVVa">
+                                <div class="mental-sub-group" data-page-node-id="sE1cB7kTdiYVSJrcw24eom">
+                                    <h5 data-page-node-id="psFcXDV6Cr7mkok1rhGWMn">正面情绪</h5>
+                                    <div id="mental-positive" data-page-node-id="zKl3nJx2DbcJjLWme2O3s5"></div>
+                                </div>
+                                <div class="mental-sub-group" data-page-node-id="85ct88MsucGUE3kpY9xByQ">
+                                    <h5 data-page-node-id="fbic58X2FuaxTiaTiaT8dw">负面情绪</h5>
+                                    <div id="mental-negative" data-page-node-id="W5j89h1jjMC1GA77E1UMCu"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 事件日志 -->
+                <section class="panel panel-events" id="panel-events" data-page-node-id="NDVbu9cgUj5jWsSHKhPO5T">
+                    <h3 data-page-node-id="veuAJb5PsxeMxPqodE5BlF"><span class="material-symbols-outlined" data-page-node-id="QcMHprhd0JZwfhuXrUXC7e">history</span> 事件日志</h3>
+                    <div class="event-filter-bar" id="event-filter-bar" data-page-node-id="FKd8sA7s9otIU96P1HUCvC"></div>
+                    <div class="events-list" id="events-list" data-page-node-id="2KwCdLFZ3pf24C3Bqb68EK"></div>
+                </section>
+            </div>
+
+            <!-- 右栏：对话面板，贯穿全高 -->
+            <div class="right-panel" id="right-panel" data-page-node-id="WFWnZeqDlw1kCZqkgCobOd">
+                <section class="panel panel-dialogue" id="panel-dialogue" data-page-node-id="I9U8FnNU2EmokUAMxFsO8V">
+                    <h3 data-page-node-id="9YkRRuMjph2PhQtTsdXLrB">
+                        <button type="button" class="toggle-center-btn" id="btn-toggle-center" title="隐藏/显示中间栏" data-page-node-id="SmHsB41HlIq2PJlvArK572">
+                            <span class="material-symbols-outlined" id="btn-toggle-center-icon" data-page-node-id="s7kVxUWNT3QDn4ZpYsFJ6e">view_sidebar</span>
+                        </button>
+                        <span class="material-symbols-outlined" data-page-node-id="hf6AavOVZtOZGwWDSFY4EG">chat</span> 与<span id="dialogue-character-name" data-page-node-id="HGRoU0UpOnf90mcLxe6lfQ">主角</span>对话
+                        <span class="tone-tag" id="dialogue-tone-tag" style="display:none" data-page-node-id="mSIs3SHEiZEz45rE1q4Tfx"></span>
+                        <span class="tier-tag" id="dialogue-tier-tag" data-page-node-id="iErt9EdQEYTRCj2Pl4zEQE">陌生人</span>
+                        <button class="btn-reset-chat" id="btn-reset-chat" title="重新聊天" data-page-node-id="TdShUQ3rTaERUKPGBPrKzR">
+                            <span class="material-symbols-outlined" data-page-node-id="ThyAzwMGgLCfbMg9CdK5Kn">restart_alt</span>
+                        </button>
+                    </h3>
+                    <div class="dialogue-messages" id="dialogue-messages" data-page-node-id="rdF3hMwYU5XAClCylhBCGK">
+                        <div class="msg system-msg" data-page-node-id="BIu5BASzJfrfTOT71fNIes">游戏已就绪，开始对话吧！</div>
+                    </div>
+                    <div class="dialogue-input-area" data-page-node-id="QWjuuCSoPVGhgeTlOu3fc0">
+                        <div class="chat-plus-wrap" data-page-node-id="E7f0kt9AOOmGDxtBXccqxG">
+                            <button id="btn-chat-plus" class="btn-chat-plus" title="更多" type="button" data-page-node-id="ihGAefFMWciHQQnV7Ki05j">
+                                <span class="material-symbols-outlined" data-page-node-id="oOQ6pd5TDXNRdcKOg1fNsF">add</span>
+                            </button>
+                            <div class="chat-plus-menu" id="chat-plus-menu" data-page-node-id="qCBydiOOTsdpUHrAOO1tci">
+                                <div class="chat-plus-section" data-page-node-id="RN1iqgdC7jaX9UBWVG177q">
+                                    <div class="chat-plus-title" data-page-node-id="BidxD8TPeCftWpveUjWG4D">工具</div>
+                                    <div class="chat-plus-grid" data-page-node-id="jYyKez7RL1aqB1IAPpMSXX">
+                                        <button class="chat-plus-item chat-thinking-toggle" id="chat-thinking-toggle" type="button" aria-pressed="false" data-page-node-id="PFl3EmH1DLy8A29H4PU7DQ">
+                                            <span class="material-symbols-outlined" id="chat-thinking-icon" data-page-node-id="NXCQcrHkXsSM5E0iV9dGXd">psychology</span>
+                                            <span id="chat-thinking-label" data-page-node-id="NjHNzhBLhSJjKuH0gIUADu">思考：关</span>
+                                        </button>
+                                        <button class="chat-plus-item" id="chat-plus-tl" type="button" data-page-node-id="9MvAzI2DupthKaHDPevdO4">
+                                            <span class="material-symbols-outlined" data-page-node-id="YKsy2rCw0TSfypxZBXCicn">schedule</span>
+                                            <span data-page-node-id="c8oodKJ4VDx0a5UU0wOu32">时间/地点</span>
+                                        </button>
+                                        <button class="chat-plus-item" id="chat-plus-album" type="button" data-page-node-id="t9OrBshPB2Q7QwoSY98wPg">
+                                            <span class="material-symbols-outlined" data-page-node-id="egG9o67I3z2PWuDYIqweN3">photo_library</span>
+                                            <span data-page-node-id="p0UPZozsAQ66K4VnQDNm65">相册</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="chat-plus-section" data-page-node-id="voWAyERYzgSoxkkyxCsIeo">
+                                    <div class="chat-plus-title" data-page-node-id="ywf7p1ZrJ2Yu3t9aHqThAe">拍照</div>
+                                    <div class="chat-plus-grid photo-scenes-grid" id="chat-plus-scenes" data-page-node-id="ri3cgLa6HrfyYDVhmE3gGf"></div>
+                                </div>
+                                <div class="chat-plus-section" data-page-node-id="SJJ2fVjKDvs4pSOYWTRGgh">
+                                    <div class="chat-plus-title" data-page-node-id="nGWmbw39RQiAk8ZVCdGZor">情感快捷</div>
+                                    <div class="chat-plus-grid" data-page-node-id="ECqxGg33IenZWi31A9jMlL">
+                                        <button class="chat-plus-item quick-rel-btn" data-relation="trust" type="button" data-page-node-id="BVL0J7sOTWoQWc5HGNFOMg">
+                                            <span class="rel-icon" data-page-node-id="jSqa199MlLe93FQK1wBlBi">&#129309;</span>
+                                            <span class="rel-label" data-page-node-id="7RhD4kBsLXtTiMQwmIpQnH">增加信任</span>
+                                        </button>
+                                        <button class="chat-plus-item quick-rel-btn" data-relation="liking" type="button" data-page-node-id="ErtRpUm93z10Kk4BWZcejS">
+                                            <span class="rel-icon" data-page-node-id="e9KLS8hG9Qit6jdc56IXTD">&#128522;</span>
+                                            <span class="rel-label" data-page-node-id="e03NzlQwNP9yu56wIoVEBo">增加好感</span>
+                                        </button>
+                                        <button class="chat-plus-item quick-rel-btn" data-relation="respect" type="button" data-page-node-id="pmjUYxxEQS0uyiU8InZVXU">
+                                            <span class="rel-icon" data-page-node-id="98VSjQI7Bc9LVEMrjPxxBm">&#128079;</span>
+                                            <span class="rel-label" data-page-node-id="rHuki4Y6YAuQtdqmEyGp80">增加尊重</span>
+                                        </button>
+                                        <button class="chat-plus-item quick-rel-btn" data-relation="intimacy" type="button" data-page-node-id="vI7lE47ZDFZ79H8YGGo5Wr">
+                                            <span class="rel-icon" data-page-node-id="gDlttJlnhF49IaMAxwGxTz">&#128158;</span>
+                                            <span class="rel-label" data-page-node-id="vu7nR08PR4jNYGkKj73slW">增加亲密</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="text" id="dialogue-input" placeholder="输入你想说的话..."
+                               autocomplete="off" data-page-node-id="hXPoDkCSTfnSVMLtnXRU4N">
+                        <button id="btn-send" class="btn-send" data-page-node-id="dCvOuZ3uC2XbkSGa6eDr8B">
+                            <span class="material-symbols-outlined" data-page-node-id="aeX0ZE8RcH830qXieYLHCp">send</span>
+                        </button>
+                    </div>
+                    <!-- LLM 推荐面板 -->
+                    <div class="recommend-panel" id="recommend-panel" data-page-node-id="5PHZySgiXWKg2A6gCKXkhg">
+                        <button class="recommend-close" id="recommend-close" data-page-node-id="aq9wfClvPhsynoCGyEgO5f">&times;</button>
+                        <div class="panel-title" id="recommend-title" data-page-node-id="CLwgJPj4FBaFJ8mjLDdcy0">LLM 正在分析角色状态...</div>
+                        <div class="recommend-list" id="recommend-list" data-page-node-id="OTWIXtCmeHlXQQ8Qdlo2MQ"></div>
+                    </div>
+                    <div class="dialogue-hints" id="dialogue-hints" data-page-node-id="yMdUTTqgfPAEkz5DT34Tv9">
+                        <span class="hint-label" data-page-node-id="jzzRcyKyRZbYiEkBsrn9RQ">快捷对话：</span>
+                        <span id="hint-buttons" data-page-node-id="eGeOofGzxIJ6k8c8xZX24B"></span>
+                    </div>
+                </section>
+                <!-- 记忆/情感提示悬浮图层：独立于聊天流，避免布局跳动 -->
+                <div class="memory-hint-layer" id="memory-hint-layer" data-page-node-id="tcivQd62K25nZIvZRgoAXV"></div>
+            </div>
+        </main>
+
+        <!-- 角色属性弹窗 -->
+        <div class="settings-modal-overlay" id="character-profile-overlay" style="display:none" data-page-node-id="ymx4ZCJ96HX0fID3HqEmB4">
+            <div class="settings-modal" style="max-width:700px" data-page-node-id="BNXA31EE8xhoOtiv8ti0Yh">
+                <div class="settings-modal-header" data-page-node-id="MHrAsTRxIfA1TuSW9NkOJL">
+                    <h3 data-page-node-id="Fxt4cT1nmYPnnX6dOYFnJG"><span class="material-symbols-outlined" data-page-node-id="noJOmNwa5eJyBqBYLOH6nr">person_edit</span> 角色属性</h3>
+                    <button class="btn-icon" id="btn-close-character-profile" title="关闭" data-page-node-id="IiUGmbtNvZ9fT0ipJ6K0hW">
+                        <span class="material-symbols-outlined" data-page-node-id="EDRzzlcv80M5YHRC0QGYri">close</span>
+                    </button>
+                </div>
+                <div class="settings-tabs" data-page-node-id="0keBD6B2dx3MnCPD9CwLks">
+                    <button class="settings-tab profile-tab active" data-tab="basic" data-page-node-id="4EvF0BnFVSVntkZNn41z0u">基础信息</button>
+                    <button class="settings-tab profile-tab" data-tab="relations" data-page-node-id="VYMoK0EcOExaS1TpeYaUue">社交关系</button>
+                    <button class="settings-tab profile-tab" data-tab="worldview" data-page-node-id="J4q1LCWC9QuFH75EwFE2OA">世界观</button>
+                    <button class="settings-tab profile-tab" data-tab="cases" data-page-node-id="EHt1p2OTDaenXpRJGf3Ojd">任务</button>
+                    <button class="settings-tab profile-tab" data-tab="event-templates" data-page-node-id="aL8vRudFK4STv3oOF2oEH5">事件模板</button>
+                    <button class="settings-tab profile-tab" data-tab="chat-settings" data-page-node-id="eYCcbRuike8Y9i7GXONqRN">聊天设置</button>
+                </div>
+                <div class="settings-scroll" style="max-height:70vh;overflow-y:auto;padding:16px" data-page-node-id="lb4NWng1T84GzCIabHohFx">
+                    <div class="profile-tab-content" data-tab="basic" id="profile-basic-info" data-page-node-id="Ga7lgb4GvXrTX8gyP6dZ5P">加载中...</div>
+                    <div class="profile-tab-content" data-tab="relations" id="profile-relations" style="display:none" data-page-node-id="uGz2kmapMDFZR4jhOEbH4L">加载中...</div>
+                    <div class="profile-tab-content" data-tab="chat-settings" id="profile-chat-settings" style="display:none" data-page-node-id="ZMxaVJZvBFgHbw0uOeft0G">加载中...</div>
+                    <div class="profile-tab-content" data-tab="worldview" id="profile-worldview" style="display:none" data-page-node-id="8E2NFSuDIxkA2rjVcqdkzA">
+                        <div style="margin-bottom:6px" data-page-node-id="CnAKLype83CqNnQz7g5EdW"><strong data-page-node-id="pd0Ol5BUCwCsGH7DgjUy9h">世界观生成提示词</strong><br data-page-node-id="E6MLYO5pEiF4XqIipMKGBi">
+                            <small style="color:var(--text-secondary)" data-page-node-id="MBG6dReOLJFgoD4qYMMEad">打开面板即自动渲染当前真实 prompt（模板 + 角色档案），可直接编辑后再点「生成世界观」</small></div>
+                        <textarea id="profile-world-seed" style="width:100%;min-height:300px;max-height:60vh;resize:vertical;padding:12px;border:1px solid var(--border-color);border-radius:8px;background:var(--bg-input);color:var(--text-primary);font-size:13px;line-height:1.7;font-family:Consolas,Monaco,monospace" placeholder="正在渲染提示词..."></textarea>
+                        <div style="display:flex;gap:8px;margin:8px 0" data-page-node-id="9gvHCZVCdzbVutoxHS2vry">
+                            <button class="btn btn-primary" id="btn-generate-worldview" data-page-node-id="kyXvvjHhmfePi0DPF2LHfD">🌍 生成世界观</button>
+                            <button class="btn" onclick="CharacterProfilePanel._openBigEditor('profile-world-seed','世界观生成提示词')" data-page-node-id="tUl4mlfZBPokFtN3q9RsGb">⛶ 全屏编辑</button>
+                            <button class="btn" id="btn-save-world-prompt" data-page-node-id="WizpXHeZAG3TRZYwC5AoAu">💾 保存提示词</button>
+                        </div>
+                        <div id="profile-worldview-content" data-page-node-id="LoNVoBe3HABLEm4Y1DSMsJ"></div>
+                    </div>
+                    <div class="profile-tab-content" data-tab="cases" id="profile-cases" style="display:none" data-page-node-id="P1P8dkjl5QATErGTJGRh3J">
+                        <div style="margin-bottom:12px" data-page-node-id="CsFAXNWlcZ8IdKT0GZ3918"><strong data-page-node-id="FoHIENkj0QFyLMMiEM97kj">剧情任务提示词</strong><br data-page-node-id="hvL56vMdDqpSqogaa5CCmA"><small style="color:var(--text-secondary)" data-page-node-id="sMSALBetXYisazLZDMSYFW">打开面板即自动渲染当前真实 prompt（基于角色状态+世界观），可直接编辑后再点「生成任务」</small></div>
+                        <textarea id="profile-world-prompt" style="width:100%;min-height:300px;max-height:60vh;resize:vertical;padding:12px;border:1px solid var(--border-color);border-radius:8px;background:var(--bg-input);color:var(--text-primary);font-size:13px;line-height:1.7;font-family:Consolas,Monaco,monospace" placeholder="正在渲染提示词..."></textarea>
+                        <div style="display:flex;gap:8px;margin:8px 0 16px;align-items:center" data-page-node-id="qoOWp9NnrvUXTWpXCAtvBR">
+                            <button class="btn btn-primary" id="btn-generate-case" onclick="CharacterProfilePanel._generateCase()" data-page-node-id="cUvBuvxJ8BSRgVLcCLMbId">生成任务</button>
+                            <button class="btn" onclick="CharacterProfilePanel._openBigEditor('profile-world-prompt','剧情任务提示词')" data-page-node-id="pfqoOvg0l5nJ6TnLbIGQnG">⛶ 全屏编辑</button>
+                        </div>
+                        <div id="profile-cases-list" data-page-node-id="J6OeFi0a8ZL2OVY0SpikBK">加载中...</div>
+                    </div>
+                    <div class="profile-tab-content" data-tab="event-templates" id="profile-event-templates" style="display:none" data-page-node-id="E2ldn0Ycd0hDkKe2Ayzra9">加载中...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 世界观 JSON 预览弹窗 -->
+        <div class="settings-modal-overlay" id="profile-json-modal" style="display:none" data-page-node-id="iKJGlapTayxUtIEcqyUrJi">
+            <div class="settings-modal" style="max-width:700px" data-page-node-id="HTxj4s7eJtrWWbrIJsw8cF">
+                <div class="settings-modal-header" data-page-node-id="2cDVzhJaTNKD7KJFVHQBqB">
+                    <h3 data-page-node-id="EZMP7pBtdauHZ6BSbPilPy">世界观 JSON 预览</h3>
+                    <button class="btn-icon" onclick="document.getElementById('profile-json-modal').style.display='none'" title="关闭" data-page-node-id="YyDWRJNEYnQSqObAY1gcp0">
+                        <span class="material-symbols-outlined" data-page-node-id="HVoefsvb8CFCdKEtDfLELw">close</span>
+                    </button>
+                </div>
+                <pre id="profile-json-content" style="max-height:60vh;overflow:auto;padding:12px;font-size:12px;white-space:pre-wrap;word-break:break-all" data-page-node-id="ctCltPc7AwNPl5tXeN0FUI"></pre>
+            </div>
+        </div>
+
+        <!-- 任务抉择事件选择弹窗 -->
+        <div class="settings-modal-overlay" id="choice-overlay" style="display:none" data-page-node-id="uOMsMMAuJKlUPJncGUHAJ5">
+            <div class="settings-modal" style="max-width:460px;text-align:center" data-page-node-id="LUZ7R0vKJoIRnEOmcqEQ9A">
+                <div class="settings-modal-header" data-page-node-id="Z0g4FUKM6olIlYUrCCrfvG">
+                    <h3 data-page-node-id="y9BzecPGAvKVRsAwGGhJFV"><span class="material-symbols-outlined" data-page-node-id="aDCsUqsXBxPalrmC07EGww">alt_route</span> 分支选择</h3>
+                </div>
+                <div style="padding:20px" data-page-node-id="LahYvgm2OnT84CK8DlSKyq">
+                    <p style="color:var(--text-secondary);margin-bottom:16px;font-size:14px" data-page-node-id="EL8yTzbWH64qPjkU2T0j8Z">你的选择将影响剧情走向：</p>
+                    <div id="choice-options" style="display:flex;flex-direction:column;gap:10px" data-page-node-id="1R3V7Fcv60obpHE3SbLier"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 事件模板管理功能已迁移至「角色属性」面板（事件模板 Tab）-->
+
+        <!-- 系统设置弹窗（大模型 / TTS / ComfyUI / Embedding） -->
+        <div class="settings-modal-overlay" id="settings-modal-overlay" style="display:none" data-page-node-id="uRz9GEq026UFl2EKtN3iL2">
+            <div class="settings-modal" data-page-node-id="ZYys1MDawgF4r7FUjR9Ced">
+                <div class="settings-modal-header" data-page-node-id="96pZ0UPkcHFSREvUkY9cYF">
+                    <h3 data-page-node-id="fiHRDRRnbNzG1u6FG33B7f"><span class="material-symbols-outlined" data-page-node-id="xx8wBIbRkyRH7qNY4GLHR0">settings</span> 系统设置</h3>
+                    <button class="btn-icon" id="btn-close-settings" title="关闭" data-page-node-id="TJI0jB1r985861qt2Wq3A8">
+                        <span class="material-symbols-outlined" data-page-node-id="DSctbQTLo15B8Uc1GPzwlg">close</span>
+                    </button>
+                </div>
+                <div class="settings-tabs" data-page-node-id="SIQO1aRULk6IBUwanDLHSX">
+                    <button class="settings-tab active" data-tab="llm" data-page-node-id="YjqkANlEHwNE3SMni2J1TW"><span class="material-symbols-outlined" data-page-node-id="j2uRdczH09h18Nk77ilQSq">smart_toy</span> 大模型</button>
+                    <button class="settings-tab" data-tab="tts" data-page-node-id="rBTKVsUDmfKsvTGPzMxdRt"><span class="material-symbols-outlined" data-page-node-id="duoDFkloTPT0ZVDdaPViNR">record_voice_over</span> 语音</button>
+                    <button class="settings-tab" data-tab="comfyui" data-page-node-id="zaSjLKkgQs2bZIowc7WRSc"><span class="material-symbols-outlined" data-page-node-id="8qp02lzJwscw2L9vNd37K9">image</span> ComfyUI</button>
+                    <button class="settings-tab" data-tab="vlm" data-page-node-id="i7sbXx7heEcDHaxCA0iNEJ"><span class="material-symbols-outlined" data-page-node-id="KtkjpWG175weFc6ekJuvrR">visibility</span> 视觉回看</button>
+                    <button class="settings-tab" data-tab="embedding" data-page-node-id="Qh9Z1AJ7JFiaKtvaXHgq9A"><span class="material-symbols-outlined" data-page-node-id="BAlnfACZjPGfTRhjNvyhzp">hub</span> Embedding</button>
+                    <button class="settings-tab" data-tab="memos" data-page-node-id="qLC5qcR9ZanBZDIA2Pi82F"><span class="material-symbols-outlined" data-page-node-id="RX31rxMVB57UboGEqfzDye">note_stack</span> Memos</button>
+                    <button class="settings-tab" data-tab="news" data-page-node-id="WngEsd2g692pAsDjRYNx1W"><span class="material-symbols-outlined" data-page-node-id="6T6ZIdKjtJYAW69rnYw0C7">newspaper</span> 资讯</button>
+                    <button class="settings-tab" data-tab="prompts" data-page-node-id="MRgETvipvlrFudlUiLPYsq"><span class="material-symbols-outlined" data-page-node-id="Uk5EB2q3AdybgYunKetEns">psychology</span> 提示词</button>
+                    <button class="settings-tab" data-tab="smallmodel" data-page-node-id="1oA5WCuIdc4J5zZojuNF4l"><span class="material-symbols-outlined" data-page-node-id="BTtZ4FDJvHgeL9WgRVivnP">memory</span> 小模型</button>
+                </div>
+                <div class="settings-body" data-page-node-id="1kJvvswGvNYElMUfO6Mg3o">
+                    <!-- ====== Tab: 大模型 ====== -->
+                    <div class="settings-tab-content active" id="settings-tab-llm" data-page-node-id="b992QXNMS4pYRpvrxXegq4">
+                        <div class="config-section" data-page-node-id="vYhDQwaYeAc1d5cPAWtWCf">
+                            <h4 data-page-node-id="LoF7zs1WRcWyDi4u4hWO2q">当前激活配置</h4>
+                            <div class="active-config-info" id="active-config-info" data-page-node-id="4FlSlwV4Q3I9hrOtUV4Ovq">
+                                <p class="no-config" data-page-node-id="DIDHsQtGkEDKVdKgyDy3Eh">暂无激活配置</p>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="mkfbYwBUyJxS41qnMwCWuW">
+                            <h4 data-page-node-id="3gqUR9zGTfq5ppx3cBjsFa">配置列表</h4>
+                            <div class="config-list" id="config-list" data-page-node-id="3knMYZJhP7oVF3qFFp7rCd"></div>
+                        </div>
+                        <div class="config-section" data-page-node-id="YPpT2nUqFSLrGIxZFdG3xI">
+                            <h4 id="form-title" data-page-node-id="6L4VBFrl4lAWJwDR1QKbWu">新增配置</h4>
+                            <form id="config-form" class="config-form" data-page-node-id="EKUtVDa0ZK1TrKZwABmYZs">
+                                <input type="hidden" id="config-id" value="" data-page-node-id="pDQoc5NQJBZGOTiANeErex">
+                                <label data-page-node-id="hEK37BAOZf8pVSYfN9y19F">平台</label>
+                                <select id="config-provider" data-page-node-id="Az4t3EXL9mJhKCrjkjPVAw">
+                                    <option value="openai" data-page-node-id="vfJB4FlajOuyW5ES3qMY66">OpenAI</option>
+                                    <option value="deepseek" data-page-node-id="OSgb2AMxcT9gh66B9KCE5H">DeepSeek</option>
+                                    <option value="zhipu" data-page-node-id="kMwKB6XX4XmNafHuTaqdq7">智谱 (GLM)</option>
+                                    <option value="dashscope" data-page-node-id="pPnpfjqA5l3pufJ9xna8H4">阿里 (DashScope)</option>
+                                    <option value="siliconflow" data-page-node-id="tXhmF8TGYTggJ8IIH7oCVC">SiliconFlow</option>
+                                    <option value="llm_studio" data-page-node-id="2ioNe3q7eR6KkWqhUrNaOC">LLM Studio (本地)</option>
+                                    <option value="ollama" data-page-node-id="CifrSXre8QdaUUoKicfTn8">Ollama (本地)</option>
+                                    <option value="custom" data-page-node-id="4ZUk9FBF5zEjAYnclcpV6c">Custom (OpenAI Compatible)</option>
+                                </select>
+                                <label data-page-node-id="eYKetoqxKSEnLSoSFOAQ2N">API URL</label>
+                                <input type="text" id="config-api-url" placeholder="https://api.openai.com/v1/chat/completions" data-page-node-id="fTrZUBaWvpsGek0UVQQiWr">
+                                <label data-page-node-id="mQCYfuMCVbbzmDcsmoEhwG">API Key</label>
+                                <input type="password" id="config-api-key" placeholder="sk-..." data-page-node-id="qU1PZupz05up7qCRDSi0cE">
+                                <label data-page-node-id="R5MIyTCGXtjPZpOdxBzSQH">Model Name</label>
+                                <input type="text" id="config-model" placeholder="gpt-4o-mini" data-page-node-id="PEV9Cl8ioOznzhTXAw8nym">
+                                <label data-page-node-id="S5DFXXNsQ0qyZigdtykk9p">Temperature (0-2)</label>
+                                <input type="number" id="config-temperature" step="0.05" min="0" max="2" value="0.85" data-page-node-id="c5hjP8dzO4eX3WeGo96VLI">
+                                <label data-page-node-id="mNdiwcWTTZe1HtBB5HK5H7">Max Tokens</label>
+                                <input type="number" id="config-max-tokens" value="4000" data-page-node-id="eqOAeUwv9RYePQFonhrFio">
+                                <div class="form-actions" data-page-node-id="2ufqoAxkm4ralD8vxhWZ8a">
+                                    <button type="button" class="btn-test" id="btn-test-config" data-page-node-id="azNuxgAQYmc5U1lQhVKs1A">测试连接</button>
+                                    <button type="button" class="btn-cancel" id="btn-cancel-form" style="display:none" data-page-node-id="sJiLpzH3bs17X66pUZx3Dy">取消</button>
+                                    <button type="submit" class="btn-primary" data-page-node-id="U8kHnIJJVjT7DzZpW7wkyW">保存</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ====== Tab: 语音 TTS ====== -->
+                    <div class="settings-tab-content" id="settings-tab-tts" data-page-node-id="C64gJCoLKUKNx9hO9fFTq6">
+                        <!-- 第一层：TTS 服务选择与管理 -->
+                        <div class="config-section" data-page-node-id="tH3aQf7RqV5FTiI7p4k85G">
+                            <h4 data-page-node-id="W7Bxgw1jD9qWVDefANj7V8">TTS 服务管理</h4>
+                            <select id="tts-service-select" style="margin-bottom:12px; width:100%; padding:8px;" data-page-node-id="VN2UVUHSLO602bnorxs1FZ">
+                                <option value="" data-page-node-id="h5HzsvR1BKMyH1KYVmlseE">-- 选择已有服务或新增 --</option>
+                            </select>
+                            <div id="tts-service-cards" data-page-node-id="wqlbh6ooyqzzFhVkCUTH8l"></div>
+                            <div class="form-actions" style="margin-top:12px;" data-page-node-id="JxnGPeGBoIJhuV6Ue9Hgz6">
+                                <button type="button" class="btn-primary" id="btn-new-tts-service" data-page-node-id="TAHD3jB9hD0h3fuoHsklvA">新增服务</button>
+                            </div>
+                        </div>
+
+                        <!-- 第二层：角色音色底色锚点编辑 -->
+                        <div class="config-section" data-page-node-id="MZn8Is0mTPTTbwvuIikiAg">
+                            <h4 data-page-node-id="DSvnoDrceXEDro2UIoROux">角色音色底色锚点</h4>
+                            <div class="tts-character-grid" id="tts-character-grid" data-page-node-id="CYklWZcS6HR7Q7fFABNkCr">
+                                <p class="no-config" data-page-node-id="GIWlECOR6KOpy6e7Uls1om">加载中...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ====== Tab: ComfyUI ====== -->
+                    <div class="settings-tab-content" id="settings-tab-comfyui" data-page-node-id="WjWwyfJ3SdgytNTNFaml1D">
+                        <div class="config-section" data-page-node-id="NpAGdrFpdpwVVTVObcuYZs">
+                            <h4 data-page-node-id="4g2eVLNSCXHu973ayQGlkO">ComfyUI 服务配置</h4>
+                            <div class="comfyui-config-form" data-page-node-id="DlY4vUDthHDF5DuMEpthUR">
+                                <input type="hidden" id="comfyui-editing-id" value="" data-page-node-id="MBHtpZBzPKY8TdAQhS7hOi">
+                                <label data-page-node-id="vWwfa8AiefxrRuilEu1CvT">ComfyUI API URL <small data-page-node-id="t7Y3l6Eww7INujsrT0x6Js">(标准端口为 8188)</small></label>
+                                <input type="text" id="comfyui-api-url" placeholder="http://127.0.0.1:8188" data-page-node-id="JoyqtaNYiUq3AHHTjDIXec">
+                                <label data-page-node-id="zHaKCqdFgQezEBUGMNu4gl">API Key（可选）</label>
+                                <input type="password" id="comfyui-api-key" placeholder="留空表示无需认证" data-page-node-id="coEAiD9M55SK401vmaWObk">
+                                <div class="form-actions" data-page-node-id="2jrarylUcNx4ksSAx9kU78">
+                                    <button type="button" class="btn-primary" id="btn-new-comfyui" data-page-node-id="H7bIV5ERR3FlFRY8pmys63">新增配置</button>
+                                </div>
+                                <div class="form-actions form-actions-row" data-page-node-id="dLFSsUqRTmVE8uAjrjakUk">
+                                    <button type="button" class="btn-test" id="btn-test-comfyui" data-page-node-id="0vUWKfUMOcBAlca7GSNg39">测试连接</button>
+                                    <button type="button" class="btn-cancel" id="btn-cancel-comfyui" style="display:none" data-page-node-id="e1Z2arwASOvDwimkFMVpn4">取消</button>
+                                    <button type="button" class="btn-primary" id="btn-save-comfyui" style="display:none" data-page-node-id="kEBxvLl8pREu7UKAgaMwf6">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="AZilUmt46ea1ruFKew8jQo">
+                            <h4 data-page-node-id="ojJ07iTBXZN0kQj1iSEw5z">已保存的配置</h4>
+                            <div class="config-list" id="comfyui-config-list" data-page-node-id="lz6hRXKZPDO3jqEJ8ud2Ei">
+                                <p class="no-config" data-page-node-id="ePDrnYeJsvQDa1Vu5JeSXd">加载中...</p>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="pCOEpTuWYNhnIbHb9CZOoF">
+                            <h4 data-page-node-id="aQszM6H4eWLRFUSVSnqeiu">工作流配置</h4>
+                            <div class="comfyui-workflow-form" data-page-node-id="JckamxWpaf8WhL13Pde3W3">
+                                <input type="hidden" id="comfyui-workflow-editing-id" value="" data-page-node-id="MCzHbZDqZzDkhd04yphfJe">
+                                <label data-page-node-id="uUFtUhXVh6Aockj6PfPKZe">工作流名称</label>
+                                <input type="text" id="comfyui-workflow-name" placeholder="用于下拉显示，如：肖像写实 v1" data-page-node-id="JavQ7Y3yzNdNB9ctHf0ns1">
+                                <label class="checkbox-label" data-page-node-id="Jh0FN6Qc5qFbcfAAqR5a2s"><input type="checkbox" id="comfyui-workflow-default" data-page-node-id="2YwgnwOZGzTifx7le8WM9S"> 设为默认工作流（生图主用）</label>
+                                <label data-page-node-id="fUE53s42SY0EyWez9adgDW">工作流 JSON 文件 <small data-page-node-id="Xrc003xRaWEfnBViyxDviS">(从磁盘选择并自动注册到数据库)</small></label>
+                                <div class="file-input-row" data-page-node-id="BRu3wtKlmgUMSwEy9NEERX">
+                                    <input type="file" id="comfyui-workflow-file" accept=".json,application/json" data-page-node-id="Y878kNFCPdFXlqDmWKRB6k">
+                                    <button type="button" class="btn-sm" id="btn-upload-workflow" data-page-node-id="daeUnrIxfxfhLERNirA3di">上传</button>
+                                </div>
+                                <div class="form-actions" data-page-node-id="OZoe5mmJjlof8L6WIisTQZ">
+                                    <button type="button" class="btn-cancel" id="btn-cancel-comfyui-workflow" style="display:none" data-page-node-id="1vTxk8s0db6R67E9wByvPW">取消</button>
+                                    <button type="button" class="btn-primary" id="btn-save-comfyui-workflow" style="display:none" data-page-node-id="CWaAPWeW8xdSpAwMOgUpa8">保存工作流</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="PoyfPehoGskCCgA8pVQeK1">
+                            <h4 data-page-node-id="VAGALGVwr6HJOO2ACYK7wP">磁盘中的工作流（data/comfyui/workflows/）</h4>
+                            <div class="form-actions" data-page-node-id="ExF7Z52nqjsgQlnyJuUMT4">
+                                <button type="button" class="btn-test" id="btn-scan-comfyui-workflow" data-page-node-id="B6l2oT0WeBK6LvddVQr2Ys">扫描磁盘工作流</button>
+                            </div>
+                            <div class="config-list" id="comfyui-workflow-scan-list" data-page-node-id="ubVIUYfyPb4yLQGz6vYPQM">
+                                <p class="no-config" data-page-node-id="3J9XoT1LEsXIyPaxC30DW1">点击「扫描磁盘工作流」查看磁盘上的 JSON 文件</p>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="xFBBSfd70fjbY6SeAzVUtN">
+                            <h4 data-page-node-id="gFGnlFHofDmPEliYFHxCIk">已保存的工作流（仅在数据库删除，文件删除请至硬盘自行删）</h4>
+                            <div class="config-list" id="comfyui-workflow-list" data-page-node-id="h304xxo96ChVioDEVzXIyk">
+                                <p class="no-config" data-page-node-id="TNZz8iP0zmS7eIuxBEpq0B">加载中...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ====== Tab: 视觉回看 VLM ====== -->
+                    <div class="settings-tab-content" id="settings-tab-vlm" data-page-node-id="VcrYtR2wwmGm00GPQVsAs1">
+                        <div class="config-section" data-page-node-id="cVeFKgEzeTdngABnGkt4Zp">
+                            <h4 data-page-node-id="jvPvZAGk6U7aGt67uj3BUp">视觉回看（VLM）配置</h4>
+                            <p class="vlm-hint" data-page-node-id="Eb4HTAcVHQFZAwc74qQxkB">女主生成照片后，由 VLM 回看图片并写出「回看」描述，与 LLM 的即时记忆合流。默认使用 LM Studio 本地模型（nsfwvision-qwen3-vl-8b-v3）。</p>
+                            <div class="vlm-config-form" data-page-node-id="Qhaz4oimKMqbgfDZgcOWN6">
+                                <label data-page-node-id="5WabKH5QZ73V09yYArMhmE">服务商 Provider</label>
+                                <select id="vlm-provider" data-page-node-id="ePWbquYXdJNU1g8E3gLl2D">
+                                    <option value="lm_studio" data-page-node-id="0A9E56znIJHjDHLsTgYDT1">LM Studio</option>
+                                    <option value="ollama" data-page-node-id="UeRL7FGcVJI2Eq2TcxnsTZ">Ollama</option>
+                                    <option value="vllm" data-page-node-id="PT5tphkH9ziMEUtvGWETD9">vLLM</option>
+                                    <option value="openai" data-page-node-id="hUIVGrPhR83SgVr7sEVTLL">OpenAI 兼容</option>
+                                    <option value="custom" data-page-node-id="l5nNnNpkeqrNFpDzzamlle">自定义</option>
+                                </select>
+                                <label data-page-node-id="AlT9SkoHvXABCuAFoa7ZDH">API URL</label>
+                                <input type="text" id="vlm-api-url" placeholder="http://localhost:10039/v1/chat/completions" data-page-node-id="Fi71WzKuHwZA9TQ93qWgwU">
+                                <label data-page-node-id="eXXukh4YgeLDWlGI8dErcd">API Key（可选）</label>
+                                <input type="password" id="vlm-api-key" placeholder="留空表示无需认证" data-page-node-id="bECmMRzCc5Gq6kZ7QUXK11">
+                                <label data-page-node-id="ntlUcbBpJhhtPxBiCALeRZ">模型名称</label>
+                                <input type="text" id="vlm-model-name" placeholder="nsfwvision-qwen3-vl-8b-v3" data-page-node-id="MLx1cMhBpWLKZ3430UlJxE">
+                                <div class="vlm-row" data-page-node-id="GiR5EH0mh5ZnmUo1BHAlCC">
+                                    <div data-page-node-id="iIHN5U4SgBcQ72s7JdxGum">
+                                        <label data-page-node-id="sxCOJ21GO8arz4AunX2s0S">Max Tokens</label>
+                                        <input type="number" id="vlm-max-tokens" value="200" min="1" max="4096" data-page-node-id="KngOweBDby6kgu2Eq5VRXl">
+                                    </div>
+                                    <div data-page-node-id="dC0jGbx9AL4IIBhDBcHlqD">
+                                        <label data-page-node-id="lPyrBNiRAZfpQE8F8Sb1sO">Temperature</label>
+                                        <input type="number" id="vlm-temperature" value="0.2" step="0.05" min="0" max="2" data-page-node-id="3NzRqCPgxp6rxgnvcs8IYQ">
+                                    </div>
+                                    <div data-page-node-id="mIiRItGbPyjlQbDBEOcoEl">
+                                        <label data-page-node-id="TGlBwo66tubsaYbDmaYdJe">超时(秒)</label>
+                                        <input type="number" id="vlm-timeout" value="60" min="1" max="600" data-page-node-id="T85kE3rWE7F9YdSWfHr30Y">
+                                    </div>
+                                </div>
+                                <div class="form-actions form-actions-row" data-page-node-id="r4XpSjxLKHC0YbHDxCExD6">
+                                    <button type="button" class="btn-test" id="btn-test-vlm" data-page-node-id="HKO9W8TokHBRgbTWVIFo0G">测试连接</button>
+                                    <button type="button" class="btn-primary" id="btn-save-vlm" data-page-node-id="woDyyGeQXpfD61ayCxgjLz">保存</button>
+                                </div>
+                                <div class="vlm-test-result" id="vlm-test-result" style="display:none" data-page-node-id="SjCaguenTJcWB5su0aRxGr"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ====== Tab: Embedding ====== -->
+                    <div class="settings-tab-content" id="settings-tab-embedding" data-page-node-id="7zy00doY1WQO2EjiiDrhdv">
+                        <div class="config-section" data-page-node-id="2IDqtuo9AO5NwHe0ZO2CED">
+                            <h4 data-page-node-id="S9Z54kcgdeBkisjHDgn8zZ">Embedding 模型配置</h4>
+                            <div class="embedding-config-form" data-page-node-id="bXBk8omK1VT08SkKtGAXLr">
+                                <input type="hidden" id="embedding-editing-id" value="" data-page-node-id="es11UWEeswUA1qPT6Yxi5H">
+                                <label data-page-node-id="9sAAlGx1dQZrv5wH93PH2L">平台</label>
+                                <select id="embedding-provider" data-page-node-id="5GOpAS9gQzpMDyuAnUyhXu">
+                                    <option value="local" data-page-node-id="9AT3FpTP2hMcmdPW8GDGaG">本地模型 (bge-small-zh)</option>
+                                    <option value="openai" data-page-node-id="wUFpKtwo21QYwo2yAA3mNh">OpenAI</option>
+                                    <option value="dashscope" data-page-node-id="yhOlE0rS0XJQsKXX71RWd3">阿里 (DashScope)</option>
+                                    <option value="zhipu" data-page-node-id="gb3VdplIyYaO3PmmcdpxLr">智谱 (GLM)</option>
+                                    <option value="siliconflow" data-page-node-id="jUQp0AMiMNjpxTmdDJP1rR">SiliconFlow</option>
+                                    <option value="llm_studio" data-page-node-id="UikeWlxlEIfZMCzKmwfyec">LLM Studio (本地)</option>
+                                    <option value="ollama" data-page-node-id="9PPtDdRnllUTRDEcdcD0br">Ollama (本地)</option>
+                                    <option value="custom" data-page-node-id="HqHTh6HFhUJCvmDWIRFx46">Custom (OpenAI Compatible)</option>
+                                </select>
+                                <label data-page-node-id="kFl6l5r8qBFu5oyHgGE2lH">API URL</label>
+                                <input type="text" id="embedding-api-url" placeholder="http://127.0.0.1:5000/v1/embeddings" data-page-node-id="7f5oLwFJ0mK2h0QRnubPV9">
+                                <label data-page-node-id="WNQNCOEOZ4jsXGuHqJKFg4">API Key（可选）</label>
+                                <input type="password" id="embedding-api-key" placeholder="留空表示无需认证" data-page-node-id="Gcs8B5fYPXjUMOKNF6bl14">
+                                <label data-page-node-id="sXuJBiaid7l03rOEcOaDCh">模型名称</label>
+                                <input type="text" id="embedding-model" placeholder="BAAI/bge-small-zh-v1.5" data-page-node-id="IgyXuAIG8c4rQKcVS3gBZ8">
+                                <label data-page-node-id="UXHxG4NMG6cRdBTMWf38uw">向量维度</label>
+                                <input type="number" id="embedding-dim" min="64" max="4096" value="512" data-page-node-id="fpnZqLDvff9UyjECXoHuTx">
+                                <div class="form-actions" data-page-node-id="FLwQ8wVGCtWqOkXOXPl6wU">
+                                    <button type="button" class="btn-primary" id="btn-new-embedding" data-page-node-id="Mz34cPcqdVunakNWXkDX0G">新增配置</button>
+                                </div>
+                                <div class="form-actions form-actions-row" data-page-node-id="j4is0v0MWMuXFYC7AtMc4D">
+                                    <button type="button" class="btn-test" id="btn-test-embedding" data-page-node-id="8dUzxkzhgHEHBFRxZB97OB">测试连接</button>
+                                    <button type="button" class="btn-cancel" id="btn-cancel-embedding" style="display:none" data-page-node-id="5OPtahHioTOr2zQSMm0lzu">取消</button>
+                                    <button type="button" class="btn-primary" id="btn-save-embedding" style="display:none" data-page-node-id="0z617RFFWhccFkNCCQx476">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="o29p5gcCb54QsWEUn9Io5q">
+                            <h4 data-page-node-id="5MhH3AcqPB01J4DY7jAsJA">已保存的配置</h4>
+                            <div class="config-list" id="embedding-config-list" data-page-node-id="09EKERwBnd6dWSR5o84gk0">
+                                <p class="no-config" data-page-node-id="M7RRqlI8B2KwsxgnpDMD11">加载中...</p>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="mJ1WC0cGADN0HuKzYbvwUz">
+                            <h4 data-page-node-id="n67u934hM4CQz8QJHODQpt">当前状态</h4>
+                            <div class="embedding-status-info" id="embedding-status-info" data-page-node-id="pAS6URZaAVzL10m21GdSjR">
+                                <p class="no-config" data-page-node-id="nuzjYAosyMjHI1IzRf9tGD">未配置</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ====== Tab: Memos ====== -->
+                    <div class="settings-tab-content" id="settings-tab-memos" data-page-node-id="ZApdspkalx1bVbE69HR5zI">
+                        <div class="config-section" data-page-node-id="cWajXbKydBI4heCt8CxziR">
+                            <h4 data-page-node-id="Ccaiw8C6XcBUeSRlEcZHDN">Memos 服务配置</h4>
+                            <p class="config-hint" data-page-node-id="gXxNy4fKXNGEIxsFpMGXge">连接你的 Memos 实例，自动将 memo 导入为角色的知识记忆。</p>
+                            <form class="memos-config-form config-form-card" autocomplete="off" onsubmit="return false;" data-page-node-id="xyBUEcZ7T0Aq2b2UdFn7dK">
+                                <input type="hidden" id="memos-editing-id" value="" data-page-node-id="PraqsrfZfzwVgh5bX71nEt">
+                                <div class="form-row" data-page-node-id="DKtClyn6jltOPVDNmP8xUx">
+                                    <div class="form-group" data-page-node-id="Hxk3lvtakELjdClDKjtFUl">
+                                        <label for="memos-api-url" data-page-node-id="Ld5hRDEXMzzQPj4oFlcpXH">API 地址</label>
+                                        <input type="text" id="memos-api-url" placeholder="https://memos.nerdm.site" autocomplete="off" data-page-node-id="doVrdM7VjQZZb4HpUUwhd1">
+                                    </div>
+                                    <div class="form-group" data-page-node-id="MMYbV8kgEWlNAL9cRl4hAQ">
+                                        <label for="memos-access-token" data-page-node-id="eU4CbLe9ZyWcQP0lGZVtve">Access Token</label>
+                                        <div class="password-input-wrapper" data-page-node-id="ObUnqIKZrySUOkhq8kHwwt">
+                                            <input type="password" id="memos-access-token" placeholder="粘贴 Memos Access Token..." autocomplete="new-password" data-page-node-id="2TX5VPCPj7AKL8tWEk9Hkc">
+                                            <button type="button" class="btn-toggle-password" data-target="memos-access-token" title="显示/隐藏" data-page-node-id="FZAf2uCXlEHPmS1GCGKvKI">
+                                                <span class="material-symbols-outlined" data-page-node-id="LleGJuR5Z8CkXdSpiTHEbO">visibility</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row" data-page-node-id="xFi0RUjsWnsOQQ6Dt0G5V7">
+                                    <label class="checkbox-label memos-checkbox" data-page-node-id="MpHca9AY8R8bwbeZKGKo9L">
+                                        <input type="checkbox" id="memos-skip-attachments" checked data-page-node-id="53y1amBiwnLMrUUUxzPn1G">
+                                        <span data-page-node-id="PWCBumCJejWTsow91Nqq86">跳过纯附件/图片 memo（仅文本 content &lt; 20 字符会被过滤）</span>
+                                    </label>
+                                </div>
+                                <div class="form-actions form-actions-row" data-page-node-id="lSk9qN2PnCzGKqysfBE4zz">
+                                    <button type="button" class="btn-test" id="btn-test-memos" data-page-node-id="LVN0q6jMGHi2ioGEgTUMXA">测试连接</button>
+                                    <div class="form-actions-spacer" data-page-node-id="qrMLfMPAzV7byNbStxalr5"></div>
+                                    <button type="button" class="btn-cancel" id="btn-cancel-memos" style="display:none" data-page-node-id="2qhC4GucLW3XWnakivXdE0">取消</button>
+                                    <button type="button" class="btn-primary" id="btn-save-memos" data-page-node-id="QcBPp6ggYaIW45wTQ6IveR">保存配置</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="config-section" data-page-node-id="zuGcvoKvRa1Ju6jWnrwC4t">
+                            <h4 data-page-node-id="8ilsAAXaIV1aTuMuckC2tD">已保存的配置</h4>
+                            <div class="config-list" id="memos-config-list" data-page-node-id="0rtj5oQYhm9yjN4upHLoOW">
+                                <p class="no-config" data-page-node-id="CJG2zodhjkJ2bwHFzoOvBu">加载中...</p>
+                            </div>
+                        </div>
+                        <div class="config-section memos-sync-section" data-page-node-id="PYeXhWtoZ5x8zGIxlRpZ7I">
+                            <h4 data-page-node-id="bE9R362RP5PMgdcVN7SIJ0">数据同步</h4>
+                            <p class="config-hint" data-page-node-id="DhtD7qhFpzVkiywilvcYCb">手动触发一次全量导入，将 Memos 中的所有 memo 同步到角色知识库。</p>
+                            <button type="button" class="btn-primary" id="btn-sync-memos" data-page-node-id="xu4sah3wQAvlIvnvIZtr7x">手动拉取 Memos</button>
+                        </div>
+                    </div>
+                    <!-- ====== Tab: 资讯 ====== -->
+                    <div class="settings-tab-content" id="settings-tab-news" data-page-node-id="dYhWjkE9znhe0G4GAe2V4c">
+                        <div class="config-section" data-page-node-id="cuFrbKWaqLuEYGfrZ2G56m">
+                            <h4 data-page-node-id="1lhS3H0Usd4AKimWQxGfzH">新闻资讯总开关</h4>
+                            <p class="config-hint" data-page-node-id="g2jIBRn9g5JHU1sG7Go91p">开启后，后台线程每小时自动抓取正规新闻源，按女主职业筛选后注入对话和主动消息。</p>
+                            <div class="form-row" data-page-node-id="KkXAFjcGHRiTIv52xPssaU">
+                                <label class="checkbox-label" data-page-node-id="RCYMocFvHwnxhsU4UtoLym">
+                                    <input type="checkbox" id="news-enabled-toggle" data-page-node-id="QBULAdXPakl2PkscFXpsD5">
+                                    <span data-page-node-id="I8xUALjqoHfXYubeZGEKpk">启用新闻资讯功能</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="jfBZ6ho61xgD1weP8ybnqU">
+                            <h4 data-page-node-id="lJ5SpUihh2S1eHq6i69PGd">参数配置</h4>
+                            <div class="form-row" data-page-node-id="m3fCmBN0KEwIMCbsckM1Tx">
+                                <div class="form-group" data-page-node-id="U5cwaEJECCWINIytzu25aV">
+                                    <label for="news-max-feed" data-page-node-id="XEwAAciWcejopT9enMlY5Y">每源抓取上限</label>
+                                    <input type="number" id="news-max-feed" min="1" max="50" value="8" style="width:80px" data-page-node-id="yzaqrAIkGsPsldrR7bDh9R">
+                                    <small data-page-node-id="P71WT0gtmxeG5lKuBw5Jfb">每个源每轮最多抓几条</small>
+                                </div>
+                                <div class="form-group" data-page-node-id="HrQkD4IcAZ1gvZ4NlSiUYz">
+                                    <label for="news-max-inject" data-page-node-id="muzIV0X5WJu8JcndXzrX5W">每天注入条数</label>
+                                    <input type="number" id="news-max-inject" min="1" max="10" value="3" style="width:80px" data-page-node-id="Xxi1RHL1V7vb9CVuECfDRT">
+                                    <small data-page-node-id="oT20hGsBjgCy3Xpr3AfdHL">每角色每天注入几条资讯到对话</small>
+                                </div>
+                                <div class="form-group" data-page-node-id="3j1rSWt7982heLqOQP4wUP">
+                                    <label for="news-push-interval" data-page-node-id="N9y9G2XUVqeQTVYPErwKys">推送间隔(天)</label>
+                                    <input type="number" id="news-push-interval" min="0" max="30" value="0" style="width:80px" data-page-node-id="Jgy7QlGcIi9FuZCWCVUISl">
+                                    <small data-page-node-id="5LNcLjHfGzClTTBdTU9TDS">0=不限制，每隔几天推送一次</small>
+                                </div>
+                            </div>
+                            <div class="form-row" data-page-node-id="L5AW7pAHqLl8lEnj1wNIDG">
+                                <div class="form-group" data-page-node-id="TrbUyrOFfQVYGMDiGSWlTh">
+                                    <label for="news-fetch-interval" data-page-node-id="N55qpHz9Vj9FxcHPETGchO">抓取间隔(秒)</label>
+                                    <input type="number" id="news-fetch-interval" min="300" max="86400" value="3600" style="width:100px" data-page-node-id="YROKxqEZDkS509CDMHbvTt">
+                                </div>
+                                <div class="form-group" data-page-node-id="xF99ULJl6XoWUwXsLLMbp2">
+                                    <label for="news-cache-days" data-page-node-id="fueKul3GaBT27ABj7Ci11v">缓存保留天数</label>
+                                    <input type="number" id="news-cache-days" min="1" max="30" value="2" style="width:80px" data-page-node-id="NMQOwdmg1EbdgQD9aYk0pA">
+                                </div>
+                                <div class="form-group" data-page-node-id="5dvIFNw6Cp0wgNe4Gb9FGP">
+                                    <label for="news-sum-threshold" data-page-node-id="rZKUbqwlWziawRxkGtuguM">摘要阈值(字)</label>
+                                    <input type="number" id="news-sum-threshold" min="20" max="500" value="80" style="width:80px" data-page-node-id="lF3Gv70XcTKnTkXEpfZN7i">
+                                    <small data-page-node-id="6qNabqicagGcZVx2BebbB9">超过此长度才调LLM摘要</small>
+                                </div>
+                            </div>
+                            <div class="form-actions form-actions-row" data-page-node-id="ihBA26Jjo2oGMweKGGH1kb">
+                                <button type="button" class="btn-primary" id="btn-save-news-settings" data-page-node-id="L7cc3JrtVdTKLSm2xvDqZU">保存配置</button>
+                                <button type="button" class="btn-test" id="btn-fetch-news-now" data-page-node-id="G4PFU5yRjpZEz9e3HGFnGB">立即抓取一次</button>
+                                <button type="button" class="btn-test" id="btn-view-news-cache" data-page-node-id="5jNWZMOMI3ZaiC5jJCElu2">查看已抓新闻</button>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="flQvWfe3QJGLkTBbQ70BOw">
+                            <h4 data-page-node-id="jLW6zZ8FqQEMnlwdDiCYsG">新闻源管理</h4>
+                            <p class="config-hint" data-page-node-id="HTBcrPpRdeJG53umN7d5Wt">管理新闻数据源。RSS 源无需 API Key；60s API 免费无需 Key。（聚合数据 / 火山引擎暂未实现，已隐藏）</p>
+                            <div class="form-actions form-actions-row" style="margin-bottom:12px" data-page-node-id="0zGJGnrvHCF6WXnVyyTGPR">
+                                <button type="button" class="btn-primary" id="btn-new-news-source" data-page-node-id="wAb3kWThKTJ40LPWohnesD">+ 新增源</button>
+                            </div>
+                            <!-- 新增/编辑表单（默认隐藏） -->
+                            <div id="news-source-form" style="display:none; background:var(--bg-secondary); border-radius:8px; padding:16px; margin-bottom:12px" data-page-node-id="LdX9QTsm5HufKy4uej6cDg">
+                                <input type="hidden" id="news-src-editing-id" value="" data-page-node-id="VZEov4vA816lQyIYr5RV1a">
+                                <div class="form-row" data-page-node-id="KaDvqAecUDPQFf9LEiEBVA">
+                                    <div class="form-group" data-page-node-id="ETfrkACfE3XbWRoRkBz4UD">
+                                        <label for="news-src-name" data-page-node-id="1eFXGRD7OUrCdBJTzXMb8u">源名称</label>
+                                        <input type="text" id="news-src-name" placeholder="如：中新网即时" style="width:160px" data-page-node-id="gjHFXYRvVMWZ3rFL3Yz3yz">
+                                    </div>
+                                    <div class="form-group" data-page-node-id="7b7rI6cYEPptJoULhghaND">
+                                            <label for="news-src-type" data-page-node-id="8GEDDEHPEZekigVEGE4b6N">类型</label>
+                                            <select id="news-src-type" style="width:120px" data-page-node-id="iCY2Jt2zLC5w2CUAtDjCbg">
+                                                <option value="rss" data-page-node-id="uk7FDw8CYDy6m0UBrnpvNi">RSS</option>
+                                                <option value="60s" data-page-node-id="AH7Othz26V3OVGoaEYFC9v">60s API</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group" data-page-node-id="DAKHpOoeUk3ZCQWjzMEnub">
+                                        <label for="news-src-category" data-page-node-id="KqO0UAqqn3lj4EXBTcAyMb">分类</label>
+                                        <select id="news-src-category" style="width:120px" data-page-node-id="62ywkBPGKiGqOEAppDevBj">
+                                            <option value="general" data-page-node-id="Dikll8yZy8WMcR8orsBpWj">通用</option>
+                                            <option value="tech" data-page-node-id="7f2qpU0c3Wo9TERlHYKkyo">科技</option>
+                                            <option value="edu" data-page-node-id="DNnW3UpqG8mY51uur29HnN">教育</option>
+                                            <option value="culture" data-page-node-id="7WH4W39Al3VSkGyC5Bm0OJ">文化</option>
+                                            <option value="health" data-page-node-id="mtyQH8CEiyb2CHlqrGtpfQ">健康</option>
+                                            <option value="world" data-page-node-id="3B28MD44pAaFJwZMVhPm9r">国际</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row" data-page-node-id="72Dwo13CCMqapBhJpSyzWa">
+                                    <div class="form-group" style="flex:1" data-page-node-id="FIfl8M69CraUSMrCn7bu2M">
+                                        <label for="news-src-url" data-page-node-id="BasxgxEoPsvdJSfkfeGie7">API URL / RSS 地址</label>
+                                        <input type="text" id="news-src-url" placeholder="https://..." style="width:100%" data-page-node-id="SjqllANXoqF2ug55R1X8n6">
+                                    </div>
+                                    <div class="form-group" data-page-node-id="to5GYgOlIOaVcWRog8HvtW">
+                                        <label for="news-src-key" data-page-node-id="vJqFAnoLhysEdxhu3TYU78">API Key（可选）</label>
+                                        <input type="password" id="news-src-key" placeholder="付费源才需要" style="width:180px" data-page-node-id="BvDBoivnQtOKswMpsTxcJk">
+                                    </div>
+                                </div>
+                                <div class="form-actions form-actions-row" data-page-node-id="S1q6tQmkl4htohxGN2jQqb">
+                                    <button type="button" class="btn-primary" id="btn-save-news-source" data-page-node-id="cExhBbxYH7TM0G3nM9RJMe">保存</button>
+                                    <button type="button" class="btn-cancel" id="btn-cancel-news-source" data-page-node-id="sBf8VOqrWFQIDMKeyqVmTQ">取消</button>
+                                </div>
+                            </div>
+                            <div class="config-list" id="news-source-list" data-page-node-id="03c8Re18gOkA7RSEnJSQjq">
+                                <p class="no-config" data-page-node-id="hpMPpDHfLYq7PHH50JTu9Z">加载中...</p>
+                            </div>
+                            <!-- 已抓新闻缓存查看 -->
+                            <div id="news-cache-modal" style="display:none; position:fixed; inset:0; z-index:9500; background:rgba(0,0,0,.5); align-items:center; justify-content:center;" data-page-node-id="DIMAYmhndD2IjUxad3cAVE">
+                                <div style="background:var(--bg-primary,#fff); border-radius:12px; width:min(640px,92vw); max-height:80vh; overflow:auto; padding:18px;" data-page-node-id="B0K3Cz26y3HyWzdzrSOTrc">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;" data-page-node-id="LA8KzDhZjW4cDAZvTPb4zC">
+                                        <h3 style="margin:0" data-page-node-id="2NFNoNCy3VDfHJJL3feoMu">已抓新闻缓存</h3>
+                                        <button class="btn-icon" id="btn-close-news-cache" data-page-node-id="NKkV0hA6e0oOunMGzGSzDP"><span class="material-symbols-outlined" data-page-node-id="QsQQGMhqvaEKVWlFk9rhWi">close</span></button>
+                                    </div>
+                                    <div id="news-cache-list" data-page-node-id="OwAS3pQE7pJ41iZOsqNyA7"><p class="no-config" data-page-node-id="Lf5cFUtmTLGhtlrb3VJhdu">加载中...</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ====== Tab: 小模型 ====== -->
+                    <div class="settings-tab-content" id="settings-tab-smallmodel" data-page-node-id="qO5mgYjhzBUwK0f4IIpTyv">
+                        <div class="config-section" data-page-node-id="JO4hnJWrO6ayl9FXRlzfAk">
+                            <h4 data-page-node-id="PcehbLxDXInWpuNERAqdAY">小模型用途说明</h4>
+                            <p class="config-desc" data-page-node-id="YYIgpwZ9HikY1lsoKjrBmj">以下功能的轻量推理由「小模型」完成（本地 LM Studio / 其他 OpenAI 兼容服务）：</p>
+                            <ul class="config-usage-list" data-page-node-id="27gKBmemjgssgDLjKB2FRV">
+                                <li data-page-node-id="BsEZXtVDwqualA09u39Wb2"><strong data-page-node-id="9zkjSf7vICQwqw4KvONN73">对话情绪属性分析</strong>：根据对话判断角色情绪与属性变化</li>
+                                <li data-page-node-id="K0enHNLapSNpJ1r8ts6i4S"><strong data-page-node-id="8qa7GnLtFmE0TeEqsr7b7Z">TTS 语音参数分类</strong>：根据台词生成腾讯云 TTS 的语气 / 语速 / 音量参数</li>
+                            </ul>
+                        </div>
+                        <div class="config-section" data-page-node-id="BXOVHtpfcPeb5AVPEWZZ9I">
+                            <h4 data-page-node-id="JCg6mMqdBCrxtUIjs0U4B2">当前激活配置</h4>
+                            <div class="active-config-info" id="smallmodel-active-info" data-page-node-id="fpJ1WkDuiHpBLMocUc3GQU">
+                                <p class="no-config" data-page-node-id="IVTVmH1pEGvsqqUFvlxWyA">暂无激活配置</p>
+                            </div>
+                        </div>
+                        <div class="config-section" data-page-node-id="ZeHq1D27A7xcrIFXFK86QD">
+                            <h4 data-page-node-id="7a006ZMzD0OHU6VTGEAWiE">配置列表</h4>
+                            <div class="config-list" id="smallmodel-config-list" data-page-node-id="moPOld1qRExBxlQXOU2GHk"></div>
+                        </div>
+                        <div class="config-section" data-page-node-id="3bRXDTacwbVV1RzkvSOP8Z">
+                            <h4 id="smallmodel-form-title" data-page-node-id="tFmWyEdxbCt49XHmgN09qx">新增小模型配置</h4>
+                            <form id="smallmodel-form" class="config-form" data-page-node-id="GSSOJnIdM5zLYSzRCphtCF">
+                                <input type="hidden" id="smallmodel-id" value="" data-page-node-id="xXFRpWFzGR9TIgJi0wguqO">
+                                <label data-page-node-id="R5TsszMvi6moWgyhHHksqI">名称</label>
+                                <input type="text" id="smallmodel-name" placeholder="例如：本地 LM Studio 1.5B" data-page-node-id="zUUGk9CTZlcgIOYZNKCNzH">
+                                <label data-page-node-id="wG1KCBgYCR3fvoGLEXtK50">访问地址 (API Base)</label>
+                                <input type="text" id="smallmodel-api-url" placeholder="http://127.0.0.1:10039/v1" data-page-node-id="1RlR1eTH5sGNDFFXjlHDgq">
+                                <label data-page-node-id="8VKwwbYNgVIOC2oQ1d0OsN">API Key（本地 LM Studio 一般留空）</label>
+                                <input type="password" id="smallmodel-api-key" placeholder="（可留空）" data-page-node-id="utSzPy67Y8Ya5QRiliKvYn">
+                                <label data-page-node-id="cIbqmIhycbeejmn6e5d3KJ">模型名称</label>
+                                <input type="text" id="smallmodel-model" placeholder="qwen2.5-1.5b-instruct" data-page-node-id="9aGJg9HU8ASbrrlVS6lAQ7">
+                                <div class="form-actions" data-page-node-id="TnG7bVG6P5XwXYsBrFxxMH">
+                                    <button type="button" class="btn-test" id="btn-smallmodel-test" data-page-node-id="zHSTdnHwMYCyuU1V1wBBRh">测试连接</button>
+                                    <button type="button" class="btn-cancel" id="btn-smallmodel-cancel" style="display:none" data-page-node-id="6ixADt25LZmzICT5vd3EH6">取消</button>
+                                    <button type="submit" class="btn-primary" data-page-node-id="j5qdQgMXwqNBLQGtGwYx2H">保存</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- ====== Tab: 提示词 ====== -->
+                    <div class="settings-tab-content" id="settings-tab-prompts" data-page-node-id="FH6GrcspACR6awhvkgMVgT">
+                        <div class="prompt-panel-layout" data-page-node-id="nTRFjvuLpvZFwHNAI9eqHA">
+                            <div class="prompt-sidebar" id="prompt-sidebar" data-page-node-id="z57k9EjklzbLqmwMd52OrC">
+                                <div class="prompt-sidebar-header" data-page-node-id="sHwcfeOhFLuClLVp6F7CxK">
+                                    <span data-page-node-id="2yzLrNdfAvAW3UFMeuFscV">提示词列表</span>
+                                    <button class="btn-icon btn-refresh" onclick="PromptPanel.loadPrompts()" title="刷新列表" data-page-node-id="jajR1vKddUjf474g3lIUml">🔄</button>
+                                </div>
+                                <div class="prompt-category" onclick="PromptPanel.toggleCategory('dialogue')" data-page-node-id="xazc6CyYlqfqgO7NpGf0q3">
+                                    <span class="cat-icon" data-page-node-id="GOTfvmIbfB7w85CgEB3zL3">💬</span> 对话系统 <span class="cat-count" data-page-node-id="YV7Yv1xGawmrTKGTvlRXPk">8</span>
+                                </div>
+                                <div class="prompt-items" id="prompt-items-dialogue" data-page-node-id="CqqfrNa897HiDCKInEYrE1"></div>
+                                <div class="prompt-category" onclick="PromptPanel.toggleCategory('event')" data-page-node-id="ATMVk7vXREk1uJiRVgbIkv">
+                                    <span class="cat-icon" data-page-node-id="zMjmCulFGaaZ262SERLAP9">🎲</span> 事件系统 <span class="cat-count" data-page-node-id="zQ9z7ijgZqnbgoQH1r0n3C">6</span>
+                                </div>
+                                <div class="prompt-items" id="prompt-items-event" data-page-node-id="X0tDjZ5TFjzY2AL1HLMtvk"></div>
+                                <div class="prompt-category" onclick="PromptPanel.toggleCategory('classify')" data-page-node-id="Q6usFe0D7XWhprqcsfLrrs">
+                                    <span class="cat-icon" data-page-node-id="aB5fKwopKNskxWsFB6wdIn">🏷</span> 分类器 <span class="cat-count" data-page-node-id="tpStHWlhbYjtkOUZ8I1cHC">2</span>
+                                </div>
+                                <div class="prompt-items" id="prompt-items-classify" data-page-node-id="29MWCnU5C0NOvAg1vm8vQp"></div>
+                                <div class="prompt-category" onclick="PromptPanel.toggleCategory('character')" data-page-node-id="JWGmW6C47r4rM02hMKeW3f">
+                                    <span class="cat-icon" data-page-node-id="u5KdQZzIwAJZICPlwhZ2mR">👤</span> 角色创建 <span class="cat-count" data-page-node-id="mqlAYpODw0CGBL15uC0xrH">5</span>
+                                </div>
+                                <div class="prompt-items" id="prompt-items-character" data-page-node-id="xmTGFSaeIjAMxe8BRKJ94c"></div>
+                                <div class="prompt-category" onclick="PromptPanel.toggleCategory('mission')" data-page-node-id="hRO853i9Dqfo5Kg3prXMwC">
+                                    <span class="cat-icon" data-page-node-id="tYPLKN3xQOWusCdQ3F5JP2">📋</span> 任务 <span class="cat-count" data-page-node-id="mhquyvGmtmMetaGQZq9fes">3</span>
+                                </div>
+                                <div class="prompt-items" id="prompt-items-mission" data-page-node-id="Ly6AZRFIXUgzKCuat5mFuq"></div>
+                                <div class="prompt-category" onclick="PromptPanel.toggleCategory('other')" data-page-node-id="5MF9voWCBW2JRr3voKC8SN">
+                                    <span class="cat-icon" data-page-node-id="gvwY7FbK7HL3MIVXKKEwiy">🔧</span> 其他 <span class="cat-count" data-page-node-id="m53vJm1tc0xsV5XhpVFEb9">4</span>
+                                </div>
+                                <div class="prompt-items" id="prompt-items-other" data-page-node-id="ZnofBPJtZzBYtJcNSPYtQ4"></div>
+                                <div class="prompt-category" onclick="PromptPanel.toggleCategory('photo')" data-page-node-id="hPDWswLcFH8Eg1UzYwuCeS">
+                                    <span class="cat-icon" data-page-node-id="1a38s8En8TG8JfpkNDvvgF">📷</span> 聊天生图
+                                </div>
+                                <div class="prompt-items" id="prompt-items-photo" data-page-node-id="gfqlmfPAmRFosTetpS6JvT"></div>
+                                <div class="prompt-category" onclick="PromptPanel.toggleCategory('world')" data-page-node-id="dsQ1hAupdJlukVAhw1YZmA">
+                                    <span class="cat-icon" data-page-node-id="DAyZnxxhNJ3iiJ0EUfsx5a">🌐</span> 角色世界观
+                                </div>
+                                <div class="prompt-items" id="prompt-items-world" data-page-node-id="HYWbAaiPMATVgaubwgnTAE"></div>
+                            </div>
+                            <div class="prompt-main" data-page-node-id="4b0D3FbLHFmBYSzzonjlc3">
+                                <div class="prompt-header" data-page-node-id="lE03FuIL0eOmWqRZJdvBfc">
+                                    <span class="prompt-title" id="prompt-editor-title" data-page-node-id="kld5Y3gXpY8i6OqGLErU8Y">选择一个提示词</span>
+                                    <span class="prompt-badge" id="prompt-editor-badge" data-page-node-id="gHE6mVXFq0oscnUAxAwL7v"></span>
+                                    <span class="prompt-think-info" id="prompt-think-info" data-page-node-id="l7CBS8vCXFAiQGM4Oon2Qg"></span>
+                                </div>
+                                <textarea id="prompt-editor" class="prompt-editor" placeholder="选择一个提示词开始编辑..." readonly></textarea>
+                                <div id="prompt-editor-mc" class="prompt-editor" style="display:none; height: 400px;" data-page-node-id="gMoNVF3aSGZFsvrBNsLmDZ"></div>
+                                <div class="prompt-actions" data-page-node-id="I6EjTjlh4Dsi1zcMj3IPGB">
+                                    <button class="btn-sm" id="btn-prompt-preview" disabled data-page-node-id="sjG75dNxFnBdy6EdRRuqrh">预览</button>
+                                    <button class="btn-sm btn-test" id="btn-prompt-test" style="display:none" data-page-node-id="3spZpVoHNXaSR4UKbmIfue">测试</button>
+                                    <button class="btn-sm btn-primary" id="btn-prompt-save" disabled data-page-node-id="Es6CchrMi7ijePSiKzoQtE">保存</button>
+                                    <button class="btn-sm" id="btn-prompt-reset" disabled data-page-node-id="VL5NvOYB3BhSGWXiJbcuRd">重置</button>
+                                    <button class="btn-sm" id="btn-prompt-versions" data-page-node-id="JAgC00RGNhKDGyO86Nbwzo">版本</button>
+                                    <span class="prompt-status" id="prompt-status" data-page-node-id="teUFWVvBStlWMlsqivwmVk"></span>
+                                </div>
+                                <div class="prompt-preview" id="prompt-preview" style="display:none" data-page-node-id="WGPpDky7eBD1lvH1iHM1lw">
+                                    <div class="preview-header" data-page-node-id="KQoxQZZl3nGRFr96Zto2qe">预览</div>
+                                    <pre id="prompt-preview-content" data-page-node-id="qeyJZiAFEQpI8z82Lv5iQk"></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-overlay" id="panel-overlay" data-page-node-id="RI2uq1vIv5c2WEQELQgdUC"></div>
+
+        <!-- GM 设置面板模态框 -->
+        <div class="gm-modal-overlay" id="gm-modal-overlay" style="display:none" data-page-node-id="EFfpNSy1BisWhGzu8lCfRq">
+            <div class="gm-modal" id="gm-modal" data-page-node-id="vFAGLywbPHef3oTUbEmauI">
+                <div class="gm-modal-header" data-page-node-id="jC6JxugE1OkBPhFCeDCRWk">
+                    <h3 data-page-node-id="Ec1bQTE5XE6dz0eQIJ4oDB"><span class="material-symbols-outlined" data-page-node-id="jSVmiE7eFZaBAmyIIU3qqC">tune</span> GM 设置</h3>
+                    <button class="btn-icon" id="btn-close-gm" title="关闭" data-page-node-id="3dPsCeGAdOwnmia7EMBiww">
+                        <span class="material-symbols-outlined" data-page-node-id="6JztPon3GPehC9Gp3t6XER">close</span>
+                    </button>
+                </div>
+                <!-- Tab 导航 -->
+                <div class="gm-tabs" data-page-node-id="jSf1k0VKjaA4yGGdqY3Hf7">
+                    <button class="gm-tab active" data-tab="settings" data-page-node-id="i9rA5DgXlDoGevYncnEx4K">属性设置</button>
+                    <button class="gm-tab" data-tab="reset" data-page-node-id="BfypiT6wS8FwIq4IOyqJND">恢复角色默认状态</button>
+                    <button class="gm-tab gm-tab-danger" data-tab="delete" data-page-node-id="BsSgexOoO7ZT0LA4UXqyES">彻底删除角色</button>
+                </div>
+                <!-- 属性设置面板 -->
+                <div class="gm-modal-body" id="gm-panel-settings" data-page-node-id="neyMjQAm5wBb6FuNp0Lzkh">
+                    <div class="gm-section" data-page-node-id="uJQFHWCCYSiqDyTXCFcpuf">
+                        <h4 data-page-node-id="NJlKBzeULH5NwKOodRxnnC">玩家关系</h4>
+                        <div class="gm-sliders" id="gm-player-sliders" data-page-node-id="VYmD3SDbvwDRSMM5De9VKJ"></div>
+                    </div>
+                    <div class="gm-section" data-page-node-id="PROFH2rhQ8lOO4ZeXLOWrL">
+                        <h4 data-page-node-id="V8GLMjQj72zaPLYJEsdpQ2">物理状态</h4>
+                        <div class="gm-sliders" id="gm-physical-sliders" data-page-node-id="8HETClD5HzCan44JJ3OKC0"></div>
+                    </div>
+                    <div class="gm-section" data-page-node-id="43CLlGDyvCSiBCYxyHCHrt">
+                        <h4 data-page-node-id="AW4WolKx2AaXuYfJeRFomb">心理状态</h4>
+                        <div class="gm-sliders" id="gm-mental-sliders" data-page-node-id="88AEhiCjxdC7AgeBFn9bV8"></div>
+                    </div>
+                    <div class="gm-section" data-page-node-id="bL3JBAsqCdloYWhsbPhXHD">
+                        <h4 data-page-node-id="hK8WKuOF53n5HbHD58LzMI">技能属性</h4>
+                        <div class="gm-sliders" id="gm-skill-sliders" data-page-node-id="iZUeCTeZuuGZTIKwN7Qm2r"></div>
+                    </div>
+                    <div class="gm-section" data-page-node-id="j3Fl3tWZDB8Kw7Rk3XGnBK">
+                        <h4 data-page-node-id="flvj2wuXyixGyOPxEhiz4C">目标进度</h4>
+                        <div class="gm-sliders" id="gm-goal-sliders" data-page-node-id="20muXS88zZcUvpJKBfktdQ"></div>
+                    </div>
+                </div>
+                <!-- 恢复角色默认状态面板 -->
+                <div class="gm-modal-body" id="gm-panel-reset" style="display:none" data-page-node-id="hW8eZiaKIiFAySsBOLzHoW">
+                    <div class="gm-data-warning" data-page-node-id="CuvF8mmUuqXzGGzujHe1QH">
+                        <span class="material-symbols-outlined" style="color:var(--danger,#e53935);font-size:28px" data-page-node-id="CgtOS9t2vpdEVzoj6LFEBi">warning</span>
+                        <p data-page-node-id="pWxti46gHeIZGOgqWADBpW">此操作将<strong data-page-node-id="YRWJcpE0KCAvZHx2fmJAnq">永久删除</strong>当前角色的所有运行时数据（对话记录、事件日志、关系历史、记忆、TTS音频等），<strong data-page-node-id="kHyfcJ9UbLkOj1T0e8YTA5">不可恢复！</strong></p>
+                        <p style="margin-top:6px" data-page-node-id="VapuVHD6SQShkTP1cnD2uE">同时将删除该角色的<strong data-page-node-id="KbPomazop7JQSAvC6JtmBK">全部任务数据</strong>：任务（mission）、任务归档（mission_archive）、事件冷却（event_cooldown）、任务专属成就（achievement_id 含 mission）、任务生成的社交关系（friend 中 mission_id 非空），<strong data-page-node-id="TUPofnF5dJY6NnMCgpyy6F">同样不可恢复！</strong></p>
+                    </div>
+                    <div class="gm-data-section" data-page-node-id="a2BNZtVHHHVMqug6FrEmJE">
+                        <h4 style="color:var(--danger,#e53935)" data-page-node-id="cUSx9lKtzUk3weByjAXKGY">将删除 / 重置</h4>
+                        <ul class="gm-data-list" data-page-node-id="sTlBbM8DREXnfse1BdA3gb">
+                            <li data-page-node-id="2AX2zi2aYQSrBJCZRbfv02">对话记录（MD 文件 + TTS 音频）</li>
+                            <li data-page-node-id="T7YylUcLhvMdEF8JLYdfhX">事件日志、关系事件、长期记忆、情感时刻</li>
+                            <li data-page-node-id="OH4BGYEGVDuB90EiRH5pNJ">快捷对话建议、语音样本、参考音频、TTS 试听缓存</li>
+                            <li data-page-node-id="CDgYoAgWFSztwWrNuo5uuL">任务与任务归档（mission / mission_archive）→ 全部删除</li>
+                            <li data-page-node-id="l1coAMIuh32jNlRHuc7nao">事件冷却记录（event_cooldown）→ 全部删除</li>
+                            <li data-page-node-id="OfEJidAy9DiKFsvzlXkXyt">任务专属成就（achievement_id 含 mission）→ 删除</li>
+                            <li data-page-node-id="XqqfvMlrsBVGenYqB3UBcq">任务生成的社交关系（friend 中 mission_id 非空）→ 删除</li>
+                            <li data-page-node-id="DuMu3060sb80fFUFWOCNou">游戏时间、天气、穿搭历史 → 重置为初始值</li>
+                            <li data-page-node-id="Yd4D8VDp2qzM0a28FC0ApM">玩家关系四指标 → 重置为陌生人（Tier 0）</li>
+                            <li data-page-node-id="mTBW1DRR05P2mSOIEHSOVJ">恋爱关系 → 重置为普通朋友</li>
+                            <li data-page-node-id="Fbg1LWxfeenMMBBphRRp8H">地点访问次数 → 重置为 0</li>
+                            <li data-page-node-id="2CZBs152fW5BqeauEQQwpQ">朋友互动记录 → 清空（保留好友列表和好感度）</li>
+                            <li data-page-node-id="74YYdb8j8OQOcKpTY0GfMm">基础属性（能量、情绪、压力、健康等）→ 重置为角色初始基线值（baselines）</li>
+                            <li data-page-node-id="OiGFkNWq7VZhdUyH9miYE6">技能（skill_*）→ 重置为角色初始值</li>
+                            <li data-page-node-id="ELpnBAGDQpoLYXdvKpFpXY">当前穿搭（current_outfit）→ 清空</li>
+                            <li data-page-node-id="oLvcJSUSWKpv5SEo0v1l8D">情绪历史 → 清空</li>
+                            <li data-page-node-id="yDUZTWYibyQ7lQSCrlIStx">待处理任务标记、当日计划地点 → 清空</li>
+                            <li data-page-node-id="bPxvTDhG4fcW8CVoWD44RJ">心理状态初始化标记（mental_initialized）→ 重置，下次对话重新建立心理画像</li>
+                            <li data-page-node-id="ny0VMvXFOeEwFBhL2IO3Hd">主动消息冷却计数 → 重置</li>
+                        </ul>
+                    </div>
+                    <div class="gm-data-section" data-page-node-id="etUvA2A9VMr43lop12hTgf">
+                        <h4 style="color:var(--success,#43a047)" data-page-node-id="D56dwc2hGeySTXPGwbqcfG">将保留</h4>
+                        <ul class="gm-data-list gm-data-keep" data-page-node-id="BAGgGrfwbsva5YaEtGXK3C">
+                            <li data-page-node-id="oZ2HBxnP68NrAQCJeg2WD5">角色身份、性格、梦想、目标</li>
+                            <li data-page-node-id="RiErzsiQfgM1KOlcuIqRtB">TTS 配置、外貌</li>
+                            <li data-page-node-id="TSr5ks1AE8nlf9Hb0NQpbZ">角色静态设定（可用属性面板调整）</li>
+                            <li data-page-node-id="ygABijSnGTcci8otHT7WMl">朋友列表及好感度（任务生成的 NPC 除外）</li>
+                            <li data-page-node-id="X20gOTfIE0JJR8NwciTsEi">当前位置（避免触发换装副作用）</li>
+                            <li data-page-node-id="RyJqEPZlLMYBaKIJKYuKlz">成就（任务专属成就除外）、头像、肖像图</li>
+                        </ul>
+                    </div>
+                    <div class="gm-data-confirm" data-page-node-id="GXZw1G4LQDvUG45Ydj25vR">
+                        <label data-page-node-id="IJFW9spWBE4zHeq0pQxwts">请输入角色名 <strong id="gm-confirm-name" style="color:var(--danger,#e53935)" data-page-node-id="QfjI32A7OFwW8GEmCzTasS"></strong> 以确认：</label>
+                        <input type="text" id="gm-confirm-input" placeholder="输入角色名" autocomplete="off" data-page-node-id="CbE0Sy2jXCDs4gvlQ2jtMx">
+                        <button class="btn-danger" id="btn-gm-reset" disabled data-page-node-id="wHvDHt30kt4ys2rbbDpZZH">确认重置</button>
+                    </div>
+                </div>
+                <!-- 彻底删除角色面板 -->
+                <div class="gm-modal-body" id="gm-panel-delete" style="display:none" data-page-node-id="dFbap3KQBiQAiXlbCt5GM7">
+                    <div class="gm-data-section gm-data-danger" data-page-node-id="B4QNPplIjBINThZQG6tYDO">
+                        <h4 style="color:var(--danger,#e53935)" data-page-node-id="3UwfOuTkruYzE4p8BV8TFJ">⚠ 彻底删除角色（不可恢复）</h4>
+                        <p class="gm-data-warn" data-page-node-id="ekHVGGv7FzPkOWBcYoxqD2">将永久删除该女主的全部游戏数据，包括但不限于：角色身份/性格/梦想/目标、TTS 配置、外貌、朋友及好感度、当前位置、成就、头像与肖像图、对话记录（MD + TTS 音频）、事件日志、关系事件、长期记忆、情感时刻、快捷对话建议、语音样本、参考音频、TTS 试听缓存、任务与归档、事件冷却记录、游戏时间/天气/穿搭历史、玩家关系、恋爱关系、地点访问、基础属性、技能、当前穿搭、情绪历史等。</p>
+                        <div class="gm-data-confirm" data-page-node-id="0lKLSWZy9LTckQJrj6TY7F">
+                            <label data-page-node-id="tDhZqlz788BD9srpg1Ocek">请输入角色名 <strong id="gm-delete-name" style="color:var(--danger,#e53935)" data-page-node-id="qMHvpW4qC8M82FCZHFVKs8"></strong> 以确认彻底删除：</label>
+                            <input type="text" id="gm-delete-input" placeholder="输入角色名" autocomplete="off" data-page-node-id="KesWEd2AyniKDwacRaNGsH">
+                            <button class="btn-danger" id="btn-gm-delete" disabled data-page-node-id="HY1fYn1TPPN1mj9eBrLouV">彻底删除</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer（仅属性设置 tab 显示） -->
+                <div class="gm-modal-footer" id="gm-modal-footer" data-page-node-id="zspxErTDyw2om4jHkR0Lru">
+                    <button class="btn-cancel" id="btn-gm-cancel" data-page-node-id="ebSkDLPIqeaiGbpbQCn2ld">取消</button>
+                    <button class="btn-primary" id="btn-gm-apply" data-page-node-id="YNqkOhu7xbdxuZqGVyIFch">应用</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 音色设置模态框 -->
+        <div class="gm-modal-overlay" id="voice-modal-overlay" style="display:none" data-page-node-id="WKmBZBIXxmEXDM4yEKxVVr">
+            <div class="gm-modal" id="voice-modal" data-page-node-id="rUvhvEGkPL7NBh6OgX0AbJ">
+                <div class="gm-modal-header" data-page-node-id="KVoPuCuzBJAFELGddXaIDA">
+                    <h3 data-page-node-id="FOS1jEL5b8DFpaGsGgrrei"><span class="material-symbols-outlined" data-page-node-id="5JUYmISKFcuOnIRrO9oqRy">record_voice_over</span> 音色设置</h3>
+                    <button class="btn-icon" id="btn-close-voice" title="关闭" data-page-node-id="dIjkOTpEPd6WKKtT0bAP3a">
+                        <span class="material-symbols-outlined" data-page-node-id="6GR8knaFWKzkqGDpMJXMP4">close</span>
+                    </button>
+                </div>
+                <div class="gm-modal-body" id="voice-modal-body" data-page-node-id="dByLFdwDVASGzYUI2jCGox">
+                    <div class="voice-character-list" id="voice-character-list" data-page-node-id="ScXOACdNXi9Xd1eEUQovjl">
+                        <!-- 动态生成角色音色配置 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 更新说明模态框 -->
+        <div class="changelog-modal-overlay" id="changelog-modal-overlay" style="display:none" data-page-node-id="5bg3ykt0PWG2gZSm3SUBtb">
+            <div class="changelog-modal" id="changelog-modal" data-page-node-id="SrHyuuLr95g12pC1WvJYBT">
+                <div class="changelog-modal-header" data-page-node-id="VWRBmLA9vS96DxDAPUpHQH">
+                    <h3 data-page-node-id="9ApSkFqHzuOovwkhZklQeE"><span class="material-symbols-outlined" data-page-node-id="J8Nbjekl1M48jhCq09HMoj">history</span> 更新说明</h3>
+                    <button class="btn-icon" id="btn-close-changelog" title="关闭" data-page-node-id="EMg6Aj3pHizGpaR7JFEEXO">
+                        <span class="material-symbols-outlined" data-page-node-id="bol6rb9AC9dfJCNtEC7VLT">close</span>
+                    </button>
+                </div>
+                <div class="changelog-modal-body" id="changelog-modal-body" data-page-node-id="YtyStY7PWdfSS3CBXHGsOv">
+                    <div class="changelog-loading" data-page-node-id="gCIdtnzY7cNBz94WfevN84">加载中...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 日历弹窗 -->
+        <div class="calendar-modal-overlay" id="calendar-modal-overlay" style="display:none" data-page-node-id="dzckb6FGkqyyELO5SaQwAz">
+            <div class="calendar-modal" data-page-node-id="2GFNB3RZ3XmvZ8CIEBEbjt">
+                <div class="calendar-header" data-page-node-id="DG3fi2kj0LDwagPD1LoiNt">
+                    <button class="cal-nav-btn" id="cal-prev" title="上个月" data-page-node-id="p1bGEBuDHiFEb0XyP86V09">◀</button>
+                    <span class="cal-title" id="cal-title" data-page-node-id="bVKuh2wetPPzb9PH208KGp">2024年9月</span>
+                    <button class="cal-nav-btn" id="cal-next" title="下个月" data-page-node-id="KpmUm0m9vMZYDXGapraG7O">▶</button>
+                </div>
+                <div class="calendar-weekdays" data-page-node-id="jD7OTGJEzJsRDR6JiI3wSx">
+                    <span data-page-node-id="4RYOwFHMYwGvAt4JRL8StQ">一</span><span data-page-node-id="U3TafxjORtbyerUWWVA0hE">二</span><span data-page-node-id="fhRkpLrYOR8vGcI4voyyCq">三</span><span data-page-node-id="pEtCZu1Y3haasPZTVv1uoa">四</span><span data-page-node-id="zEj8wn2ds2bWoUWdi24BTN">五</span><span data-page-node-id="qWXNWtIrBe0jkASXQBEOVZ">六</span><span data-page-node-id="suh603pnHYVclSyocCJ8sC">日</span>
+                </div>
+                <div class="calendar-grid" id="calendar-grid" data-page-node-id="3sLyj5bSJPBov8fmzjNmfy">
+                    <!-- JS 动态生成 -->
+                </div>
+                <div class="cal-detail" id="cal-day-detail" style="display:none" data-page-node-id="rxSkJPCgPlnGFatcoZkGGh"></div>
+                <div class="calendar-footer" data-page-node-id="EoYDGWbYHvwwqHNmjtXnOz">
+                    <span class="cal-selected-label" id="cal-selected" data-page-node-id="UlIDWx6fbVPRLaaT3TbQcC">未选择日期</span>
+                    <div class="cal-footer-btns" data-page-node-id="nBbCoodnyF07sDRuNiPiNp">
+                        <button class="btn-cancel" id="cal-cancel" data-page-node-id="hiY1yGMOsklte9bmSUGbzF">取消</button>
+                        <button class="btn-primary" id="cal-confirm" data-page-node-id="tAiewvbpLmwFGcj9NAGwe4">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 通知 Toast -->
+        <div class="toast-container" id="toast-container" data-page-node-id="ZID6itXjstPu6CY4kA7jbj"></div>
+
+        <!-- 角色创建弹窗 -->
+        <div class="modal-overlay" id="character-create-modal" style="display:none;" data-page-node-id="1eJB2OIjJboObxURpE6Hge">
+            <div class="modal-content character-create-content" data-page-node-id="YrmTEXTAZojXD2jvIIZRJK">
+                <div class="modal-header" data-page-node-id="VfUwUiF65pjJGyS5fuVRp2">
+                    <h2 data-page-node-id="6TedIK1GlOXNbU0mNnV9TO">创建新角色</h2>
+                    <button class="modal-close" id="btn-close-create" data-page-node-id="sa2bRyzD7IAcDyTMXQdsnQ">&times;</button>
+                </div>
+
+                <!-- 阶段1: 表单 -->
+                <div class="create-stage" id="create-stage-form" data-page-node-id="CxvtY0jCHObQSmdabFlRwM">
+                    <div class="create-form" data-page-node-id="VJioO594s9YpNNbcpGNBVb">
+                        <div class="form-row" data-page-node-id="RARnmYqmDIIn66V9Yq4EFZ">
+                            <div class="form-group" data-page-node-id="Q6Y3Pc76UW4FcLcsLx5abw">
+                                <label data-page-node-id="hpbz8cWebzx2qFuwlMOj4B">姓名 <span class="req" data-page-node-id="H6voQq3X9DK0oTPlgnT3jN">*</span></label>
+                                <input type="text" id="cc-name" placeholder="2-4字中文名" maxlength="10" data-page-node-id="X1ZFVIMmXzuJFUDNQ7Bhmn">
+                            </div>
+                            <div class="form-group" data-page-node-id="eEANO6sUkUjy4JMvikpTAe">
+                                <label data-page-node-id="uxVgw11GT15BvfTzEsQFMe">年龄 <span class="req" data-page-node-id="EJdjaVMcLaItnDrGDyosh6">*</span></label>
+                                <input type="number" id="cc-age" value="22" min="16" max="40" data-page-node-id="ZhdFDcVLwP80Mw728wljGE">
+                            </div>
+                            <div class="form-group" data-page-node-id="fNHwGT3xo4BJZsNio9oFbC">
+                                <label data-page-node-id="6sDKuHd8Cc6GenPnVcOjer">性别 <span class="req" data-page-node-id="Yt1yHGwZnWWuVWbLvIr9j0">*</span></label>
+                                <select id="cc-gender" data-page-node-id="8lIWbMvmfxE2NQBLKFyG2Y">
+                                    <option value="female" data-page-node-id="wuClaMSZ5iK5nTBAJnEOds">女</option>
+                                    <option value="male" data-page-node-id="9vjO1hGEnDW4t1kVzxNkO7">男</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row" data-page-node-id="lnMdivYDUl7kRGQUzB1HqM">
+                            <div class="form-group" data-page-node-id="qhNNwu7rWfNGTTFwl8wUbV">
+                                <label data-page-node-id="5dtqI8GjOqtSvX3huQ1Go9">行业大类 <span class="req" data-page-node-id="zKpsO0rDD8g5u5F31uHrcP">*</span></label>
+                                <select id="cc-industry" data-page-node-id="Pj9EQc0dgguRIzS3aDsO7i"></select>
+                            </div>
+                            <div class="form-group" data-page-node-id="OoQOU82aaxf37KZ1mMT7Ri">
+                                <label data-page-node-id="SbLB589D0uOTuQQj4gPHiN">具体职业 <span class="req" data-page-node-id="sn5vGCeH19Hh1h5WBMZEUO">*</span></label>
+                                <select id="cc-profession" data-page-node-id="ExWGwUHtjICA1uEyHr3GBl"><option value="" data-page-node-id="p0qQzVctASxCNBab2bLH8J">-- 请先选行业大类 --</option></select>
+                                <input type="text" id="cc-profession-custom" placeholder="输入自定义职业" style="display:none;" data-page-node-id="JDkGVYX2DrO8MDpaI6oRvG">
+                            </div>
+                        </div>
+                        <div class="form-row" data-page-node-id="7wyGZ8P3qBcUWH2d8o8acv">
+                            <div class="form-group" data-page-node-id="yoc5BIKc1q6Y5DCnSErVPw">
+                                <label data-page-node-id="gE4UjyvjwvzcoQ59AKmWrg">所在省份 <span class="req" data-page-node-id="uyRPWv2LfFuH70cqa1SaeL">*</span></label>
+                                <select id="cc-province" data-page-node-id="0yDpm53pdK68LgDy9VKUTc"></select>
+                            </div>
+                            <div class="form-group" data-page-node-id="3wMvblmyMbbns60eNwUGqj">
+                                <label data-page-node-id="upTCmfQQDKmtNZoHb9OZn4">所在城市 <span class="req" data-page-node-id="pw2sItHgI5dkR4sI9uXJZg">*</span></label>
+                                <select id="cc-city" data-page-node-id="ppDfx4hj9uCXeZlYAQT5nw"><option value="" data-page-node-id="xFG1ZMfajLaOgFlPBzpaRJ">-- 请先选省份 --</option></select>
+                                <input type="text" id="cc-city-custom" placeholder="输入自定义城市" style="display:none;" data-page-node-id="Zitcu5tZFjXTPwJYGhbzeI">
+                            </div>
+                        </div>
+                        <div class="form-row" data-page-node-id="GXSRBIdmYHSWLzNisL8GCR">
+                            <div class="form-group" data-page-node-id="QgRrMqfjFNSvOhKdJiH0dH">
+                                <label data-page-node-id="rJTp4VGSDPZxWiion2yp0W">玩家身份 <span class="req" data-page-node-id="O2OalIorjKrJCCWGHDajQJ">*</span></label>
+                                <select id="cc-player-identity" data-page-node-id="zXll6pXgtagTMKyL2bCXA4"><option value="" data-page-node-id="iR5cJ7owP1AY0yu08vHz5Y">-- 请选择 --</option></select>
+                                <input type="text" id="cc-player-identity-custom" placeholder="输入自定义身份" style="display:none;" data-page-node-id="iyWInvdXjnNhKspgNayGNe">
+                            </div>
+                            <div class="form-group" data-page-node-id="4V5zydtrw5t2vv9c4QdAp7">
+                                <label data-page-node-id="6zX9J2QzeGvCSgGoaXVEeD">玩家昵称 <span class="req" data-page-node-id="UcC0v4uKBPFqzZPJeBnCGs">*</span></label>
+                                <input type="text" id="cc-player-nickname" placeholder="如：李一帆" data-page-node-id="A4PzhwvLxJ96MdOTXbRPcY">
+                            </div>
+                        </div>
+                        <div class="form-group" data-page-node-id="S9tyYw8udrQfEvOFp32Hgv">
+                            <label data-page-node-id="e4DNN8N8ZUgCdUqKZhMsuJ">性格预设模版 <span class="hint-inline" data-page-node-id="6hzXzZ9UPDDVYCOynMenQn">（核心底色 · 正向 · 中性 · 短板）</span></label>
+                            <select id="cc-trait-template" data-page-node-id="2AI0SzX7KjHFvBzo554bjj">
+                                <option value="" data-page-node-id="86OMut3T9DELJ5x0vEXnFV">-- 不使用预设（自由描述）--</option>
+                            </select>
+                            <div id="cc-trait-preview" class="trait-preview" style="display:none;" data-page-node-id="GIlpw8pczwMoorAI8HzDKL"></div>
+                            <div id="cc-trait-custom" class="trait-custom" style="display:none;" data-page-node-id="26dBFUx6UOjL1Nw645APEi">
+                                <div class="form-row" data-page-node-id="rKFDEvqZsDiuRfHLt46JDE">
+                                    <div class="form-group" data-page-node-id="a2KgSpCrAoKRUSRAp9jKkw">
+                                        <label data-page-node-id="cEe0II2y9TluVUk84oHRC7">核心底色 <span class="req" data-page-node-id="vfGwO6CLm8MK2s9QAFDcjC">*</span></label>
+                                        <input type="text" id="cc-core" placeholder="如：温柔包容" data-page-node-id="1xn8AepqIf3bjsXKG30YMd">
+                                    </div>
+                                    <div class="form-group" data-page-node-id="YjFElR77x3383hazMxsHbr">
+                                        <label data-page-node-id="1L4chzjGoNKna2Dp8fYovp">正向 <span class="req" data-page-node-id="8NWwNgfqL5s4HX1zwMSSmF">*</span></label>
+                                        <input type="text" id="cc-positive" placeholder="如：共情力强、耐心" data-page-node-id="bhB3UIuAmzQc7n4ZZ5jO1s">
+                                    </div>
+                                </div>
+                                <div class="form-row" data-page-node-id="xPnnGIMMFclIHR87N9pOfg">
+                                    <div class="form-group" data-page-node-id="HvkAHHdsx4xTDcU0UasxpQ">
+                                        <label data-page-node-id="smp015T2e9GS8oEgrlSPeo">中性</label>
+                                        <input type="text" id="cc-neutral" placeholder="如：慢热、喜欢稳定" data-page-node-id="nEu7qyBPQWNLhvTjuTsDyo">
+                                    </div>
+                                    <div class="form-group" data-page-node-id="v2JYfCSvQuJWkPLAqav0id">
+                                        <label data-page-node-id="XxxPsNVAhUdkcICFQqI03V">短板</label>
+                                        <input type="text" id="cc-weak" placeholder="如：容易心软、边界感弱" data-page-node-id="HHjKMGRsERQc95nmloXySj">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" data-page-node-id="DdQhc1CA2ARuX7oi6OF9qo">
+                            <label data-page-node-id="POFCGXQ8ErAGwvjfxENVRX">角色描述（可选）</label>
+                            <textarea id="cc-description" rows="3" placeholder="描述你想要的角色风格、性格特点等，帮助 AI 更好地理解你的需求..."></textarea>
+                        </div>
+                        <div class="form-group" data-page-node-id="ANDSPqLUDXksEuMUg8goQF">
+                            <label data-page-node-id="QYZHVmqjWdZihIFfEJcWXv">世界观 / 任务提示词（可选）</label>
+                            <textarea id="cc-world-prompt" rows="3" placeholder="可直接写下该角色的世界观或任务提示词。留空则由系统根据职业/城市/性格自动生成。"></textarea>
+                        </div>
+                        <div class="form-actions" data-page-node-id="dkdK9hERgXzOAMXNKsfesZ">
+                            <button class="btn-secondary" id="btn-create-cancel" data-page-node-id="PN6aWggG7PH4rEnB4z8XAq">取消</button>
+                            <button class="btn-primary" id="btn-create-generate" data-page-node-id="lKGQWCK1DLuVsWMCjJV1qz">生成角色</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 阶段2: 生成中 -->
+                <div class="create-stage" id="create-stage-loading" style="display:none;" data-page-node-id="MgTOShIgI7frbZv8ruA4fw">
+                    <div class="create-loading" data-page-node-id="HxpjKm1JS8Mwq6ebsWhRIe">
+                        <div class="loading-spinner" data-page-node-id="H797e1qcfTtEaaSyOG5Bee"></div>
+                        <p id="create-loading-text" data-page-node-id="Vx2uknn22lfCJe1wp3ugPO">正在生成角色画像...</p>
+                    </div>
+                </div>
+
+                <!-- 阶段3: 预览编辑 -->
+                <div class="create-stage" id="create-stage-preview" style="display:none;" data-page-node-id="pygvgxx3ZWwKluCc32FZfN">
+                    <div class="create-preview" id="create-preview-content" data-page-node-id="9u9BG201HozwhIZJ7neRYW"></div>
+                    <div class="form-actions preview-actions" data-page-node-id="gdyc7MLcdZpn2XB3f8W5fC">
+                        <button class="btn-secondary" id="btn-preview-back" data-page-node-id="0YdEXmw0GLdSmPT5fhKd3Z">返回修改</button>
+                        <button class="btn-secondary" id="btn-preview-regenerate-all" data-page-node-id="jbDchMuj80gHeYWyGkY2Ce">全部重新生成</button>
+                        <button class="btn-primary" id="btn-preview-confirm" data-page-node-id="G5EWUn3o4nTRIHykF7vAfT">确认创建</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 移动端底部 Tab 栏 -->
+        <nav class="mobile-tab-bar" data-page-node-id="iqsslmyWapsW2NfpPJQUF8">
+            <button class="tab-btn" data-panel="left-panel" data-page-node-id="kf5EVcf7ZmC3H6uO5G63gw">
+                <span class="material-symbols-outlined" data-page-node-id="lFo9X6fTsaqRWWGGk3epHa">account_circle</span>
+                <span data-page-node-id="kv3n9XxJgdcTnTREdh9Uqo">角色</span>
+            </button>
+            <button class="tab-btn" data-panel="center-panel" data-page-node-id="RWpt8Yym7AAwQykN3qsZYT">
+                <span class="material-symbols-outlined" data-page-node-id="YIMCwEcagR0At4G3pJJC7b">monitor_heart</span>
+                <span data-page-node-id="DNYNL2EpsZe1jnQuWgKTg4">状态</span>
+            </button>
+            <button class="tab-btn" data-panel="right-panel" data-page-node-id="aAEk5iNK8t7tZGl3gOZCpB">
+                <span class="material-symbols-outlined" data-page-node-id="HgxfCaNMBopeHGBsEE2IWw">chat</span>
+                <span data-page-node-id="63tgEvZUqU5ER46WCPmKfZ">对话</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="/static/js/panels/status-panel.js?v=20260806a"></script>
+    <script src="/static/js/panels/relationship-panel.js"></script>
+    <script src="/static/js/panels/photo-panel.js?v=20260814d"></script>
+    <script src="/static/js/panels/dialogue-panel.js?v=20260904b"></script>
+    <script src="/static/js/panels/map-panel.js"></script>
+    <script src="/static/js/panels/portrait-presets.js?v=20260812c"></script>
+    <script src="/static/js/panels/portrait-panel.js?v=20260812e"></script>
+    <script src="/static/js/panels/memory-panel.js"></script>
+    <script src="/static/js/panels/event-log.js?v=20260731b"></script>
+    <script src="/static/js/panels/goal-tracker.js"></script>
+    <script src="/static/js/panels/config-panel.js?v=20260913a"></script>
+    <script src="/static/js/panels/news-panel.js?v=20260802a"></script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <script src="/static/js/panels/prompt-panel.js?v=20260809a"></script>
+    <script src="/static/js/panels/voice-panel.js?v=20260725b"></script>
+    <script src="/static/js/changelog.js"></script>
+    <script src="/static/js/gm-panel.js?v=20260806a"></script>
+    <script src="/static/js/panels/character-profile-panel.js?v=20260904a"></script>
+    <script src="/static/js/panels/choice-panel.js?v=20260731a"></script>
+    <script src="/static/js/calendar-panel.js"></script>
+    <script src="/static/js/character-create.js?v=20260811a"></script>
+    <script src="/static/js/app.js?v=20260915a"></script>
+
+    <!-- 角色切换弹窗 -->
+    <div class="char-switch-overlay" id="char-switch-overlay" style="display:none" data-page-node-id="PrQHn6V9vOT1hLTRlWUubT">
+        <div class="char-switch-modal" data-page-node-id="IKqAVIdT3isELKV3cnJZgJ">
+            <h3 data-page-node-id="Uu0vPY1J0TqP6qulWPQv1M">切换角色</h3>
+            <div class="char-list" id="char-switch-list" data-page-node-id="I10ZIV85Dn36Pg5Td3IDNz"></div>
+            <button class="btn-cancel" id="btn-char-switch-cancel" data-page-node-id="5Xmo7Y0M1DGaZ0YDthicDf">取消</button>
+        </div>
+    </div>
+
+    <!-- 移动端聊天全屏视图（独立于三栏，body 级别避免被 main-container 隐藏） -->
+    <div class="mobile-chat-overlay" id="mobile-chat-overlay" data-page-node-id="v29txj6CdgqdxNOzvglEKq">
+        <div class="mobile-chat-nav" data-page-node-id="zBZmMmxJutasRp8qkRhGJd">
+            <button class="mobile-chat-back" id="mobile-chat-back" title="返回" data-page-node-id="p7Lj2q38vNkSvrDQAyUODu">
+                <span class="material-symbols-outlined" data-page-node-id="v9xYve5tEgpydARlSv3t2u">arrow_back</span>
+            </button>
+            <div class="mobile-chat-title" data-page-node-id="FUNB16NgnEutlHLZpal22W">
+                <span class="mobile-chat-name" id="mobile-chat-name" data-page-node-id="1Z6BDRlyQINb7WUex9KjCE">主角</span>
+                <span class="tone-tag" id="mobile-chat-tone" style="display:none" data-page-node-id="9KvaBOj1mMOHySax7EW1SO"></span>
+                <span class="tier-tag" id="mobile-chat-tier" data-page-node-id="NtpW5foYBoDC2tzINCCfhY">陌生人</span>
+            </div>
+            <button class="btn-reset-chat mobile-chat-reset-btn" id="mobile-chat-reset" title="重新聊天" data-page-node-id="poLlzZb4mFd2jSHLT01XSV">
+                <span class="material-symbols-outlined" data-page-node-id="gT4MLGLCShpOqS5n23Vx3S">restart_alt</span>
+            </button>
+        </div>
+        <!-- 小喇叭通知条（移动端） -->
+        <div class="announce-bar mobile-announce-bar" id="mobile-announce-bar" data-page-node-id="CizxGnXhrhivQ8620kJERV">
+            <span class="announce-icon material-symbols-outlined" data-page-node-id="nw9BhdMwpm6lin8NY56w5h">campaign</span>
+            <div class="announce-viewport" id="mobile-announce-viewport" data-page-node-id="FEwkg6OxEWr0myiuABF0Pl">
+                <div class="announce-track" id="mobile-announce-track" data-page-node-id="2grN5L7VMEg20H6dCwJEYO">
+                    <div class="announce-empty" data-page-node-id="7pBZ6mHxBe779e7H5P1PKo">暂无动态通知</div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-chat-messages" id="mobile-chat-messages" data-page-node-id="I9r7CzerBI02RizMRInmb0">
+            <div class="msg system-msg" data-page-node-id="4ObFX8QPjoBkJDe6sGAzwy">游戏已就绪，开始对话吧！</div>
+        </div>
+        <div class="mobile-chat-bottom" data-page-node-id="StOlZStoZlkvHYsu0LD8EF">
+        <div class="mobile-chat-hints" id="mobile-chat-hints" data-page-node-id="DLGCEwpLxCPWDeHwCdQHuc">
+            <span id="mobile-hint-buttons" data-page-node-id="GTfXkWgiPIJYzHEbRz7lYa"></span>
+        </div>
+        <div class="mobile-chat-input-area" data-page-node-id="p4gEiqnCbLVaOBTcmQ78Hb">
+            <button class="mobile-chat-plus" id="mobile-chat-plus" title="更多" type="button" data-page-node-id="3rkHthIUDBPKRTVWGkB51y">
+                <span class="material-symbols-outlined" data-page-node-id="BewviDBxGMWYZgxAFqPjNa">add_circle</span>
+            </button>
+            <textarea id="mobile-chat-input" placeholder="说点什么..." rows="1" autocomplete="off"></textarea>
+            <button id="mobile-btn-send" class="btn-send" data-page-node-id="DEYInmemsw6E7zEqJWC5yD">
+                <span class="material-symbols-outlined" data-page-node-id="McBwht2kBDGRnF51YsM8b7">send</span>
+            </button>
+        </div>
+        <div class="mobile-chat-menu" id="mobile-chat-menu" data-page-node-id="s7RphChM4TDEKywFeo3xu4">
+            <div class="mobile-chat-menu-title" data-page-node-id="SNO1Jzyh2SBKKicPBHvrA1">更多</div>
+            <button class="mobile-chat-menu-item" id="mobile-chat-thinking-toggle" type="button" aria-pressed="false" data-page-node-id="jY0KBZivG8LU0lB6eIyULE">
+                <span class="material-symbols-outlined" id="mobile-chat-thinking-icon" data-page-node-id="YTNJufkqY79bDo4ZAXhzGw">psychology</span>
+                <span id="mobile-chat-thinking-label" data-page-node-id="6g37zCQTdqaIozLqG62LTh">思考：关</span>
+            </button>
+            <button class="mobile-chat-menu-item" id="mobile-open-tl" type="button" data-page-node-id="BYQsBEFpni4yG1umxNfUR3">
+                <span class="material-symbols-outlined" data-page-node-id="Y0nMxWvYNqHPBLjtsPyCU3">schedule</span> 设置游戏时间 / 地点
+            </button>
+            <button class="mobile-chat-menu-item" id="mobile-open-album" type="button" data-page-node-id="CXxOv83Ee4yKTAuYzm1XK8">
+                <span class="material-symbols-outlined" data-page-node-id="DHY0DZruxle0o7zhAfKsjE">photo_library</span> 相册
+            </button>
+            <div class="mobile-chat-menu-title" data-page-node-id="YAB2AYo5lCF3QaJhqNapEe">拍照</div>
+            <div class="mobile-chat-menu-grid" id="mobile-photo-scenes" data-page-node-id="fRASNDNTQfkDbocMRDPbD9"></div>
+            <div class="mobile-chat-menu-title" data-page-node-id="5ne1Vt2fZGsNYN73DfKzYA">关系快捷</div>
+            <div class="mobile-chat-menu-grid" data-page-node-id="BOlgxxY7ySH22866avvx0E">
+                <button class="quick-rel-btn" data-relation="trust" data-page-node-id="caqu1OyMjg1tVCkL14sYf9">
+                    <span class="rel-icon" data-page-node-id="aHBa6J144jW3MHpfDZ83vx">🤝</span><span class="rel-label" data-page-node-id="MuNgrktu8Zs5B7LoCL09aX">增加信任</span>
+                </button>
+                <button class="quick-rel-btn" data-relation="liking" data-page-node-id="5fvgKziwd3LWBn6xfdURED">
+                    <span class="rel-icon" data-page-node-id="77sSGxAQQeOgLEIud5HlE6">😊</span><span class="rel-label" data-page-node-id="JB6Drq3mKS8iK87smnBLIz">增加好感</span>
+                </button>
+                <button class="quick-rel-btn" data-relation="respect" data-page-node-id="9V0oBq90SOR3IqRAvxc95h">
+                    <span class="rel-icon" data-page-node-id="vBHyhzKDn9zp8802QNoqi6">👏</span><span class="rel-label" data-page-node-id="Z2oVxaxS8GOLXnUTfICmDP">增加尊重</span>
+                </button>
+                <button class="quick-rel-btn" data-relation="intimacy" data-page-node-id="3OGf0Rszte7ryMZVja8pyK">
+                    <span class="rel-icon" data-page-node-id="yxUAycoMDZvA9KAeyq95Kv">💘</span><span class="rel-label" data-page-node-id="NdTXrJell7ggyREwCKEJDD">增加亲密</span>
+                </button>
+            </div>
+        </div>
+        </div>
+        <div class="recommend-panel mobile-recommend-panel" id="mobile-recommend-panel" data-page-node-id="tB6dbeKZuoKGOLFAEWj5pW">
+            <button class="recommend-close" id="mobile-recommend-close" data-page-node-id="xxTeGNpHTvXBfyjaTRagjH">&times;</button>
+            <div class="panel-title" id="mobile-recommend-title" data-page-node-id="32D7cx0aCxQnY9AcYgDZqt">LLM 正在分析角色状态...</div>
+            <div class="recommend-list" id="mobile-recommend-list" data-page-node-id="BMtt9bfYWcXYHeNc5kubte"></div>
+        </div>
+        <div class="memory-hint-layer" id="mobile-memory-hint-layer" data-page-node-id="NMI9QTLldn0OiMFCpuNC0f"></div>
+    </div>
+
+    <!-- 时间 / 地点选择器（默认折叠，点击输入栏 🕐/📍 展开；移动端为底部抽屉） -->
+    <div class="tl-picker-backdrop" id="tl-picker-backdrop" hidden data-page-node-id="VC81tqAyHtbQQCbcGwxGkp"></div>
+    <div class="tl-picker" id="tl-picker" hidden role="dialog" aria-label="设置时间或地点" data-page-node-id="NGDYYVIqkuow05D1qGyMc0">
+        <div class="tl-picker-header" data-page-node-id="TH5ZpbfNGAhZ2S64PsfFrV">
+            <span id="tl-picker-title" data-page-node-id="xEuWIR1PMb8yufi1NAChVG">设置游戏时间 / 地点</span>
+            <button class="tl-picker-close" id="tl-picker-close" title="关闭" type="button" data-page-node-id="O77gKsBYT5g97OWPcvQCFq">&times;</button>
+        </div>
+        <div class="tl-picker-body" data-page-node-id="az0Y01M3SOx4HnTfLUDeDn">
+            <div class="tl-section" id="tl-time-section" data-page-node-id="JXbM9dOpaXPnKXpDjaGOzA">
+                <div class="tl-section-title" data-page-node-id="WMpwAYw5JyYOxp3ZketAfl"><span class="material-symbols-outlined" data-page-node-id="QKFE5wbouUzpMytiVFluaa">schedule</span> 游戏时间</div>
+                <!-- 快捷跳转 + 场景入口 -->
+                <div class="tl-row tl-quick-chips" data-page-node-id="tHBEJEBcNimrxNBLPU8DIU">
+                    <button class="tl-chip" data-day="+1" type="button" data-page-node-id="ZwWxTIAw4zBOmRD1Q0LrCp">+1天</button>
+                    <button class="tl-chip" data-day="+3" type="button" data-page-node-id="XN0KHOloKFCE9szIatkr7b">+3天</button>
+                    <button class="tl-chip" data-day="now" type="button" data-page-node-id="JTHBuIADCHqzza0aOs63sf">现在</button>
+                    <button class="tl-chip tl-scene-toggle" data-scene="natural" type="button" data-page-node-id="E6Q7DHAYcA8DBk8ETb1G3r">🌤 天色</button>
+                    <button class="tl-chip tl-scene-toggle" data-scene="routine" type="button" data-page-node-id="jxRphT9SzJytQJPQLOZxzG">🛌 作息</button>
+                    <button class="tl-chip tl-scene-toggle" data-scene="short" type="button" data-page-node-id="vS1C5H2VY2zjdrTELPf2y4">⏱ 微时</button>
+                </div>
+                <!-- 场景面板（点天色/作息/微时后展开） -->
+                <div class="tl-scene-panel" id="tl-scene-panel" hidden data-page-node-id="ScdGfGJT8qqmnyziqLzpgw">
+                    <div class="tl-scene-list" id="tl-scene-list" data-page-node-id="0linayBMICUGXUdqPiHJhN"></div>
+                </div>
+                <!-- 精确设置（折叠区） -->
+                <details class="tl-details" id="tl-precise-details" data-page-node-id="I9WpTjgIprmRNUmJP1TKHL">
+                    <summary data-page-node-id="1kQtGFILD6jMwDaQfqYb5f">精确设置</summary>
+                    <div class="tl-row tl-precise-inputs" data-page-node-id="UzNJFxO55iqeCbt9xGHRsP">
+                        第 <input type="number" id="tl-precise-day" min="0" value="0" style="width:60px" data-page-node-id="skhSS8eTxHEBTpLBxHKlgF"> 天&nbsp;
+                        <input type="number" id="tl-precise-hour" min="0" max="23" value="8" style="width:45px" data-page-node-id="PvGBaRAqN5J83aCwP7Ik7r"> :
+                        <input type="number" id="tl-precise-minute" min="0" max="59" value="0" style="width:45px" data-page-node-id="8Nrkz2qTWJGkwJS8TG6jva"> :
+                        <input type="number" id="tl-precise-second" min="0" max="59" value="0" style="width:45px" data-page-node-id="ASucSXtNlZbdIGDruV4Is4">
+                        <button class="tl-chip" id="tl-precise-apply" type="button" data-page-node-id="MhY2Qg9hISXROr1CmpidvH">确定</button>
+                    </div>
+                </details>
+                <div class="tl-preview" id="tl-time-preview" data-page-node-id="RN3kTgW9BhlqNIxw4bs47F">未修改（将保持当前游戏时间）</div>
+            </div>
+            <div class="tl-section" id="tl-loc-section" data-page-node-id="EkfSbBpeBeAb7qevmp3CiF">
+                <div class="tl-section-title" data-page-node-id="115SaqioDIxpDMNgyekKJd"><span class="material-symbols-outlined" data-page-node-id="WEfOFYToOQBMK79IPjWsg6">location_on</span> 地点</div>
+                <div class="tl-row tl-loc-row" data-page-node-id="SSKQy04BOMPOiDl9WLaAJx">
+                    <input type="text" id="tl-loc-input" list="tl-venue-list" placeholder="选择或输入新地点，如：巴黎圣母院 / 杭埠" autocomplete="off" data-page-node-id="MC82M7yLyYtH0JwF4TkLYn">
+                    <datalist id="tl-venue-list" data-page-node-id="uhrdDFLhLHwmUL00jcHFDO"></datalist>
+                    <button class="tl-chip" id="tl-loc-add" type="button" data-page-node-id="oDhRNOGd3RHrO4G73HhFug">添加</button>
+                </div>
+                <div class="tl-preview" id="tl-loc-preview" data-page-node-id="9Q4Co6VRaazB1QTbh5I3Li">未指定（保持当前地点）</div>
+            </div>
+        </div>
+        <div class="tl-picker-footer" data-page-node-id="mqvxx0AR4qDZCvfYBoOPPO">
+            <button class="tl-chip" id="tl-clear" type="button" data-page-node-id="sEsrNC28FNCTzK3laGFUMw">清除选择</button>
+            <button class="tl-btn-primary" id="tl-apply" type="button" data-page-node-id="0Dphd9nf6ApupedpNBNu1V">完成</button>
+        </div>
+    </div>
+
+</body>
+</html>

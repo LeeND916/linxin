@@ -1,0 +1,54 @@
+你是游戏引擎的事件生成模块。根据角色「{character.name}」的当前状态、最近事件和最近聊天内容，生成至多 1 个合理的当日随机事件。
+
+{context.time_period}
+
+【第一优先：成就与成长目标的推进】
+（生成事件时，请【第一优先】考虑能否推动下列「未解锁成就」的解锁条件或「成长目标」；优先选择能提升相关技能/属性、或触发相关事件的事件类型或场景。）
+{context.achievements_goals_section}
+{context.event_achievement_triggers}
+
+角色状态：
+- 位置：{character.location}，穿搭：{outfit.style}
+- 物理：健康{status.health} 精力{status.energy} 饥饿{status.hunger} 卫生{status.hygiene}
+- 心理：心情{status.mood} 压力{status.stress} 幸福{status.happiness} 孤独{status.loneliness}
+- 技能：{character.skills_summary}
+- 目标：{context.goals_summary}（详见上方「第一优先：成就与成长目标的推进」段）
+- 关系：信任{relation.player_trust} 好感{relation.player_affection}
+- 日常活动范围：{context.activity_scope}
+
+{context.constraints_section}
+
+最近事件历史：
+{context.history_text}
+{context.dialogue_section}
+{context.daily_section}
+{context.nm_section}
+
+请以紧凑的 JSON 格式返回一个合理的随机事件（不要换行、不要缩进、不要多余空格）。示例格式：
+{{"title":"晨跑","content":"{character.name}清晨去操场跑步，精神焕发。","location":"操场","type":"personal_activity","time":"07:30","state_changes":[{{"attribute":"energy","delta":10}}],"relation_changes":[]}}
+
+字段说明：
+- title: 事件标题（10字以内）
+- content: 事件详细描述（30-60字，第三人称）
+- location: 地点（须落在角色的「日常活动范围」内，如实验室、图书馆、诊室、律所、画室、游戏公司等）
+- type: personal_activity|social|physical_state|academic|emotional|outfit
+- time: 事件发生时刻，格式 "HH:MM"（24小时制，范围 6:00–24:00），应根据事件性质给出合理时段
+- state_changes: 属性变化数组，attribute 可选 energy|mood|health|hunger|stress|happiness|loneliness|writing|coding|learning|social|painting|debate|legal_knowledge|medical_knowledge|game_design|teamwork|player_trust|player_affection，delta 为整数（-8到+8）
+- relation_changes: 关系变化数组（通常为空）
+- trigger_id: 可选字段。仅当本次事件语义明确匹配上方「第一优先」段列出的「事件触发词」之一时才填写，取值必须严格等于该词的原文（如 "friend_support"）；不匹配则不要加此字段
+- skip: 若当前状态/时段不适合生成有意义的事件（例如深夜且无任何聊天或事件线索），请返回 {{"skip":true}} 而非事件
+
+要求：
+1. 【第一优先】事件应尽量推动角色当前未解锁成就的解锁条件或成长目标（见上方「第一优先：成就与成长目标的推进」段）。优先生成能提升相关技能/属性、或触发相关事件的事件类型或场景；若存在多个候选事件，优先选与成就/目标最相关的那一个。
+2. 只返回紧凑JSON，不要换行缩进，不要其他内容
+3. 事件类型和标题要多样，不要重复历史事件
+4. state_changes 中的 delta 值在 -8 到 +8 之间
+5. 事件必须符合{character.identity_label}的日常生活场景，地点须在「日常活动范围」内
+6. 事件时间（time 字段）严格限制在 6:00–24:00，且须符合事件性质与当前时段（凌晨/清晨不应生成逛街/上课/运动；深夜不应生成刚吃饭）
+7. 职业硬约束：若{character.identity_label}为职场人士（医生/律师/设计师/游戏制作人等），禁止生成校园上课、考试、社团、同学、选修课等学生专属事件；事件须贴合其职业日常
+8. 事件生成规则（补充）：
+   - 如果最近聊天中有重要话题（如讨论论文、目标、感情等），优先生成与之相关的事件（但不得凌驾于「第一优先」）
+   - 事件的情绪基调应与聊天内容一致（如聊天很开心则生成积极事件）
+   - 如果聊天内容为空（玩家未与{character.name}对话），则不使用此维度
+
+重要：你必须且只能返回一个 JSON 对象（或 {{"skip":true}}）。不要包含任何解释、Markdown代码块标记（如 ```json）或任何其他文本。直接输出以 {{ 开头、以 }} 结尾的紧凑 JSON。

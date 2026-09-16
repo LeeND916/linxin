@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>人物肖像实验室 · UI 设计稿</title>
+<style>
+:root{
+  --bg:#f5f6f8; --panel:#ffffff; --line:#e3e6ec; --line2:#eef0f4;
+  --ink:#1a1d24; --ink2:#5b6472; --ink3:#8b95a5;
+  --acc:#3b6ef5; --acc-bg:#eef3ff;
+  --var:#f5871f; --var-bg:#fff5e9;
+  --ok:#12a05c; --ok-bg:#e8f7ef;
+  --warn:#d99000; --warn-bg:#fff8e4;
+  --err:#d8412f; --err-bg:#fdeceb;
+  --shared:#0e8fb0; --shared-bg:#e6f6fa;
+  --r:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font:13px/1.6 "PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1420px;margin:0 auto;padding:0 20px 60px}
+
+/* ============ 顶栏 ============ */
+.topbar{background:var(--panel);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50}
+.topbar-in{max-width:1420px;margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;gap:26px;height:54px}
+.logo{font-size:15px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--acc)}
+.logo small{font-weight:400;color:var(--ink3);font-size:11px;letter-spacing:0}
+.navs{display:flex;gap:4px;margin-left:8px}
+.nav{padding:6px 14px;border-radius:7px;cursor:pointer;color:var(--ink2);
+  font-size:13px;transition:.15s;border:1px solid transparent}
+.nav:hover{background:var(--bg)}
+.nav.on{background:var(--acc-bg);color:var(--acc);font-weight:600;border-color:#d5e2ff}
+.spacer{flex:1}
+.status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink2);
+  background:var(--ok-bg);padding:5px 11px;border-radius:20px}
+.status .pulse{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+
+/* ============ 通用 ============ */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-top:14px}
+.ph{padding:13px 16px;border-bottom:1px solid var(--line2);display:flex;align-items:center;gap:10px}
+.step{width:21px;height:21px;border-radius:50%;background:var(--acc);color:#fff;
+  font-size:11px;font-weight:700;display:grid;place-items:center;flex:0 0 auto}
+.ph h3{font-size:13.5px;font-weight:650}
+.ph .sub{font-size:11.5px;color:var(--ink3);font-weight:400}
+.pb{padding:15px 16px}
+.tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600;line-height:1.7}
+.t-green{background:var(--ok-bg);color:var(--ok)}
+.t-blue{background:var(--shared-bg);color:var(--shared)}
+.t-yellow{background:var(--warn-bg);color:var(--warn)}
+.t-orange{background:var(--var-bg);color:var(--var)}
+.t-gray{background:#f0f2f5;color:var(--ink2)}
+.t-red{background:var(--err-bg);color:var(--err)}
+.mono{font-family:"SF Mono",Consolas,Monaco,monospace}
+
+/* ============ Step1 女主 ============ */
+.chars{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:flex;align-items:center;gap:9px;padding:7px 13px 7px 8px;border:1.5px solid var(--line);
+  border-radius:30px;cursor:pointer;background:#fff;transition:.15s;user-select:none}
+.chip:hover{border-color:#c3ccdb}
+.chip.on{border-color:var(--acc);background:var(--acc-bg)}
+.av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  font-size:11px;color:#fff;font-weight:600;flex:0 0 auto}
+.chip .nm{font-size:13px;font-weight:600}
+.chip .sd{font-size:10.5px;color:var(--ink3)}
+.chip.on .sd{color:var(--acc)}
+.selall{margin-left:6px;padding:7px 14px;border:1.5px dashed #c3ccdb;border-radius:30px;
+  background:transparent;cursor:pointer;color:var(--ink2);font-size:12.5px;font-family:inherit}
+.selall:hover{border-color:var(--acc);color:var(--acc)}
+.seednote{margin-top:12px;padding:9px 12px;background:var(--acc-bg);border-radius:7px;
+  font-size:12px;color:#2c4fa8;display:flex;gap:8px;align-items:flex-start}
+
+/* ---- 扩展性：角色筛选工具条 ---- */
+.cbar{display:flex;align-items:center;gap:8px;margin-bottom:11px;flex-wrap:wrap}
+.cbar input[type=text]{padding:6px 11px;border:1.5px solid var(--line);border-radius:7px;
+  font:12.5px inherit;font-family:inherit;width:150px;outline:none}
+.cbar input[type=text]:focus{border-color:var(--acc)}
+.fchip{padding:5px 11px;border:1.5px solid var(--line);border-radius:30px;cursor:pointer;
+  font-size:12px;color:var(--ink2);background:#fff;user-select:none}
+.fchip.on{border-color:var(--acc);background:var(--acc-bg);color:var(--acc);font-weight:600}
+.cbar .cnt{margin-left:auto;font-size:12px;color:var(--ink3)}
+.chip.blk{opacity:.55;border-style:dashed;cursor:not-allowed}
+.chip.blk:hover{border-color:var(--err)}
+.chip .tagn{font-size:10px;padding:1px 6px;border-radius:20px;background:var(--err-bg);
+  color:var(--err);font-weight:600;margin-left:4px}
+.chip .tagd{font-size:10px;padding:1px 6px;border-radius:20px;background:var(--warn-bg);
+  color:var(--warn);font-weight:600;margin-left:4px}
+
+/* ---- 扩展性：新角色提醒 ---- */
+.newbar{display:flex;align-items:center;gap:9px;padding:7px 13px;border-radius:30px;
+  background:var(--err-bg);color:var(--err);font-size:12.5px;font-weight:600;
+  cursor:pointer;border:1.5px solid #f3bdb6}
+.newbar:hover{background:#fbdcd8}
+
+/* ---- 扩展性：接入向导 ---- */
+.mask{display:none;position:absolute;inset:0;background:rgba(20,24,32,.42);z-index:80;
+  padding:60px 20px;overflow:auto}
+.mask.on{display:block}
+.dlg{max-width:720px;margin:0 auto;background:var(--panel);border-radius:14px;overflow:hidden}
+.dlgh{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.dlgh h3{font-size:15px}
+.dlgh .x{margin-left:auto;cursor:pointer;color:var(--ink3);font-size:18px;line-height:1}
+.dlgb{padding:18px 20px}
+.gate{display:flex;gap:12px;padding:12px 14px;border-radius:9px;margin-bottom:9px;
+  border:1px solid var(--line);align-items:flex-start}
+.gate.bad{background:var(--err-bg);border-color:#f3bdb6}
+.gate.warn{background:var(--warn-bg);border-color:#f0dda2}
+.gate.ok{background:var(--ok-bg);border-color:#b7e5cd}
+.gate .gi{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  font-size:11px;font-weight:700;color:#fff;flex:0 0 auto;margin-top:1px}
+.gate.bad .gi{background:var(--err)} .gate.warn .gi{background:var(--warn)}
+.gate.ok .gi{background:var(--ok)}
+.gate .gt{font-size:13px;font-weight:600;margin-bottom:3px}
+.gate .gd{font-size:12px;color:var(--ink2);line-height:1.55}
+.gate .fix{margin-top:7px;padding:4px 11px;font-size:11.5px;border-radius:6px;cursor:pointer;
+  border:1px solid currentColor;background:#fff;font-family:inherit}
+.dlgf{padding:14px 20px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.dlgf .note{font-size:11.5px;color:var(--ink3)}
+.btnp{margin-left:auto;padding:8px 18px;border-radius:8px;border:none;background:var(--acc);
+  color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.btnp:disabled{background:#c3ccdb;cursor:not-allowed}
+
+/* ============ Step2 维度 ============ */
+.dims{display:grid;grid-template-columns:repeat(8,1fr);gap:9px}
+.dim{border:1.5px solid var(--line);border-radius:9px;padding:11px 10px;cursor:pointer;
+  background:#fff;transition:.15s;position:relative;text-align:center}
+.dim:hover{border-color:#c3ccdb;transform:translateY(-1px)}
+.dim.on{border-color:var(--var);background:var(--var-bg);box-shadow:0 2px 8px rgba(245,135,31,.12)}
+.dim .ic{font-size:19px;line-height:1;margin-bottom:6px}
+.dim .dn{font-size:13px;font-weight:650;margin-bottom:3px}
+.dim .dc{font-size:10.5px;color:var(--ink3)}
+.dim.on .dc{color:var(--var);font-weight:600}
+.dim .badge{position:absolute;top:-6px;right:-5px;background:var(--var);color:#fff;
+  font-size:10px;font-weight:700;padding:1px 6px;border-radius:9px;display:none}
+.dim.on .badge{display:block}
+.dim.lack::after{content:"";position:absolute;top:7px;left:8px;width:6px;height:6px;
+  border-radius:50%;background:var(--warn)}
+
+/* 预算条 */
+.budget{margin-top:13px;display:flex;gap:9px;align-items:stretch}
+.bcard{flex:1;border:1px solid var(--line);border-radius:8px;padding:10px 13px;background:#fbfcfd}
+.bcard .bl{font-size:11px;color:var(--ink3);margin-bottom:3px}
+.bcard .bv{font-size:19px;font-weight:700;font-family:"SF Mono",Consolas,monospace}
+.bcard.hl{background:var(--var-bg);border-color:#f7d3aa}
+.bcard.hl .bv{color:var(--var)}
+.bcard.danger{background:var(--err-bg);border-color:#f5c4bf}
+.bcard.danger .bv{color:var(--err)}
+
+/* ============ Step3 候选 ============ */
+.subtabs{display:flex;gap:2px;border-bottom:1px solid var(--line2);padding:0 16px;background:#fbfcfd}
+.subtab{padding:9px 15px;font-size:12.5px;cursor:pointer;color:var(--ink2);
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:.12s}
+.subtab:hover{color:var(--ink)}
+.subtab.on{color:var(--var);border-bottom-color:var(--var);font-weight:650}
+.subtab .cnt{font-size:10.5px;color:var(--ink3);margin-left:4px}
+.cands{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cand{display:flex;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;
+  cursor:pointer;background:#fff;transition:.12s;align-items:flex-start}
+.cand:hover{border-color:#c3ccdb;background:#fbfcfd}
+.cand.on{border-color:var(--var);background:var(--var-bg)}
+.cbx{width:15px;height:15px;border:1.5px solid #c3ccdb;border-radius:4px;flex:0 0 auto;
+  margin-top:2px;display:grid;place-items:center;font-size:10px;color:#fff;background:#fff}
+.cand.on .cbx{background:var(--var);border-color:var(--var)}
+.cand .cn{font-size:12.5px;font-weight:600;margin-bottom:2px}
+.cand .cd{font-size:11px;color:var(--ink3);line-height:1.45}
+.cand.base{position:relative}
+.cand.base .cn::after{content:"当前默认";font-size:9.5px;background:var(--shared-bg);color:var(--shared);
+  padding:1px 5px;border-radius:4px;margin-left:6px;font-weight:600}
+.candbar{display:flex;gap:8px;margin-bottom:11px;align-items:center}
+.mini{padding:4px 10px;font-size:11.5px;border:1px solid var(--line);border-radius:6px;
+  background:#fff;cursor:pointer;color:var(--ink2);font-family:inherit}
+.mini:hover{border-color:var(--acc);color:var(--acc)}
+
+/* ============ 体检表 ============ */
+.hx{width:100%;border-collapse:separate;border-spacing:0;font-size:12px}
+.hx th{font-weight:600;color:var(--ink2);padding:7px 6px;text-align:center;
+  border-bottom:1px solid var(--line);font-size:11.5px;white-space:nowrap}
+.hx th:first-child{text-align:left;padding-left:10px}
+.hx td{padding:5px 6px;text-align:center;border-bottom:1px solid var(--line2)}
+.hx td:first-child{text-align:left;padding-left:10px;font-weight:600;white-space:nowrap}
+.cellc{display:inline-block;width:100%;max-width:74px;padding:3px 0;border-radius:5px;
+  font-size:10.5px;font-weight:600}
+.c-g{background:var(--ok-bg);color:var(--ok)}
+.c-b{background:var(--shared-bg);color:var(--shared)}
+.c-y{background:var(--warn-bg);color:var(--warn)}
+.c-o{background:var(--var-bg);color:var(--var);outline:1.5px solid var(--var)}
+.c-r{background:var(--err-bg);color:var(--err)}
+.legend{display:flex;gap:16px;margin-top:11px;font-size:11.5px;color:var(--ink2);flex-wrap:wrap}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.blockwarn{margin-top:11px;padding:10px 13px;background:var(--warn-bg);border:1px solid #f0dca8;
+  border-radius:7px;font-size:12px;color:#8a6200;display:flex;gap:8px}
+.oknote{margin-top:11px;padding:9px 13px;background:#eefaf1;border:1px solid #bfe6cd;
+  border-radius:7px;font-size:12px;color:#1f7a3d;display:flex;gap:8px;align-items:flex-start}
+.oknote span{font-weight:700}
+.oknote code{background:#d8f0e0}
+.subk{display:inline-block;font-size:9.5px;color:var(--ink3);background:var(--line2);
+  border-radius:4px;padding:0 5px;margin-left:4px;font-family:"SF Mono",Consolas,monospace}
+.ctags{margin-top:4px;display:flex;flex-wrap:wrap;gap:4px}
+.ctags .tg{font-size:9.5px;color:#8a5a00;background:#fdf0d8;border:1px solid #f3dcae;
+  border-radius:4px;padding:1px 6px;font-weight:600}
+
+/* ============ 提示词 ============ */
+.pv{background:#fbfcfd;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.pvrow{display:flex;gap:11px;padding:6px 12px;border-bottom:1px solid var(--line2);
+  font-size:11.5px;align-items:flex-start}
+.pvrow:last-child{border-bottom:none}
+.pvrow.var{background:var(--var-bg)}
+.pvrow.seed{background:var(--acc-bg)}
+.pvn{width:20px;color:var(--ink3);font-family:"SF Mono",Consolas,monospace;flex:0 0 auto;text-align:right}
+.pvk{width:88px;flex:0 0 auto;color:var(--ink2);font-weight:600}
+.pvrow.var .pvk{color:var(--var)}
+.pvv{flex:1;color:var(--ink);line-height:1.5}
+.pvrow.var .pvv{color:#a35d00;font-weight:600}
+.pvl{flex:0 0 auto;font-size:10px}
+.lock{color:var(--ink3)}
+
+/* ============ 结果区 ============ */
+.rtabs{display:flex;gap:2px;padding:0 16px;background:#fbfcfd;border-bottom:1px solid var(--line2)}
+.vswitch{display:inline-flex;background:#f0f2f5;border-radius:7px;padding:2px}
+.vsw{padding:5px 13px;font-size:12px;border-radius:5px;cursor:pointer;color:var(--ink2);transition:.12s}
+.vsw.on{background:#fff;color:var(--ink);font-weight:650;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.prog{height:5px;background:#eef0f4;border-radius:3px;overflow:hidden;margin:0 0 3px}
+.progi{height:100%;background:linear-gradient(90deg,var(--acc),#6a92ff);border-radius:3px;transition:width .3s}
+.mx{overflow:auto;padding-bottom:4px;max-height:calc(100vh - 322px);
+  scrollbar-color:var(--acc) #e9edf3;scrollbar-width:thin}
+.mxt{border-collapse:separate;border-spacing:0}
+.mxt th{padding:9px 8px;font-size:12px;font-weight:650;color:var(--ink2);white-space:nowrap;
+  border-bottom:1px solid var(--line);text-align:center;position:sticky;top:0;background:var(--panel);z-index:3}
+.mxt th.rowh{text-align:left;position:sticky;left:0;top:0;background:var(--panel);z-index:4;min-width:108px}
+.mxt td{padding:6px;border-bottom:1px solid var(--line2)}
+.mxt td.rowh{position:sticky;left:0;top:auto;background:var(--panel);z-index:2;font-size:13px;font-weight:650;
+  padding-left:6px;white-space:nowrap}
+.rowh .sd{display:block;font-size:10px;color:var(--ink3);font-weight:400}
+.cell{width:178px;height:224px;border-radius:8px;position:relative;overflow:hidden;cursor:pointer;
+  border:1.5px solid var(--line);transition:.15s}
+.cell:hover{border-color:var(--acc);transform:scale(1.03);z-index:3}
+.cell.baseline{border-color:var(--shared);box-shadow:0 0 0 2px var(--shared-bg)}
+.cell.picked{border-color:var(--ok);box-shadow:0 0 0 2px var(--ok-bg)}
+.cell .ph2{position:absolute;inset:0;display:grid;place-items:center;font-size:48px}
+.cell .wm{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.92);
+  font-size:11px;padding:3px 5px;text-align:center;font-weight:600;color:#333;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell .flag{position:absolute;top:4px;left:4px;font-size:10px;padding:1px 6px;border-radius:4px;
+  font-weight:700;background:rgba(255,255,255,.94)}
+.cell.baseline .flag{color:var(--shared)}
+.cell.picked .flag{color:var(--ok)}
+.pickbtn{display:block;width:178px;margin-top:4px;padding:5px 0;font-size:11.5px;border:1px solid var(--line);
+  border-radius:6px;background:#fff;cursor:pointer;color:var(--ink2);font-family:inherit}
+.pickbtn:hover{border-color:var(--ok);color:var(--ok)}
+.pickbtn.on{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:650}
+.viewwarn{padding:9px 13px;background:var(--err-bg);border:1px solid #f5c4bf;border-radius:7px;
+  font-size:12px;color:#a32a1c;margin-bottom:12px;display:flex;gap:8px}
+
+/* 底部操作 */
+.actbar{position:sticky;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);margin-top:16px;padding:12px 16px;border-radius:0 0 var(--r) var(--r);
+  display:flex;align-items:center;gap:12px}
+.btn{padding:9px 20px;border-radius:8px;border:none;font-size:13px;font-weight:650;
+  cursor:pointer;font-family:inherit;transition:.15s}
+.btn-p{background:var(--acc);color:#fff}
+.btn-p:hover{background:#2d5ce0}
+.btn-o{background:#fff;color:var(--ink2);border:1px solid var(--line)}
+.btn-o:hover{border-color:var(--acc);color:var(--acc)}
+.btn-g{background:var(--ok);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* ===== 铺满全屏对比 ===== */
+.fsbtn{margin-left:10px;padding:5px 13px;font-size:12px;border:1px solid var(--line);border-radius:7px;
+  background:#fff;color:var(--ink2);cursor:pointer;font-family:inherit;transition:.15s;flex:0 0 auto}
+.fsbtn:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-bg)}
+.panel.fs{position:fixed;inset:0;z-index:210;display:flex;flex-direction:column;margin:0;
+  border-radius:0;overflow:hidden;background:var(--panel)}
+.panel.fs>.ph{position:relative;z-index:5;background:var(--panel)}
+.panel.fs>.rtabs{flex:0 0 auto}
+.panel.fs>.pb{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.panel.fs .mx{flex:1 1 auto;min-height:0;max-height:none;overflow:auto}
+.panel.fs .actbar{flex:0 0 auto;z-index:5}
+.panel.fs .cgrid{flex:1 1 auto;min-height:0;overflow:auto;align-content:start}
+
+/* 定妆间 */
+.hide{display:none}
+.combo{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.guard{display:flex;gap:9px;margin-bottom:14px}
+.gcard{flex:1;border:1px solid #f0dca8;background:var(--warn-bg);border-radius:8px;padding:10px 13px}
+.gcard .gl{font-size:11px;color:#8a6200;margin-bottom:2px}
+.gcard .gv{font-size:14px;font-weight:700;color:#7a5600}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:13px}
+.ccell{border:1.5px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:#fff}
+.ccell:hover{border-color:var(--acc)}
+.ccell .cimg{height:184px;display:grid;place-items:center;font-size:48px}
+.ccell .cinfo{padding:5px 7px;border-top:1px solid var(--line2);font-size:10px;color:var(--ink2);line-height:1.5}
+.note{font-size:11.5px;color:var(--ink3);margin-top:9px;line-height:1.6}
+h4.sec{font-size:12.5px;font-weight:650;color:var(--ink2);margin:16px 0 9px}
+h4.sec:first-child{margin-top:0}
+.mini{margin-left:auto;font:inherit;font-size:11px;font-weight:600;color:var(--acc);background:#fff;border:1px solid var(--line);
+  border-radius:6px;padding:3px 9px;cursor:pointer}
+.mini:hover{border-color:var(--acc);background:var(--acc-bg)}
+/* 定妆间：维度块 + 候选药丸 */
+.dimblock{border:1px solid var(--line);border-radius:9px;margin-bottom:10px;overflow:hidden}
+.dimhead{display:flex;align-items:center;gap:9px;padding:9px 13px;background:var(--panel);font-weight:650;font-size:13px;
+  cursor:pointer;user-select:none}
+.dimhead:hover{background:var(--acc-bg)}
+.dimhead .dimchk{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--line);display:inline-grid;place-items:center;
+  font-size:11px;color:#fff;transition:.12s}
+.dimhead.on .dimchk{background:var(--acc);border-color:var(--acc)}
+.dimhead .dimcnt{margin-left:auto;font-size:11px;color:var(--ink3);font-weight:400}
+.candwrap{padding:10px 12px;display:flex;flex-wrap:wrap;gap:7px}
+.scand{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border:1.5px solid var(--line);border-radius:20px;
+  font-size:12.5px;cursor:pointer;background:#fff;transition:.12s}
+.scand:hover{border-color:var(--acc)}
+.scand .scbx{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);display:inline-grid;place-items:center;
+  font-size:9px;color:#fff}
+.scand.on{border-color:var(--ok);background:var(--ok-bg);color:#1f7a4d;font-weight:600}
+.scand.on .scbx{background:var(--ok);border-color:var(--ok)}
+.stwarn{margin:0 0 10px;padding:8px 12px;border-radius:7px;background:var(--warn-bg);border:1px solid #f0dca8;
+  color:#8a6200;font-size:12px;display:none}
+.stwarn.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <div class="logo"><span class="dot"></span>人物肖像实验室 <small>portrait_lab · :5090</small></div>
+  <div class="navs">
+    <div class="nav on" data-page="lab">实验台</div>
+    <div class="nav" data-page="studio">定妆间</div>
+    <div class="nav" data-page="vocab">候选词库</div>
+  </div>
+  <div class="spacer"></div>
+  <div class="newbar" id="newbar" onclick="openWiz()"><span>●</span><span id="newbartx">发现 1 位新女主未接入</span></div>
+  <div class="status"><span class="pulse"></span>ComfyUI 在线 · 127.0.0.1:8188</div>
+</div></div>
+
+<div class="mask" id="mask">
+  <div class="dlg">
+    <div class="dlgh">
+      <h3>新女主接入向导 · <span id="wizname"></span></h3>
+      <span class="x" onclick="closeWiz()">✕</span>
+    </div>
+    <div class="dlgb" id="wizb"></div>
+    <div class="dlgf">
+      <span class="note">全部红色闸门处理完毕才允许加入实验名单 · 所有修复默认不写库</span>
+      <button class="btnp" id="wizok" onclick="wizDone()"></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+<!-- ==================== 实验台 ==================== -->
+<div id="page-lab">
+
+<!-- Step 1 -->
+<div class="panel">
+  <div class="ph"><span class="step">1</span><h3>试验对象</h3>
+    <span class="sub">每位女主使用自己的 portrait_seed，全程锁定不变</span></div>
+  <div class="pb">
+    <div class="cbar">
+      <input type="text" id="csearch" placeholder="搜索女主…" oninput="renderAll()">
+      <span class="fchip on" data-f="all">全部</span>
+      <span class="fchip" data-f="ok">就绪</span>
+      <span class="fchip" data-f="warn">部分可用</span>
+      <span class="fchip" data-f="new">待接入</span>
+      <span class="cnt" id="ccnt"></span>
+    </div>
+    <div class="chars" id="chars"></div>
+    <div class="seednote"><span>🔒</span><div><b>seed 锁定策略</b> —— 同一位女主在整轮实验中 seed 恒定，画面差异只可能来自你改动的那一个维度。跨女主的 seed 不同，因此<b>只允许横着读，不允许竖着比</b>。</div></div>
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div class="panel">
+  <div class="ph"><span class="step">2</span><h3>变量维度</h3>
+    <span class="sub">可多选 —— 多选 = 打包多个单变量实验串行跑，不是笛卡尔积</span></div>
+  <div class="pb">
+    <div class="dims" id="dims"></div>
+    <div class="budget" id="budget"></div>
+  </div>
+</div>
+
+<!-- Step 3 -->
+<div class="panel">
+  <div class="ph"><span class="step">3</span><h3>候选池</h3>
+    <span class="sub">勾选参与本轮的候选，描述词即写入提示词第 3 段的实际内容</span></div>
+  <div class="subtabs" id="candtabs"></div>
+  <div class="pb">
+    <div class="candbar">
+      <button class="mini" onclick="candAll(1)">全选</button>
+      <button class="mini" onclick="candAll(0)">全不选</button>
+      <button class="mini" onclick="candAll(2)">反选</button>
+      <span style="font-size:11.5px;color:var(--ink3)" id="candinfo"></span>
+    </div>
+    <div class="cands" id="cands"></div>
+  </div>
+</div>
+
+<!-- 基线体检 -->
+<div class="panel">
+  <div class="ph"><span class="step" style="background:var(--warn)">!</span><h3>基线体检表</h3>
+    <span class="sub">开跑前确认每格基线来源 —— 黄格必须先补齐，否则实验结论不可信</span></div>
+  <div class="pb">
+    <table class="hx" id="hxt"></table>
+    <div class="legend">
+      <span><i class="c-g" style="background:#12a05c"></i>角色专属数据</span>
+      <span><i class="c-b" style="background:#0e8fb0"></i>共享池 character_id=0</span>
+      <span><i class="c-y" style="background:#d99000"></i>无数据 · 将回落通用默认值</span>
+      <span><i class="c-o" style="background:#f5871f"></i>本轮变量维度</span>
+      <span><i class="c-r" style="background:#d8412f"></i>解析失败 · 仅该维降级，其余维度照常</span>
+    </div>
+    <div class="blockwarn" id="hxwarn"><span>⚠️</span><div id="hxwarntx"></div></div>
+  </div>
+</div>
+
+<!-- 提示词预览 -->
+<div class="panel">
+  <div class="ph"><span class="step" style="background:var(--var)">P</span><h3>提示词预览</h3>
+    <span class="sub" id="pvsub"></span>
+    <div class="spacer"></div>
+    <select id="pvchar" onchange="renderPreview()" style="font:inherit;font-size:12px;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:#fff"></select>
+  </div>
+  <div class="pb"><div class="pv" id="pv"></div>
+    <div class="note">⭐ 变量段<b>永远固定在第 3 段</b>，不因候选词长短前后移动 —— 段位一动，后续 token 位置全变，等于引入第二个变量。候选描述词统一压在 6–12 词以对齐扰动。</div>
+  </div>
+</div>
+
+<!-- 操作条 -->
+<div class="panel">
+  <div class="actbar">
+    <button class="btn btn-p" onclick="startRun()">▶ 开始生成</button>
+    <button class="btn btn-o">仅预览提示词</button>
+    <button class="btn btn-o">保存为实验模板</button>
+    <div class="spacer"></div>
+    <span id="actinfo" style="font-size:12px;color:var(--ink2)"></span>
+  </div>
+</div>
+
+<!-- 结果区 -->
+<div class="panel" id="resultPanel">
+  <div class="ph"><span class="step" style="background:var(--ok)">R</span><h3>结果矩阵</h3>
+    <span class="sub" id="ressub">任务 #A17 · 眼睛扫描</span>
+    <div class="spacer"></div>
+    <div class="vswitch">
+      <div class="vsw on" data-view="exp">实验视图</div>
+      <div class="vsw" data-view="pat">巡检视图</div>
+    </div>
+    <button class="fsbtn" onclick="toggleFs('resultPanel')">⛶ 铺满对比</button>
+  </div>
+  <div class="rtabs" id="rtabs"></div>
+  <div class="pb">
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink2);margin-bottom:5px">
+        <span id="progtx">生成中 41 / 64 · 眼睛子实验</span>
+        <span class="mono" id="progpc">64%</span>
+      </div>
+      <div class="prog"><div class="progi" id="progi" style="width:64%"></div></div>
+    </div>
+    <div id="viewwarn"></div>
+    <div class="mx"><table class="mxt" id="mxt"></table></div>
+    <div class="note" id="mxnote"></div>
+  </div>
+  <div class="actbar">
+    <span style="font-size:12px;color:var(--ink2)">已标记 <b id="pickn" style="color:var(--ok)">0</b> 项最佳（仅页面标记，未写库）</span>
+    <div class="spacer"></div>
+    <button class="btn btn-o">导出对比图</button>
+    <button class="btn btn-g" onclick="alert('将先 VACUUM INTO 备份 game.db，再二次确认后写回 appearance / outfit_components')">✓ 应用选择并写库</button>
+  </div>
+</div>
+</div>
+<!-- ==================== 定妆间 ==================== -->
+<div id="page-studio" class="hide">
+<div class="panel">
+  <div class="ph"><span class="step" style="background:#8b5cf6">C</span><h3>定妆间 · 组合验证</h3>
+    <span class="sub">回答单变量实验答不了的问题：最优眼 + 最优鼻，未必协调</span></div>
+  <div class="pb">
+    <div class="guard">
+      <div class="gcard"><div class="gl">护栏 1 · 女主数</div><div class="gv">仅 1 位</div>
+        <div style="font-size:10.5px;color:#8a6200;margin-top:3px">定妆是给某人定，不做横向比较</div></div>
+      <div class="gcard"><div class="gl">护栏 2 · 维度数（智能选择）</div><div class="gv">最多 3 维</div>
+        <div style="font-size:10.5px;color:#8a6200;margin-top:3px">启用第 4 维时前端直接拒绝并提示</div></div>
+      <div class="gcard"><div class="gl">护栏 3 · 每维候选</div><div class="gv">最多 3 个</div>
+        <div style="font-size:10.5px;color:#8a6200;margin-top:3px">全部候选可见可点，但单维选取封顶 3</div></div>
+    </div>
+
+    <h4 class="sec">定妆对象（点击切换）</h4>
+    <div class="chars" id="studioChips"></div>
+    <div class="chars" style="margin-top:8px">
+      <div class="chip on" id="studioChip"><span class="av" id="studioAv">苏</span>
+        <span><span class="nm" id="studioNm">苏晴</span> <span class="sd mono" id="studioSeed">seed 107922</span></span></div>
+      <span style="font-size:11.5px;color:var(--ink3);align-self:center;margin-left:8px">
+        ✓ 候选池已就绪（各 15 项），可进入定妆</span>
+    </div>
+
+    <h4 class="sec">维度与候选（全部候选均可点选 · 前端护栏：最多 3 维 / 每维最多 3 候选）
+      <button class="mini" onclick="studioReset()">清空选择</button></h4>
+    <div class="stwarn" id="studioWarn"></div>
+    <div id="studioDims"></div>
+
+    <div class="budget" id="studioBudget" style="margin-top:14px"></div>
+  </div>
+</div>
+
+<div class="panel" id="comboPanel">
+  <div class="ph"><h3 id="comboTitle">组合结果 · 苏晴</h3><span class="sub" id="comboSub">seed 107922 恒定 · 仅三个五官维度变化</span>
+    <div class="spacer"></div>
+    <button class="fsbtn" onclick="toggleFs('comboPanel')">⛶ 铺满对比</button></div>
+  <div class="pb">
+    <div class="cgrid" id="cgrid"></div>
+    <div class="note">组合验证只看协调度，不做归因 —— 因为三个维度同时在变，你无法判断某张变好看是哪一维的功劳。这一步的唯一目的是<b>从已收敛的候选里挑出最协调的一套</b>。</div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== 候选词库 ==================== -->
+<div id="page-vocab" class="hide">
+<div class="panel">
+  <div class="ph"><span class="step" style="background:var(--shared)">V</span><h3>候选词库 · outfit_components (character_id = 0)</h3>
+    <span class="sub">共享池现状盘点 —— 红色为待建数据</span></div>
+  <div class="pb">
+    <table class="hx">
+      <tr><th style="width:110px">维度</th><th>key</th><th>共享池 cid=0</th><th>角色专属</th><th>默认值真实来源</th><th>状态</th></tr>
+      <tr><td>🥚 脸型</td><td class="mono">face_shape</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👁 眼睛</td><td class="mono">eyes</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>✏️ 眉毛</td><td class="mono">eyebrows</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👃 鼻子</td><td class="mono">nose</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👄 嘴型</td><td class="mono">mouth</td><td><span class="tag t-green">15 条</span></td><td><span class="tag t-red">0 条</span></td><td style="text-align:left">outfit_components（character_id=0）</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>💇 发型</td><td class="mono">hairstyle</td><td><span class="tag t-blue">40 条</span></td><td><span class="tag t-green">4–11 条</span></td><td style="text-align:left">outfit_components</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👙 内衣</td><td class="mono">underwear</td><td><span class="tag t-gray">0 条</span></td><td><span class="tag t-green">10–20 条</span></td><td style="text-align:left">outfit_components</td><td><span class="tag t-green">就绪</span></td></tr>
+      <tr><td>👗 服饰</td><td class="mono">outfit</td><td><span class="tag t-gray">0 条</span></td><td><span class="tag t-green">56–60 套</span></td><td style="text-align:left">outfit_presets 展开</td><td><span class="tag t-green">就绪</span></td></tr>
+    </table>
+    <div class="oknote"><span>✓</span> 脸型 / 眼睛 / 眉毛 / 鼻子 / 嘴型 五个外观维度已写入 <code class="mono">outfit_components</code>（character_id=0，各 15 条），<code class="mono">style_tags</code> 存气质印象（逗号分隔）。这就是真实候选池，定妆间与候选词库均直接读它。</div>
+    <div class="blockwarn" style="margin-top:14px"><span>⚠️</span><div>
+      <b>数据状态更新（2026-08-08）</b><br>
+      1 · <b>晓月的「眉眼」段已可在运行时自动拆分</b> —— 三级降级解析：L1 分号切（7/8 人），L2 句级切（晓月，眉眼混写同一句），L3 不可分（仅新角色 <code class="mono">bad</code> 触发，需 LLM 规范化 + 人工 review）。晓月现落在 L2，无需回库。<br>
+      2 · <b>苏晴、顾云溪实际有「脸型与轮廓」段</b> —— 此前误报缺失是解析器 bug（脸型段被标题前缀「带金丝圆框眼镜／东亚女性」挤掉，已修）。脸型现已升为第 8 个变量维度；且发现<b>苏晴、晓月佩戴眼镜</b>，眼镜已提取为全程锁定段（永远保留、不参与变量）。
+    </div></div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="ph"><h3>appearance 原位替换机制</h3><span class="sub">摘除同义原句 → 在原位插入候选词，绝不追加</span></div>
+  <div class="pb">
+    <div class="pv">
+      <div class="pvrow"><span class="pvk" style="width:60px">原文</span><span class="pvv">眉眼：细长柳叶眉，眉峰柔和；<span style="background:#fdeceb;color:var(--err);text-decoration:line-through">标准杏眼，眼尾微微上扬，双眼皮宽度适中</span></span></div>
+      <div class="pvrow"><span class="pvk" style="width:60px">摘除后</span><span class="pvv">眉眼：细长柳叶眉，眉峰柔和；<span style="color:var(--ink3)">▁▁▁▁▁▁</span></span></div>
+      <div class="pvrow var"><span class="pvk" style="width:60px">替换结果</span><span class="pvv">眉眼：细长柳叶眉，眉峰柔和；<span style="background:var(--var-bg);color:var(--var);font-weight:700">上挑丹凤眼，眼尾锐利收窄</span></span></div>
+    </div>
+    <div class="note">
+      ⭐ <b>摘除是运行时临时行为，<code class="mono">character.appearance</code> 原文永不改动。</b>实验做废可随时回滚，库里始终是唯一真相。<br>
+      这条纪律来自你自己的实践 —— <code class="mono">data/_生成发型肖像.py</code> docstring 第 10 行：「appearance 字段已移除发型描述，避免与生成图前后不一致」。当时是手工删的，现在把它产品化成自动机制。
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+/* ===== 真实数据（来自 game.db 实测） ===== */
+/* face:1 = 有脸型段。苏晴/顾云溪原判「缺失」是解析器 bug（脸型段被标题前缀挤掉），
+   升级为行内嵌标题解析后 8/8 全部命中。glasses = 常驻眼镜，全程锁定不参与变量。 */
+const CHARS=[
+ {id:1,n:'苏晴',s:107922,c:'#5b8def',face:1,brow:'L1',glasses:'带金丝圆框眼镜',st:'ok'},
+ {id:2,n:'林小鹿',s:115841,c:'#f0883e',face:1,brow:'L1',st:'ok'},
+ {id:3,n:'晓月',s:123760,c:'#a06be0',face:1,brow:'L2',glasses:'深棕细框方形圆边眼镜',faceDup:1,st:'warn'},
+ {id:4,n:'叶知秋',s:131679,c:'#3aa675',face:1,brow:'L1',st:'ok'},
+ {id:5,n:'沈念',s:139598,c:'#e06b9a',face:1,brow:'L1',st:'ok'},
+ {id:6,n:'顾云溪',s:147517,c:'#e0574a',face:1,brow:'L1',identity:'东亚女性',st:'ok'},
+ {id:9,n:'沈疏筠',s:171274,c:'#4f9bb5',face:1,brow:'L1',st:'ok'},
+ {id:10,n:'刘星苒',s:179193,c:'#8a7fd4',face:1,brow:'L1',st:'ok'},
+ {id:11,n:'许南栀',s:0,c:'#c98a3d',face:1,brow:'bad',hairSeg:1,st:'new',custom:1}];
+
+const SEED_BASE=100003, SEED_STEP=7919;
+function seedOf(c){ return c.s || (SEED_BASE + c.id*SEED_STEP); }
+function isDerived(c){ return !c.s; }
+let CFILTER='all';
+
+/* 顺序 = 视觉影响力降序，也是建议的逐维收敛顺序（与后端 DIMENSION_ORDER 对齐） */
+const DIMS=[
+ {k:'hairstyle',ic:'💇',n:'发型',src:'b',cn:40},
+ {k:'face_shape',ic:'🥚',n:'脸型',src:'y',cn:7},
+ {k:'eyes',ic:'👁',n:'眼睛',src:'y',cn:8},
+ {k:'eyebrows',ic:'✏️',n:'眉毛',src:'y',cn:6},
+ {k:'nose',ic:'👃',n:'鼻子',src:'y',cn:6},
+ {k:'mouth',ic:'👄',n:'嘴型',src:'y',cn:5},
+ {k:'underwear',ic:'👙',n:'内衣',src:'g',cn:20},
+ {k:'outfit',ic:'👗',n:'服饰',src:'g',cn:56}];
+
+/* ===== 真实候选池：来自 outfit_components (character_id=0) =====
+   字段 s=subtype(英文) n=中文名 d=核心特征 t=style_tags(气质印象,逗号分隔)
+   style_tags 即原 design_tags（已合并迁移，2026-08-09） */
+const DIMPOOL={
+  eyes:[
+    {s:"almond",n:"杏眼（标准眼）",d:"形状如杏仁，睑裂宽度比例适当，内眼角圆钝外眼角略尖，眼尾不上翘不下垂，瞳孔暴露适中",t:"清澈明亮,温和亲切,标准百搭"},
+    {s:"peach",n:"桃花眼",d:"眼型细长，眼尾略弯上翘，四周略带粉晕，不笑时似桃花花瓣，笑起来弯如月牙，常有卧蚕",t:"温柔迷人,多情妩媚,亲和力强"},
+    {s:"phoenix",n:"丹凤眼",d:"眼型细长，内眼角向下外眼角向上翘，眼尾高于眼头，黑眼珠内藏，眼裂斜向外上方延伸",t:"威严锐利,古典东方,气场强大"},
+    {s:"round_eye",n:"圆眼（荔枝眼）",d:"睑裂高宽，睑缘呈圆弧形，黑眼珠和眼白露出多，眼睛圆大，横向纵向比例接近",t:"机灵有神,天真可爱,显年轻"},
+    {s:"willow_eye",n:"柳叶眼",d:"眼型细长如柳叶，介于桃花眼和丹凤眼之间，内眼角微下垂呈钩状，外眼角微上翘，眼型扁长",t:"清冷高级,妩媚内敛,古典韵味"},
+    {s:"rui_phoenix",n:"瑞凤眼",d:"眼型细长，瞳孔接近内眼角，瞳孔上方约三分之一被上眼皮覆盖，眼尾微微上翘，眼神温润",t:"聪慧稳重,温柔有光,福气之相"},
+    {s:"sleep_phoenix",n:"睡凤眼",d:"大半个瞳孔被眼帘盖住，呈半睁半闭状态，眼神朦胧似睡非睡，眼型细长柔和",t:"忧郁深情,柔弱惹人怜,朦胧美感"},
+    {s:"fox",n:"狐狸眼（吊梢眼）",d:"眼型狭长，内眼角朝下外眼角朝上，眼尾上挑明显，眼形细长而勾人，形似狐狸",t:"风情万种,神秘魅惑,精明灵动"},
+    {s:"droopy",n:"下垂眼（狗狗眼）",d:"外眼角低于内眼角，眼轴线向下倾斜，正面呈八字形，眼头圆润，眼尾下垂",t:"无辜可怜,温柔沉静,显幼态"},
+    {s:"triangle_eye",n:"三角眼",d:"上睑皮肤中外侧松弛下垂，外眦角被遮盖显小，眼裂呈三角形，内宽外窄",t:"深沉精明,干练老练,有阅历感"},
+    {s:"slit",n:"眯缝眼",d:"睑裂小而狭短，内外眦角均小，黑眼珠眼白大部分被遮挡，眼球显小，眼睛眯成一条缝",t:"温和和气,心思缜密,藏锋内敛"},
+    {s:"elongated",n:"细长眼（长眼）",d:"睑裂细长，睑缘弧度小，黑珠及眼白露出相对较少，眼型狭长，横向比例远大于纵向",t:"沉静内敛,斯文秀气,有书卷气"},
+    {s:"puffy",n:"肿泡眼（金鱼眼）",d:"上眼睑脂肪厚，眼皮浮肿突出，眼裂显得较小，眼球有外凸感，眼睑饱满",t:"憨厚敦实,福相饱满,亲切感强"},
+    {s:"deer",n:"小鹿眼",d:"眼睛大而圆，眼距略宽，瞳孔大而黑亮，眼神清澈无辜，眼型圆润有神",t:"天真无辜,纯净灵动,少女感"},
+    {s:"dragon_eye",n:"龙眼",d:"眼型大而长，眼尾上翘，黑眼珠大而有神，眼睑有力，整体气势威严，形似龙目",t:"威严大气,有领导力,富贵之相"}
+  ],
+  eyebrows:[
+    {s:"standard",n:"标准眉（弯眉）",d:"眉峰圆润自然，位于眉毛外侧三分之一处，眉尾略低于眉头，线条流畅柔和，粗细过渡均匀",t:"百搭温婉,自然大方"},
+    {s:"straight",n:"一字眉（平眉）",d:"眉峰平缓不明显，整体呈水平直线状，从眉头到眉尾粗细均匀，线条平直",t:"减龄温柔,邻家清新"},
+    {s:"willow",n:"柳叶眉",d:"整体纤细修长，形似柳叶，眉峰平滑过渡不突兀，眉尾纤细收尖，弧度柔和优美",t:"古典柔美,温婉贤淑"},
+    {s:"sword",n:"剑眉",d:"眉形向上扬起，眉峰转折角明显，眉毛下边缘线条偏直，眉尾尖细上挑，整体锋利如剑",t:"英气逼人,正直果敢"},
+    {s:"high_arch",n:"挑眉（高挑眉）",d:"眉尾明显高于眉头，眉峰位置靠后且角度陡峭，形成明显上挑态势",t:"灵动锐利,气场强大"},
+    {s:"drop_tail",n:"落尾眉",d:"眉峰到眉尾自然向下，线条柔和，眉尾微微向下落，整体走势平缓后下落",t:"优雅灵动,无辜柔婉"},
+    {s:"wild",n:"野生眉",d:"眉毛浓密，保留自然生长方向和毛流感，线条粗犷不刻意修饰，根根分明",t:"自然随性,高级飒爽"},
+    {s:"european",n:"欧式眉",d:"眉峰极高且角度锐利，眉骨突出感强，眉尾细而长，整体立体感强",t:"深邃立体,欧美时尚"},
+    {s:"crescent",n:"新月眉",d:"眉形如弯月，整体呈圆弧状，两边向下弯曲，眉峰圆润不明显，弧度优美",t:"温柔古典,浪漫多情"},
+    {s:"figure8",n:"八字眉",d:"眉头高眉尾低，眉尾明显下垂，形如八字，前窄后宽",t:"憨厚老实,无辜可怜"},
+    {s:"cocoon",n:"卧蚕眉",d:"眉头圆弯，眉身呈两段微弯，眉尾上扬有势，毛色乌亮有光泽，整体弯曲如卧蚕",t:"聪慧机敏,刚直重义"},
+    {s:"dragon",n:"龙眉",d:"毛顺有光彩，眉尾过目，眉不过浓，根根见肉，眉峰上扬有气势，整体眉宇飞扬",t:"威严大气,有领导力"},
+    {s:"broom",n:"扫帚眉",d:"前浓后散，眉头聚拢眉尾散开，形如扫帚，眉毛前细后宽",t:"豪迈粗犷,不拘小节"},
+    {s:"triangle_brow",n:"三角眉",d:"眉峰突出呈三角形，眉峰角度大，整体眉形有明显的尖角转折",t:"果敢自信,意志坚定"},
+    {s:"broken",n:"断眉（断续眉）",d:"眉毛断续不连贯，中间有缺口或稀疏处，毛流不均匀，呈现断裂状",t:"个性独特,有辨识度"}
+  ],
+  face_shape:[
+    {s:"oval",n:"鹅蛋脸（椭圆脸）",d:"额头与颧骨宽度接近，下颌线柔和收拢，下巴圆润，整体轮廓呈上下对称的椭圆形，颧骨是脸部最宽处",t:"标准百搭,端庄优雅,古典美"},
+    {s:"round",n:"圆脸",d:"额头、颧骨、下颌宽度相近，下巴短圆无棱角，面部轮廓线条柔和，脸颊饱满圆润",t:"可爱幼态,亲切温和,显年轻"},
+    {s:"square",n:"方脸（国字脸）",d:"下颌角突出明显，额头与颧骨宽度接近，下颌宽度与颧骨接近，下巴偏方，整体轮廓方正",t:"大气稳重,骨感有力,英气硬朗"},
+    {s:"long",n:"长脸（矩形脸）",d:"脸长明显大于脸宽，额头、颧骨、下颌宽度差异小，中庭或下庭偏长，下巴可能偏尖或偏方",t:"成熟理性,清冷疏离,有故事感"},
+    {s:"heart",n:"心形脸（倒三角脸）",d:"额头最宽，颧骨较宽，下颌窄，下巴尖细，形似倒三角或桃心，常伴有美人尖发际线",t:"精致甜美,时尚感强,女神气质"},
+    {s:"diamond",n:"菱形脸（钻石脸）",d:"颧骨是脸部最宽处，额头较窄，下颌也较窄，下巴尖，整体轮廓像菱形或钻石",t:"立体精致,高冷个性,高级感"},
+    {s:"triangle",n:"三角形脸（梨形脸）",d:"下颌最宽，额头窄，从下颌向上逐渐收窄至颧骨和额头，下颌线宽阔有力",t:"沉稳可靠,福相饱满,有力量感"},
+    {s:"trapezoid",n:"梯形脸",d:"下颌较宽，额头中等宽度，面部轮廓呈梯形，介于方脸和三角形脸之间",t:"朴实敦厚,稳重踏实,亲和感强"},
+    {s:"jia",n:"甲字脸",d:"额头宽阔突出，下巴尖窄，上宽下窄且骨感明显，比心形脸更有棱角，俗称V脸",t:"聪明机敏,事业心强,精致上镜"},
+    {s:"you",n:"由字脸",d:"额头窄小，下颌宽大方正，上削下方，面部重心偏下，类似正梯形",t:"踏实稳重,大器晚成,敦厚感"},
+    {s:"shen",n:"申字脸",d:"额头狭窄，下巴也尖窄，颧骨突出最宽，两腮消瘦，中间宽两头窄",t:"精明能干,劳碌坚韧,个性鲜明"},
+    {s:"mu",n:"目字脸（长方脸）",d:"面部狭长，额头颧骨下巴宽度接近，脸的长度明显超过宽度，像竖着的门",t:"心思缜密,自尊心强,有书卷气"},
+    {s:"tian",n:"田字脸（扁方脸）",d:"面部扁方而短，额头宽，下颌宽，脸长与脸宽接近且偏短，整体方正",t:"憨厚老实,沉稳可靠,福相"},
+    {s:"yong",n:"用字脸",d:"额方，下颌宽扁，腮部突出，脸型方正且下半部分更宽，介于国字脸和由字脸之间",t:"意志坚定,行动力强,有魄力"},
+    {s:"round_square",n:"圆方脸（娃娃脸）",d:"介于圆脸和方脸之间，下颌有轻微棱角但整体偏圆，面部饱满，线条柔和中带方正",t:"显幼态,元气满满,亲和力强"}
+  ],
+  mouth:[
+    {s:"m_lip",n:"M唇（丘比特唇）",d:"上唇唇峰呈清晰的M形，唇珠突出饱满，唇峰唇谷明显，上唇上缘和下缘均呈M型，轮廓立体",t:"精致端庄,性感大气,标准美人唇"},
+    {s:"smile",n:"微笑唇（仰月唇）",d:"嘴唇厚度适中，上唇呈M形，嘴角自然微微上扬，即使面无表情也像在微笑",t:"亲和力强,温柔讨喜,自带笑意"},
+    {s:"full",n:"厚唇（嘟嘟唇）",d:"上下唇均丰厚饱满，下唇更厚，唇肉有弹性，唇峰不明显，整体圆润如果冻",t:"性感饱满,纯欲可爱,幼态减龄"},
+    {s:"thin",n:"薄唇",d:"唇红部组织薄，上下唇厚度均较薄，唇线清晰，唇峰可能不明显",t:"理智冷静,精明干练,清冷疏离"},
+    {s:"petal",n:"花瓣唇",d:"上唇呈M型，下唇呈W型（有两个唇峰），下唇中间有自然凹陷，整体如盛开的花瓣",t:"甜美优雅,立体饱满,柔媚动人"},
+    {s:"downturned",n:"下垂唇（覆舟唇）",d:"嘴角自然下垂，不做表情时嘴唇呈向下走势，下唇线呈倒弧形，形似倒扣的船",t:"沉静忧郁,严肃内敛,高冷感"},
+    {s:"heart_lip",n:"桃心唇",d:"唇珠饱满凸起明显，下唇圆润饱满，上唇窄下唇宽，整体形似桃心",t:"俏皮可爱,甜美灵动,少女感"},
+    {s:"oval_lip",n:"椭圆唇（标准唇）",d:"上下唇比例协调，上唇略薄于下唇，唇峰平缓，整体轮廓呈椭圆形，线条自然",t:"自然和谐,朴实大方,中性百搭"},
+    {s:"cherry",n:"樱桃唇（小圆唇）",d:"唇形小巧圆润，整体偏小，唇珠柔和，轮廓圆润，上下唇比例匀称，下唇微丰",t:"清甜灵动,娇俏可爱,少女感强"},
+    {s:"pearl",n:"含珠唇（龙珠唇）",d:"上唇正中唇珠明显突出，形如含着一颗珍珠，唇珠饱满圆润，立体感强",t:"能言善辩,精致灵动,辨识度高"},
+    {s:"european_lip",n:"欧美唇",d:"上下唇都非常饱满，唇峰不明显，唇线模糊向唇周晕染，着重强调体积感",t:"性感奔放,欧美风情,有张力"},
+    {s:"square_lip",n:"方形唇",d:"唇峰平直不明显，嘴角方正，上下唇厚度均匀，整体轮廓偏方正，线条硬朗",t:"稳重可靠,意志坚定,有力量感"},
+    {s:"sausage",n:"香肠嘴",d:"嘴唇异常肥厚，外翻明显，上下唇都极度饱满，唇形偏大，肉感强烈",t:"憨厚朴实,性感浓郁,个性鲜明"},
+    {s:"upturned_moon",n:"仰月唇",d:"嘴角明显上扬呈月牙形，唇形圆润饱满，上唇弧度如仰月，笑意感极强",t:"乐观开朗,治愈亲切,人缘极好"},
+    {s:"blow_fire",n:"吹火嘴",d:"嘴唇向前突出，嘴型微撅，上下唇闭合时呈圆形，形似吹火的状态",t:"天真俏皮,个性率真,有表现力"}
+  ],
+  nose:[
+    {s:"greek",n:"希腊鼻（直鼻）",d:"鼻梁挺直，从鼻根到鼻尖几乎呈一条直线，鼻背宽度适中，鼻尖微微上翘，线条流畅精致",t:"端庄优雅,古典美感,大气立体"},
+    {s:"roman",n:"罗马鼻（结节鼻）",d:"鼻梁较高且挺拔，鼻背中部有轻微隆起或凸起，鼻尖略微下垂，整体线条有力",t:"坚毅有力量,威严沉稳,硬朗阳刚"},
+    {s:"aquiline",n:"鹰钩鼻",d:"鼻梁高且呈明显弯曲状，鼻尖向下呈钩状，鼻背有凸起，形似鹰嘴，侧面轮廓突出",t:"精明锐利,深沉神秘,成熟威严"},
+    {s:"garlic",n:"蒜头鼻",d:"鼻头圆大肥厚，鼻翼较宽，鼻尖不突出，整体形状类似蒜头，软组织丰厚",t:"憨厚朴实,亲切随和,富贵感"},
+    {s:"upturned",n:"朝天鼻（翘鼻）",d:"鼻尖向上翘起，鼻孔外露明显，鼻梁长度偏短，鼻唇角较大",t:"活泼俏皮,天真可爱,幼态感"},
+    {s:"flat",n:"塌鼻（鞍鼻）",d:"鼻梁低平或凹陷，鼻根低，缺乏立体感，鼻头圆钝，整体扁平",t:"温柔平和,亲和力强,邻家感"},
+    {s:"hump",n:"驼峰鼻",d:"鼻梁中部有明显的骨性凸起，形似驼峰，鼻背线条不直，鼻尖可能下垂或正常",t:"个性鲜明,异域风情,辨识度高"},
+    {s:"teardrop",n:"水滴鼻",d:"鼻梁高度适中，鼻尖精致小巧呈水滴状，鼻翼窄，整体线条柔和自然",t:"清新秀气,精致灵动,温婉可人"},
+    {s:"lion",n:"狮子鼻（肉鼻）",d:"鼻头大而圆，鼻翼宽且肥厚，鼻型整体偏大，软组织丰厚，有肉感",t:"大气豪迈,富贵有福,气场强"},
+    {s:"crooked",n:"歪鼻",d:"鼻梁中轴线偏移，呈C形、S形或I形弯曲，可由骨性或软骨性歪斜导致",t:"个性独特,不羁随性,有故事感"},
+    {s:"wide",n:"宽鼻",d:"鼻梁宽，鼻翼宽大，鼻孔也较大，整体鼻型偏宽，横向占比大",t:"粗犷大气,豪迈奔放,有力量感"},
+    {s:"short",n:"短鼻",d:"鼻子整体长度偏短，鼻小柱短，鼻尖位置靠前，鼻唇角偏大",t:"幼态可爱,天真活泼,显年轻"},
+    {s:"long_nose",n:"长鼻",d:"鼻子整体长度偏长，鼻梁长，鼻尖位置偏下，鼻型修长",t:"成熟稳重,精明干练,有距离感"},
+    {s:"narrow",n:"窄鼻（细鼻）",d:"鼻梁窄而高，鼻翼窄小，整体鼻型纤细精致，线条利落",t:"精致秀气,清冷孤傲,高级感"},
+    {s:"xuandan",n:"悬胆鼻",d:"鼻梁高低适中，鼻翼大小合适，鼻头圆润饱满如悬胆，鼻中隔适当，轮廓清晰",t:"富贵吉祥,端正大气,福气满满"}
+  ]
+};
+/* CAND：既有的选择器/列表/预算复用 [name,desc] 元组；
+   外观五维由 DIMPOOL 派生，发型/内衣/服饰保持 mock（接 character_id 专属池后替换） */
+const CAND={
+  face_shape: DIMPOOL.face_shape.map(o=>[o.n,o.d]),
+  eyes: DIMPOOL.eyes.map(o=>[o.n,o.d]),
+  eyebrows: DIMPOOL.eyebrows.map(o=>[o.n,o.d]),
+  nose: DIMPOOL.nose.map(o=>[o.n,o.d]),
+  mouth: DIMPOOL.mouth.map(o=>[o.n,o.d]),
+  hairstyle:[['黑长直','过胸长直发，发丝平整服帖'],['温柔大波浪','耳下起卷，弧度圆润流畅'],
+    ['韩式气垫烫','顶部蓬松，发尾温柔内扣'],['齐肩短发','利落齐肩，发尾微微内扣'],
+    ['高马尾','高位束发，发尾自然垂落'],['低丸子头','脑后低位盘发，慵懒随性'],
+    ['空气刘海中长发','轻薄刘海，中长层次'],['法式微卷','发尾细碎卷度，松弛感'] ],
+  underwear:[['白色蕾丝套装','细腻蕾丝拼接，柔和贴身'],['黑色缎面','光泽缎面，简约利落'],
+    ['浅粉素色','纯色无花，柔软棉质'],['米色无痕','贴合肤色，无缝剪裁'],
+    ['深蓝运动款','高弹面料，包裹感强'],['藕粉细肩带','细肩带设计，轻盈透气'] ],
+  outfit:[['米色针织+百褶裙','柔和奶油色系，学院气质'],['白衬衫+黑西裤','利落职业风，简约干练'],
+    ['浅蓝连衣裙','清爽长裙，自然垂坠'],['灰色卫衣+牛仔裤','休闲随性，日常街头'],
+    ['黑色小礼裙','修身剪裁，正式场合'],['驼色风衣套装','中长风衣，通勤知性'] ]};
+/* 候选信息统一入口：外观维返回真实 name/desc/tags，服装维降级无 tags */
+function candInfo(k,i){
+  const p = DIMPOOL[k];
+  if(p && p[i]) return {name:p[i].n, desc:p[i].d, tags:p[i].t, sub:p[i].s};
+  const t = (CAND[k] && CAND[k][i]) ? CAND[k][i] : ['—','—'];
+  return {name:t[0], desc:t[1], tags:'', sub:''};
+}
+
+let SEL_C = CHARS.filter(c=>c.st!=='new').map(c=>c.id);
+let SEL_D = ['eyes'];
+let SEL_CAND = {};
+DIMS.forEach(d=>SEL_CAND[d.k]=CAND[d.k].map((_,i)=>i));
+let ACTIVE_TAB='eyes', VIEW='exp', RES_TAB='eyes';
+const PICKED={};
+
+/* ===== Step1 ===== */
+function visibleChars(){
+  const el=document.getElementById('csearch');
+  const q=(el&&el.value||'').trim();
+  return CHARS.filter(c=>{
+    if(CFILTER!=='all' && c.st!==CFILTER) return false;
+    if(q && c.n.indexOf(q)<0) return false;
+    return true;
+  });
+}
+function renderChars(){
+  const vis=visibleChars();
+  const selectable=vis.filter(c=>c.st!=='new');
+  const allOn = selectable.length>0 && selectable.every(c=>SEL_C.includes(c.id));
+  const h=vis.map(c=>{
+    const blk = c.st==='new';
+    const tag = blk?'<span class="tagn">待接入</span>':(c.st==='warn'?'<span class="tagd">部分</span>':'');
+    const sd = isDerived(c)? `seed ${seedOf(c)} · 派生` : `seed ${c.s}`;
+    return `<div class="chip ${SEL_C.includes(c.id)?'on':''} ${blk?'blk':''}" data-cid="${c.id}" data-blk="${blk?1:0}">
+    <span class="av" style="background:${c.c}">${c.n[0]}</span>
+    <span><span class="nm">${c.n}</span>${tag} <span class="sd mono">${sd}</span></span></div>`;
+  }).join('');
+  document.getElementById('chars').innerHTML = h +
+    `<button class="selall" onclick="toggleAll()">${allOn?'✕ 清空':'✓ 全选 '+selectable.length+' 位'}</button>`;
+  document.getElementById('ccnt').textContent =
+    `名单 ${CHARS.length} 位 · 当前显示 ${vis.length} · 已选 ${SEL_C.length}`;
+  document.querySelectorAll('.fchip').forEach(el=>{
+    el.classList.toggle('on', el.dataset.f===CFILTER);
+    el.onclick=()=>{ CFILTER=el.dataset.f; renderAll(); };
+  });
+  document.querySelectorAll('.chip[data-cid]').forEach(el=>el.onclick=()=>{
+    if(el.dataset.blk==='1'){ openWiz(); return; }
+    const id=+el.dataset.cid;
+    SEL_C = SEL_C.includes(id)? SEL_C.filter(x=>x!==id) : [...SEL_C,id];
+    renderAll();
+  });
+  const nb=document.getElementById('newbar'), nn=CHARS.filter(c=>c.st==='new').length;
+  if(nb){ nb.style.display = nn? 'flex':'none';
+    document.getElementById('newbartx').textContent = `发现 ${nn} 位新女主未接入`; }
+}
+function toggleAll(){
+  const sel=visibleChars().filter(c=>c.st!=='new');
+  const allOn = sel.length>0 && sel.every(c=>SEL_C.includes(c.id));
+  if(allOn) SEL_C = SEL_C.filter(id=>!sel.some(c=>c.id===id));
+  else sel.forEach(c=>{ if(!SEL_C.includes(c.id)) SEL_C.push(c.id); });
+  renderAll();
+}
+
+/* ===== 扩展性：新女主接入向导 ===== */
+const WIZ={g1:0,g2:0,g3:1,g4:0};
+function openWiz(){ document.getElementById('mask').classList.add('on'); window.scrollTo(0,0); renderWiz(); }
+function closeWiz(){ document.getElementById('mask').classList.remove('on'); }
+function fixG(k){ WIZ[k]=1; renderWiz(); }
+function renderWiz(){
+  const c=CHARS.find(x=>x.st==='new')||CHARS[CHARS.length-1];
+  const gates=[
+    ['g1','appearance 自带发型段',
+     `解析到 <code class="mono">发型：</code> 段 —— 由 <code class="mono">IDENTITY_PROMPT</code> 第 11 条强制生成。
+      与提示词第 9 段（<code class="mono">outfit_components</code>）重复，会造成双重发型描述。`,
+     '运行时自动摘除（不改库）'],
+    ['g2','眉眼段无法拆出眉与眼',
+     `原文用句号分隔且眉眼混写，三级降级解析全部失败。<b>仅眉、眼两维降级</b>，其余五维不受影响。`,
+     'LLM 规范化 → 返回 diff 待你 review'],
+    ['g3','分段完整性',
+     `appearance 直接供脸型/眼/眉/鼻/嘴五维基线；发型来自 <code class="mono">outfit_components</code>。
+      本角色眉眼段为 <code class="mono">bad</code> —— <b>仅眉、眼两维降级</b>，其余六维照常，不阻断实验。`,
+     null],
+    ['g4','portrait_seed 为 0',
+     `按老角色同一规律派生 <code class="mono">${SEED_BASE} + ${c.id} × ${SEED_STEP} = ${seedOf(c)}</code>，
+      运行时可直接使用；固化到库后 UI 不再标注「派生」。`,
+     '固化到库（先自动备份）']
+  ];
+  document.getElementById('wizname').textContent = c.n;
+  document.getElementById('wizb').innerHTML = gates.map(([k,t,d,btn])=>{
+    const done=WIZ[k]===1, cls=done?'ok':(k==='g3'?'warn':'bad');
+    return `<div class="gate ${cls}"><span class="gi">${done?'✓':'!'}</span><div>
+      <div class="gt">${t}</div><div class="gd">${d}</div>
+      ${btn&&!done?`<button class="fix" onclick="fixG('${k}')">${btn}</button>`:''}
+      ${done?'<div class="gd" style="margin-top:5px"><b>已处理</b></div>':''}
+    </div></div>`;
+  }).join('');
+  const pass = WIZ.g1&&WIZ.g2&&WIZ.g4;
+  const b=document.getElementById('wizok'); b.disabled=!pass;
+  b.textContent = pass? '完成接入 · 加入名单' : '请先处理红色闸门';
+}
+function wizDone(){
+  const c=CHARS.find(x=>x.st==='new'); if(!c) return;
+  c.st='warn'; c.s=seedOf(c); c.hairSeg=0;
+  if(!SEL_C.includes(c.id)) SEL_C.push(c.id);
+  closeWiz(); renderAll();
+}
+
+/* ===== Step2 ===== */
+function renderDims(){
+  document.getElementById('dims').innerHTML = DIMS.map(d=>{
+    const on=SEL_D.includes(d.k), idx=SEL_D.indexOf(d.k)+1;
+    return `<div class="dim ${on?'on':''} ${d.src==='y'?'lack':''}" data-dk="${d.k}">
+      <span class="badge">${idx}</span>
+      <div class="ic">${d.ic}</div><div class="dn">${d.n}</div>
+      <div class="dc">${on?SEL_CAND[d.k].length+' / '+d.cn+' 候选':d.cn+' 候选'}</div></div>`;
+  }).join('');
+  document.querySelectorAll('.dim').forEach(el=>el.onclick=()=>{
+    const k=el.dataset.dk;
+    SEL_D = SEL_D.includes(k)? SEL_D.filter(x=>x!==k) : [...SEL_D,k];
+    if(!SEL_D.includes(ACTIVE_TAB)) ACTIVE_TAB = SEL_D[0]||null;
+    renderAll();
+  });
+}
+function renderBudget(){
+  const nc=SEL_C.length;
+  let total=0; SEL_D.forEach(k=>total += nc*SEL_CAND[k].length);
+  const min=Math.round(total*12/60*10)/10;
+  const danger = total>200;
+  document.getElementById('budget').innerHTML=`
+    <div class="bcard"><div class="bl">试验对象</div><div class="bv">${nc} 位</div></div>
+    <div class="bcard"><div class="bl">拆成子实验</div><div class="bv">${SEL_D.length} 个</div></div>
+    <div class="bcard ${danger?'danger':'hl'}"><div class="bl">待生成图片</div><div class="bv">${total} 张</div></div>
+    <div class="bcard"><div class="bl">预估耗时</div><div class="bv">${min} min</div></div>
+    <div class="bcard" style="flex:1.4;background:${danger?'var(--err-bg)':'#fbfcfd'};border-color:${danger?'#f5c4bf':'var(--line)'}">
+      <div class="bl">对照：若做笛卡尔积</div>
+      <div class="bv" style="color:var(--err)">${SEL_D.length?SEL_D.reduce((a,k)=>a*SEL_CAND[k].length,nc):0} 张</div>
+      <div style="font-size:10.5px;color:var(--ink3);margin-top:2px">归因失效 · 已默认禁用</div></div>`;
+  document.getElementById('actinfo').innerHTML = SEL_D.length===0 ? '<span style="color:var(--err)">请至少选择一个变量维度</span>'
+    : `将串行执行 <b>${SEL_D.length}</b> 个单变量子实验，共 <b>${total}</b> 张 · 引擎内部严格保持单变量`;
+}
+
+/* ===== Step3 ===== */
+function renderCands(){
+  const tabs=document.getElementById('candtabs');
+  if(!SEL_D.length){ tabs.innerHTML=''; document.getElementById('cands').innerHTML=
+    '<div style="color:var(--ink3);padding:20px;text-align:center">请先在上方选择变量维度</div>'; return; }
+  tabs.innerHTML = SEL_D.map(k=>{const d=DIMS.find(x=>x.k===k);
+    return `<div class="subtab ${k===ACTIVE_TAB?'on':''}" data-tk="${k}">${d.ic} ${d.n}
+      <span class="cnt">${SEL_CAND[k].length}/${CAND[k].length}</span></div>`;}).join('');
+  tabs.querySelectorAll('.subtab').forEach(el=>el.onclick=()=>{ACTIVE_TAB=el.dataset.tk;renderAll();});
+  const list=(DIMPOOL[ACTIVE_TAB]||CAND[ACTIVE_TAB]||[]);
+  document.getElementById('cands').innerHTML = list.map((_,i)=>{
+    const ci=candInfo(ACTIVE_TAB,i);
+    return `<div class="cand ${SEL_CAND[ACTIVE_TAB].includes(i)?'on':''} ${i===0?'base':''}" data-ci="${i}">
+      <span class="cbx">${SEL_CAND[ACTIVE_TAB].includes(i)?'✓':''}</span>
+      <div><div class="cn">${ci.name}${ci.sub?' <span class="subk">'+ci.sub+'</span>':''}</div>
+      <div class="cd">${ci.desc}</div>${
+        ci.tags?'<div class="ctags">'+ci.tags.split(',').map(t=>'<span class="tg">'+t+'</span>').join('')+'</div>':''
+      }</div></div>`;
+  }).join('');
+  document.querySelectorAll('.cand[data-ci]').forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.ci, arr=SEL_CAND[ACTIVE_TAB];
+    SEL_CAND[ACTIVE_TAB] = arr.includes(i)? arr.filter(x=>x!==i):[...arr,i].sort((a,b)=>a-b);
+    renderAll();
+  });
+  const d=DIMS.find(x=>x.k===ACTIVE_TAB);
+  document.getElementById('candinfo').innerHTML =
+    `当前维度 <b>${d.n}</b> · 本页勾选 ${SEL_CAND[ACTIVE_TAB].length} 项 → 将生成 ${SEL_C.length}×${SEL_CAND[ACTIVE_TAB].length}=<b>${SEL_C.length*SEL_CAND[ACTIVE_TAB].length}</b> 张`;
+}
+function candAll(m){
+  const all=CAND[ACTIVE_TAB].map((_,i)=>i), cur=SEL_CAND[ACTIVE_TAB];
+  SEL_CAND[ACTIVE_TAB] = m===1?all : m===0?[] : all.filter(i=>!cur.includes(i));
+  renderAll();
+}
+
+/* ===== 体检表 ===== */
+function renderHx(){
+  const src={face_shape:'y',eyes:'y',eyebrows:'y',nose:'y',mouth:'y',hairstyle:'b',underwear:'g',outfit:'g'};
+  const lbl={g:['c-g','专属'],b:['c-b','共享池'],y:['c-y','将回落']};
+  let h='<tr><th>女主 / 维度</th>'+DIMS.map(d=>`<th>${d.ic} ${d.n}</th>`).join('')+'</tr>';
+  CHARS.filter(c=>SEL_C.includes(c.id)).forEach(c=>{
+    const lock = c.glasses? ' <span class="tag t-gray" style="margin-left:4px">🔒眼镜</span>' : '';
+    h+=`<tr><td>${c.n}${lock}</td>`+DIMS.map(d=>{
+      const isVar=SEL_D.includes(d.k);
+      if(c.brow==='bad' && (d.k==='eyes'||d.k==='eyebrows'))
+        return `<td><span class="cellc c-r" title="眉眼段无法拆分，仅该维降级，其余维度不受影响">待拆分</span></td>`;
+      const s=src[d.k], L=lbl[s];
+      return `<td><span class="cellc ${isVar?'c-o':L[0]}">${isVar?'变量':L[1]}</span></td>`;
+    }).join('')+'</tr>';
+  });
+  document.getElementById('hxt').innerHTML=h;
+  const ny = SEL_C.length * DIMS.filter(d=>src[d.k]==='y' && !SEL_D.includes(d.k)).length;
+  const w=document.getElementById('hxwarn');
+  if(ny>0){ w.style.display='flex';
+    document.getElementById('hxwarntx').innerHTML=
+      `检测到 <b>${ny}</b> 个黄格 —— 脸型/眼/眉/鼻/嘴五维在 <code class="mono">outfit_components</code> 里<b>共享池与角色专属均为 0 条</b>，
+       非变量时只能从 <code class="mono">appearance</code> 分段抽取；若抽取失败会回落到通用默认值。
+       <b>禁止留空段</b> —— 空段会让同 seed 的固有扰动放大到不可控。建议先跑 <code class="mono">seed_face_components.py</code> 补齐共享池。
+       <br>注：眼镜（苏晴/晓月）与身份前缀为<b>全程锁定段</b>，永远保留、不进变量、不进黄格。`;
+  } else w.style.display='none';
+}
+
+/* ===== 提示词预览 ===== */
+function renderPreview(){
+  const sel=document.getElementById('pvchar');
+  if(sel.options.length!==SEL_C.length){
+    sel.innerHTML=CHARS.filter(c=>SEL_C.includes(c.id)).map(c=>`<option value="${c.id}">${c.n}</option>`).join('');
+  }
+  const cid=+sel.value||SEL_C[0]; const c=CHARS.find(x=>x.id===cid)||CHARS[0];
+  if(!c){document.getElementById('pv').innerHTML='';return;}
+  const dk=ACTIVE_TAB||SEL_D[0];
+  const dim=DIMS.find(x=>x.k===dk);
+  const ci=SEL_CAND[dk]?SEL_CAND[dk][0]:0;
+  const cd=CAND[dk]&&CAND[dk][ci]?CAND[dk][ci]:['—','—'];
+  const strip = {face_shape:'脸型与轮廓',eyes:'眉眼',eyebrows:'眉眼',nose:'鼻子',mouth:'嘴唇'}[dk];
+  const rows=[
+   [1,'画质前缀','杰作，最高画质，超精细写实人像，8K',0,'photo_presets'],
+   [2,'身份基底',`22 岁东亚女性，${c.n}，气质清冷知性${c.glasses?'，'+c.glasses:''}`,0,'character'],
+   [3,dim?dim.n+'（变量）':'变量',`${cd[0]} —— ${cd[1]}`,1,'本轮候选'],
+   [4,'脸型与轮廓', dk==='face_shape'?'<span style="color:var(--err)">〔整段已摘除，由第 3 段替代〕</span>':(c.face? '鹅蛋脸偏心形，下颌线清晰流畅':'（该角色无此段 · 静默跳过）'),0,'appearance'],
+   [5,'眉眼', strip==='眉眼'?'细长柳叶眉，眉峰柔和　<span style="color:var(--err)">〔眼句已摘除〕</span>':'细长柳叶眉；标准杏眼，眼尾微扬',0,'appearance'],
+   [6,'鼻子', strip==='鼻子'?'<span style="color:var(--err)">〔整段已摘除，由第 3 段替代〕</span>':'小巧秀气，鼻梁挺翘但不突兀',0,'appearance'],
+   [7,'嘴唇', strip==='嘴唇'?'<span style="color:var(--err)">〔整段已摘除，由第 3 段替代〕</span>':'唇形饱满偏薄，唇峰清晰',0,'appearance'],
+   [8,'肤色与妆容','冷白皮，通透细腻，淡妆自然',0,'appearance'],
+   [9,'发型', dk==='hairstyle'?'<span style="color:var(--err)">〔由第 3 段替代〕</span>':'黑长直，过胸长直发，发丝平整服帖',0,'components'],
+   [10,'服饰', dk==='outfit'?'<span style="color:var(--err)">〔由第 3 段替代〕</span>':'米色针织衫搭配百褶裙',0,'presets'],
+   [11,'姿态','端坐于窗边，微微侧首，目光平视',0,'activity_pose'],
+   [12,'情绪基调','平静自持，眼神温和不外露',0,'photo_presets']];
+  document.getElementById('pv').innerHTML = rows.map(r=>
+    `<div class="pvrow ${r[3]?'var':''}"><span class="pvn">${r[0]}</span>
+     <span class="pvk">${r[1]}</span><span class="pvv">${r[2]}</span>
+     <span class="pvl">${r[3]?'<span class="tag t-orange">← 变量</span>':'<span class="lock">🔒 '+r[4]+'</span>'}</span></div>`).join('')
+    + `<div class="pvrow seed"><span class="pvn">—</span><span class="pvk">seed</span>
+       <span class="pvv mono" style="font-weight:700;color:var(--acc)">${c.s}</span>
+       <span class="pvl"><span class="tag" style="background:#dbe6ff;color:#2c4fa8">🔒 恒定不变</span></span></div>`;
+  document.getElementById('pvsub').textContent =
+    `12 段固定顺序 · 变量段锁定在第 3 位${strip?' · 已自动摘除 appearance「'+strip+'」同义原句':''}`;
+}
+
+/* ===== 结果矩阵 ===== */
+function renderResult(){
+  const tabs=document.getElementById('rtabs');
+  const dlist = SEL_D.length?SEL_D:['eyes'];
+  if(!dlist.includes(RES_TAB)) RES_TAB=dlist[0];
+  tabs.innerHTML = dlist.map(k=>{const d=DIMS.find(x=>x.k===k);
+    return `<div class="subtab ${k===RES_TAB?'on':''}" data-rt="${k}">${d.ic} ${d.n}子实验
+      <span class="cnt">${SEL_C.length*SEL_CAND[k].length} 张</span></div>`;}).join('');
+  tabs.querySelectorAll('.subtab').forEach(el=>el.onclick=()=>{RES_TAB=el.dataset.rt;renderResult();});
+
+  const cs=CHARS.filter(c=>SEL_C.includes(c.id));
+  const cands=SEL_CAND[RES_TAB].map(i=>CAND[RES_TAB][i]);
+  const d=DIMS.find(x=>x.k===RES_TAB);
+  const wv=document.getElementById('viewwarn');
+  let h='';
+  if(VIEW==='exp'){
+    wv.innerHTML='';
+    h='<tr><th class="rowh">女主 ＼ 候选</th>'+cands.map(c=>`<th>${c[0]}</th>`).join('')+'</tr>';
+    cs.forEach(c=>{
+      h+=`<tr><td class="rowh">${c.n}<span class="sd mono">seed ${c.s} 锁定</span></td>`;
+      cands.forEach((cd,j)=>{
+        const key=c.id+'-'+RES_TAB+'-'+j, pk=PICKED[key];
+        h+=`<td><div class="cell ${j===0?'baseline':''} ${pk?'picked':''}" style="background:${shade(c.c,j)}">
+          <div class="ph2">🖼</div>
+          ${j===0?'<span class="flag">基准</span>':''}${pk?'<span class="flag" style="left:auto;right:3px">★</span>':''}
+          <div class="wm">${cd[0]}</div></div>
+          <button class="pickbtn ${pk?'on':''}" onclick="pick('${key}')">${pk?'★ 已选':'设为最佳'}</button></td>`;
+      });
+      h+='</tr>';
+    });
+    document.getElementById('mxnote').innerHTML =
+      `<b>行内可读</b> —— ${cs[0]?cs[0].n:'苏晴'}这一行里，她的脸型、鼻子、嘴唇、肤色、发型、服饰、seed 全部纹丝不动，唯一变量是<b>${d.n}</b>，差异 100% 归因于它。蓝框格是她当前的默认值，作为基准。<br><b>列内不可读</b> —— 请切到巡检视图查看限制说明。`;
+  }else{
+    wv.innerHTML=`<div class="viewwarn"><span>🚫</span><div><b>巡检视图不可用于挑人。</b>
+      每一格的底板（脸型/鼻子/嘴唇/肤色）与 seed <b>全都不同</b>，等于四个变量在同时变化。
+      它只回答一个问题：<b>「${d.n}」的候选词在你的模型上稳不稳定、画不画得出来</b>。</div></div>`;
+    h='<tr><th class="rowh">候选 ＼ 女主</th>'+cs.map(c=>`<th>${c.n}<br><span class="mono" style="font-weight:400;color:var(--ink3);font-size:10px">${c.s}</span></th>`).join('')+'</tr>';
+    cands.forEach((cd,j)=>{
+      h+=`<tr><td class="rowh">${cd[0]}<span class="sd">${cd[1].slice(0,10)}…</span></td>`;
+      cs.forEach(c=>{ h+=`<td><div class="cell" style="background:${shade(c.c,j)}">
+        <div class="ph2">🖼</div><div class="wm">${c.n} · ${cd[0]}</div></div></td>`; });
+      h+='</tr>';
+    });
+    document.getElementById('mxnote').innerHTML =
+      `用途示例：如果「${cands[0]?cands[0][0]:'某候选'}」这一行 8 张图长得五花八门，说明这个词在模型里语义不稳定，应从候选池剔除；如果整行风格一致，说明它是可靠词条。<br><b>两个视图共用同一份生成结果，切换只是重排 DOM，不额外消耗算力。</b>`;
+  }
+  document.getElementById('mxt').innerHTML=h;
+  document.getElementById('ressub').textContent=`任务 #A17 · ${d.n}子实验 · ${cs.length}×${cands.length}=${cs.length*cands.length} 张`;
+  const done=Math.min(cs.length*cands.length, 41);
+  const pc=Math.round(done/(cs.length*cands.length||1)*100);
+  document.getElementById('progtx').textContent=`生成中 ${done} / ${cs.length*cands.length} · ${d.n}子实验`;
+  document.getElementById('progpc').textContent=pc+'%';
+  document.getElementById('progi').style.width=pc+'%';
+  document.getElementById('pickn').textContent=Object.keys(PICKED).length;
+}
+function shade(hex,i){
+  const n=parseInt(hex.slice(1),16);
+  let r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  const f=0.80+ (i%5)*0.045;
+  r=Math.round(255-(255-r)*(0.24*f)); g=Math.round(255-(255-g)*(0.24*f)); b=Math.round(255-(255-b)*(0.24*f));
+  return `rgb(${r},${g},${b})`;
+}
+function pick(k){ if(PICKED[k]) delete PICKED[k]; else PICKED[k]=1; renderResult(); }
+function startRun(){
+  if(!SEL_D.length) return alert('请至少选择一个变量维度');
+  let t=0; SEL_D.forEach(k=>t+=SEL_C.length*SEL_CAND[k].length);
+  alert(`任务已提交\n\n拆成 ${SEL_D.length} 个单变量子实验，串行执行\n共 ${t} 张\n\n引擎内部严格保持单变量：每次只替换 appearance 的一个子句，seed 恒定。`);
+}
+
+/* ===== 定妆间：可切换定妆对象 + 全维度候选 + 前端护栏 ===== */
+let STUDIO_C = 1;                       // 默认苏晴
+const MAX_DIMS = 3, MAX_PER_DIM = 3;    // 前端护栏
+let STUDIO_ACTIVE = new Set(['eyes','nose','mouth']);
+let STUDIO_PICK  = {eyes:[0,1], nose:[0,1], mouth:[0,1]};
+function dimEntries(k){
+  if(DIMPOOL[k]) return DIMPOOL[k];               // {s,n,d,t}
+  return (CAND[k]||[]).map(a=>({s:'',n:a[0],d:a[1],t:''}));
+}
+function renderStudioChips(){
+  document.getElementById('studioChips').innerHTML = CHARS.filter(c=>c.st!=='new').map(c=>
+    `<div class="chip ${c.id===STUDIO_C?'on':''}" style="cursor:pointer" onclick="selectStudio(${c.id})">
+       <span class="av" style="background:${c.c}">${c.n[0]}</span>
+       <span><span class="nm">${c.n}</span></span></div>`).join('');
+}
+function selectStudio(id){
+  STUDIO_C = id;
+  const c = CHARS.find(x=>x.id===id) || CHARS[0];
+  document.getElementById('studioAv').style.background = c.c;
+  document.getElementById('studioAv').textContent = c.n[0];
+  document.getElementById('studioNm').textContent = c.n;
+  document.getElementById('studioSeed').textContent = 'seed '+seedOf(c);
+  renderStudioChips();
+  renderStudioDims();
+  renderStudioBudget();
+  renderCombo();
+}
+function studioWarn(msg){
+  const el=document.getElementById('studioWarn');
+  el.textContent='⚠ '+msg; el.classList.add('show');
+  clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'),2200);
+}
+function renderStudioDims(){
+  const html = DIMS.map(d=>{
+    const active = STUDIO_ACTIVE.has(d.k);
+    const ents = dimEntries(d.k);
+    const picks = STUDIO_PICK[d.k]||[];
+    const pills = ents.map((o,i)=>{
+      const on = picks.includes(i);
+      const tip = (o.d||'') + (o.t? ' ｜ 气质：'+o.t : '');
+      return `<div class="scand ${on?'on':''}" title="${tip.replace(/"/g,'&quot;')}" onclick="toggleCand('${d.k}',${i})">
+        <span class="scbx">${on?'✓':''}</span>${o.n}</div>`;
+    }).join('');
+    return `<div class="dimblock">
+      <div class="dimhead ${active?'on':''}" onclick="toggleDim('${d.k}')">
+        <span class="dimchk">${active?'✓':''}</span> ${d.ic} ${d.n}
+        <span class="dimcnt">${active? picks.length+' / '+MAX_PER_DIM+' 已选':'点击启用'}</span>
+      </div>
+      <div class="candwrap" style="${active?'':'display:none'}">${pills}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('studioDims').innerHTML = html;
+}
+function toggleDim(k){
+  if(STUDIO_ACTIVE.has(k)){
+    STUDIO_ACTIVE.delete(k); delete STUDIO_PICK[k];
+  } else {
+    if(STUDIO_ACTIVE.size >= MAX_DIMS){
+      studioWarn(`最多只能启用 ${MAX_DIMS} 个维度（前端护栏已锁）`);
+      return;
+    }
+    STUDIO_ACTIVE.add(k);
+    STUDIO_PICK[k] = [0];                 // 启用即默认选中首个候选，保证组合有效
+  }
+  renderStudioDims(); renderStudioBudget(); renderCombo();
+}
+function toggleCand(k, idx){
+  if(!STUDIO_ACTIVE.has(k)) return;       // 维度未启用不能选候选
+  const arr = STUDIO_PICK[k]||[];
+  const pos = arr.indexOf(idx);
+  if(pos>=0){
+    const next = arr.filter(x=>x!==idx);
+    if(next.length===0){ STUDIO_ACTIVE.delete(k); delete STUDIO_PICK[k]; }   // 取消最后一个 → 维度自动停用
+    else STUDIO_PICK[k]=next;
+  } else {
+    if(arr.length >= MAX_PER_DIM){
+      studioWarn(`每维最多选 ${MAX_PER_DIM} 个候选（前端护栏已锁）`);
+      return;
+    }
+    STUDIO_PICK[k] = arr.concat(idx);
+  }
+  renderStudioDims(); renderStudioBudget(); renderCombo();
+}
+function studioReset(){
+  STUDIO_ACTIVE = new Set(); STUDIO_PICK = {};
+  renderStudioDims(); renderStudioBudget(); renderCombo();
+}
+function renderStudioBudget(){
+  const act = DIMS.filter(d=>STUDIO_ACTIVE.has(d.k));
+  const el = document.getElementById('studioBudget');
+  if(act.length===0){
+    el.innerHTML = `<div class="bcard"><div class="bl">组合数</div><div class="bv">—</div></div>
+      <div class="bcard hl"><div class="bl">待生成</div><div class="bv">0 张</div></div>
+      <div class="bcard"><div class="bl">上限（${MAX_DIMS}维×${MAX_PER_DIM}候选）</div><div class="bv" style="color:var(--ink3)">${Math.pow(MAX_PER_DIM,MAX_DIMS)} 张</div></div>`;
+    return;
+  }
+  const parts = act.map(d=>(STUDIO_PICK[d.k]||[1]).length);
+  const combos = parts.reduce((a,b)=>a*b,1);
+  const mins = (combos*12/60).toFixed(1);
+  el.innerHTML = `<div class="bcard"><div class="bl">组合数</div><div class="bv">${parts.join(' × ')}</div></div>
+    <div class="bcard hl"><div class="bl">待生成</div><div class="bv">${combos} 张</div></div>
+    <div class="bcard"><div class="bl">预估耗时</div><div class="bv">${mins} min</div></div>
+    <div class="bcard"><div class="bl">上限（${MAX_DIMS}维×${MAX_PER_DIM}候选）</div><div class="bv" style="color:var(--ink3)">${Math.pow(MAX_PER_DIM,MAX_DIMS)} 张</div></div>`;
+}
+
+/* ===== 定妆间网格（按已启用维度 × 已选候选 笛卡尔积） ===== */
+function renderCombo(){
+  const c = CHARS.find(x=>x.id===STUDIO_C) || CHARS[0];
+  const act = DIMS.filter(d=>STUDIO_ACTIVE.has(d.k));
+  const title = document.getElementById('comboTitle');
+  const sub = document.getElementById('comboSub');
+  const grid = document.getElementById('cgrid');
+  title.textContent = '组合结果 · '+c.n;
+  if(act.length===0){
+    sub.textContent = 'seed '+seedOf(c)+' 恒定 · 请先启用至少 1 个维度';
+    grid.innerHTML = '<div class="note">尚未启用任何维度。在上方点选维度并挑选候选，组合结果会实时生成（最多 3 维、每维最多 3 候选）。</div>';
+    return;
+  }
+  const picked = act.map(d=>{
+    const list = (STUDIO_PICK[d.k]||[]).map(i=>{ const e=dimEntries(d.k)[i]; return {ic:d.ic, n:e.n}; });
+    return list;
+  });
+  sub.textContent = 'seed '+seedOf(c)+' 恒定 · '+act.length+' 维变化（'+act.map(d=>d.n).join(' · ')+'）';
+  let accs=[[]];
+  picked.forEach(list=>{ const next=[]; accs.forEach(acc=>list.forEach(item=>next.push(acc.concat(item)))); accs=next; });
+  let h='';
+  accs.forEach(combo=>{
+    const sig = combo.map(x=>x.n).join('|')+c.n;
+    const info = combo.map(x=>`${x.ic} ${x.n}`).join('<br>');
+    h+=`<div class="ccell"><div class="cimg" style="background:${shade(c.c,sig.length%5)}">🖼</div>
+      <div class="cinfo">${info}</div></div>`;
+  });
+  grid.innerHTML=h;
+}
+
+/* ===== 铺满全屏对比 ===== */
+function toggleFs(id){
+  const el=document.getElementById(id); if(!el) return;
+  const on=el.classList.toggle('fs');
+  const b=el.querySelector('.fsbtn'); if(b) b.textContent = on?'✕ 退出铺满':'⛶ 铺满对比';
+  document.body.style.overflow = on? 'hidden':'';
+  if(on) el.scrollTop=0;
+}
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  document.querySelectorAll('.panel.fs').forEach(p=>{
+    p.classList.remove('fs'); const b=p.querySelector('.fsbtn'); if(b) b.textContent='⛶ 铺满对比';
+  });
+  document.body.style.overflow='';
+});
+
+/* ===== 导航 ===== */
+document.querySelectorAll('.nav').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.nav').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  ['lab','studio','vocab'].forEach(p=>
+    document.getElementById('page-'+p).classList.toggle('hide', p!==el.dataset.page));
+});
+document.querySelectorAll('.vsw').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.vsw').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on'); VIEW=el.dataset.view; renderResult();
+});
+
+function renderAll(){ renderChars();renderDims();renderBudget();renderCands();renderHx();renderPreview();renderResult(); }
+renderAll(); selectStudio(STUDIO_C);
+</script>
+</body>
+</html>
